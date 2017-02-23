@@ -1,15 +1,21 @@
-% Informatics Notes
-% Albert Smith
-
-
-
 ---
-mainfont: Fonts/Anonymous-Pro.ttf
-mainfontoptions:
-- BoldFont = Fonts/Anonymous-Pro-B.ttf
-- ItalicFont = Fonts/Anonymous-Pro-I.ttf
-- BoldItalicFont = Fonts/Anonymous-Pro-BI.ttf
+title: Informatics Notes
+author: Albert Smith
+header-includes:
+- \usepackage{sectsty}
+documentclass: report
 ---
+
+
+
+\setmonofont[
+  Path = Fonts/,
+  BoldFont = *-B,
+  ItalicFont = *-I,
+  BoldItalicFont = *-BI,
+  Extension = .ttf
+]{Anonymous-Pro}
+
 
 
 
