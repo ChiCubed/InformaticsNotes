@@ -2,7 +2,7 @@
 title: Informatics Notes
 author: Albert Smith
 header-includes:
-- \usepackage{sectsty}
+- \usepackage{titlesec}
 documentclass: report
 ---
 
