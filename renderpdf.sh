@@ -8,7 +8,7 @@ if ! [ -x "$(command -v xelatex)" ]; then
   exit 1
 fi
 
-dependencies=( titlesec )
+dependencies=( sectsty )
 
 for i in "${dependencies[@]}"
 do

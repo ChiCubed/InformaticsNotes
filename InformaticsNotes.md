@@ -2,7 +2,7 @@
 title: Informatics Notes
 author: Albert Smith
 header-includes:
-- \usepackage{titlesec}
+- \usepackage{sectsty}
 documentclass: report
 ---
 
@@ -16,6 +16,23 @@ documentclass: report
   Extension = .ttf
 ]{Anonymous-Pro}
 
+
+
+
+
+\newfontfamily\sefont[
+  Path = Fonts/,
+  BoldFont = *-B,
+  ItalicFont = *-I,
+  BoldItalicFont = *-BI,
+  Extension = .ttf
+]{SourceSansPro}
+
+
+
+
+
+\allsectionsfont{\sefont}
 
 
 
