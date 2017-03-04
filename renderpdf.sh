@@ -8,7 +8,11 @@ if ! [ -x "$(command -v xelatex)" ]; then
   exit 1
 fi
 
+<<<<<<< HEAD
 dependencies=( sectsty tocloft )
+=======
+dependencies=( sectsty )
+>>>>>>> 088764abf57afe3a27da02f09ebf5ca96d8b4e4c
 
 for i in "${dependencies[@]}"
 do
