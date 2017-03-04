@@ -3,7 +3,6 @@ title: \fontsize{50}{60}\titlefont Informatics Notes
 author: \fontsize{30}{35}\titlefont Albert Smith
 header-includes:
 - \usepackage{sectsty}
-<<<<<<< HEAD
 - \usepackage{tocloft}
 - \newfontfamily\tocchapfont[Path = Fonts/Aileron/]{Aileron}
 - \newfontfamily\titlefont[Path = Fonts/Aileron/]{Aileron}
@@ -14,8 +13,6 @@ header-includes:
 - \renewcommand\cftsubsecfont{\large\tocchapfont}
 - \renewcommand\cftsubsecpagefont{\normalsize\tocchapfont}
 - \renewcommand\cfttoctitlefont{\Huge\tocchapfont}
-=======
->>>>>>> 088764abf57afe3a27da02f09ebf5ca96d8b4e4c
 documentclass: report
 ---
 
