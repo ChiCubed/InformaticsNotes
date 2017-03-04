@@ -8,7 +8,7 @@ if ! [ -x "$(command -v xelatex)" ]; then
   exit 1
 fi
 
-dependencies=( titlesec )
+dependencies=( sectsty tocloft )
 
 for i in "${dependencies[@]}"
 do
@@ -21,5 +21,5 @@ do
 done
 
 echo 'pandoc installation found... executing render command'
-(set -x; pandoc InformaticsNotes.md -s --latex-engine=xelatex \
+(set -x; pandoc InformaticsNotes.md -s -f markdown -t latex --latex-engine=xelatex \
        -N --top-level-division=chapter --toc -o InformaticsNotes.pdf)
