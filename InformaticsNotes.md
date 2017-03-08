@@ -158,7 +158,7 @@ int graph[1000] = {1};
 cout << graph[0] << graph[1] << graph[2] << endl; // 100
 ```
 
-## define and typedef
+## `#define` and `typedef`
 C++ includes a `#define` preprocessor macro.
 ```
 #include <bits/stdc++.h>
@@ -851,8 +851,10 @@ $O(E log V)$.
 - represented in format {node, dist} i.e. if there was an edge from 0
 - to 1 with length 3, and this was the only edge, graph[0][0] = {1,3}.
 function prim takes an array of vectors of pairs graph as input:
-  priority queue of pairs of integers with underlying storage vector of pairs and comparison function greater of pairs queue
-  - priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> queue;
+  priority queue of pairs of integers with underlying storage vector of pairs
+  and comparison function greater of pairs queue
+  - priority_queue<pair<int,int>, vector<pair<int,int>>,
+                                  greater<pair<int,int>>> queue;
   
   // It doesn't matter which vertex the source is.
   integer source = 0
@@ -860,7 +862,8 @@ function prim takes an array of vectors of pairs graph as input:
   vector of integers weights of size graph size defaulting to INFINITY
   - vector<int> weights(graph size, INFINITY);
   
-  vector of integers parent of size graph size defaulting to -1, representing a nonexistent node
+  vector of integers parent of size graph size defaulting to -1, representing a
+  - nonexistent node
   - vector<int> parent(graph size, -1);
   
   vector of booleans visited of size graph size
@@ -965,12 +968,14 @@ long C[MAX_LINES]
 integer length
 integer pointer
 
-- This function assumes that m descends. If all the input is given prior to runtime this is fine - just sort the input descending.
+- This function assumes that m descends. If all the input is given prior to
+- runtime this is fine - just sort the input descending.
 function addline takes integers m, c as input:
   - The intersection of the line represented by M[length-2], C[length-2] and
   - M[length-1], C[length-1] must be to the left of the intersection of M[length-1],
   - C[length-1] with m, c.
-  while length >= 2 and (C[length-2]-C[length-1])*(m-M[length-1]) >= (C[length-1]-c)*(M[length-1]-M[length-2]):
+  while length >= 2 and (C[length-2]-C[length-1])*(m-M[length-1]) >=
+                        (C[length-1]-c)*(M[length-1]-M[length-2]):
     length--
   
   M[length] = m
@@ -981,7 +986,8 @@ function minValue takes integer x as input:
   - Given ascending values of x
   pointer = min(pointer, length-1)
   
-  while (pointer+1) < length and M[pointer+1]*x+C[pointer+1] <= M[pointer]*x+C[pointer]:
+  while (pointer+1) < length and M[pointer+1]*x+C[pointer+1] <=
+                                 M[pointer]*x+C[pointer]:
     pointer++
   
   return M[pointer]*x + C[pointer]
@@ -999,14 +1005,9 @@ A range minimum query is best performed with one of the Range Tree, Prefix Sum a
 
 One alternative to Sparse Tables and Prefix Sums are Square Root Decompositions, which are good because they are quick to implement and have reasonably quick $O(\sqrt{n})$ query for $O(\sqrt{n})$ space complexity (as well as $O(\sqrt{n})$ update and $O(n)$ preprocessing.) In most cases a sparse table is a better option however, or, if updates are needed, a range tree is probably best.
 
-A Square Root Decomposition works as follows:
-- Divide the array into $\sqrt{n}$ blocks of size $\sqrt{n}$ each.
+A Square Root Decomposition works by dividing the array into $\sqrt{n}$ blocks of size $\sqrt{n}$ each. Square Root Decompositions work for any associative operators.
 
-Query:
-- Calculate the 'product' of each of the buckets in the preprocessed array which are contained entirely within the query range.
-- Linearly scan elements that are only partially within the buckets.
-
-Square Root Decompositions work for any associative operators.
+Query: Calculate the 'product' of each of the buckets in the preprocessed array which are contained entirely within the query range, linearly scan elements that are only partially within the buckets.
 
 ### With range updates
 If we need to query ranges and update a range with operations such as 'set everything in this range to $0$' or 'multiply everything in this range by $a$', we can use a modified range tree. For the latter case, you would store a 'multiplication factor' for each node that was entirely contained within the range. This could be done by traversing up through the tree, changing every node's multiplication factor accordingly if they were a part of the range. This is only $O(log N)$.
@@ -1022,7 +1023,7 @@ This solution works with any pair of distributive semigroups. Since multiplicati
 Refers to any of a group of problems in which a set of items each with weights and values have to be packed into a knapsack such that the sum of their weights is less than or equal to the capacity of the knapsack and their value is as high as possible.
 
 ### Unbounded
-There are no constraints on the knapsack; each item can be taken as many times as desired.
+There are no constraints; each item can be taken as many times as desired.
 
 **Complexity:** $O(NW,W)$
 
