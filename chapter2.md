@@ -93,6 +93,8 @@ int graph[1000] = {1};
 cout << graph[0] << graph[1] << graph[2] << endl; // 100
 ```
 
+(If you want to initialise everything in the array to some other value than the default for the type, e.g. `0`, you'll have to use a for loop.)
+
 ## `#define` and `typedef`
 C++ includes a `#define` preprocessor macro.
 ```
