@@ -14,7 +14,7 @@ You may want to put this in your `~/.bash_profile` or `~/.profile` files if you 
 Now write a test program which prints `Hello World!` using the `bits/stdc++.h` header. If there are any compilation errors, delete the offending headers in the `stdc++.h` source file.
 
 ## `using namespace std`
-It is *always* adviseablle in Informatics competitions to add a `using namespace std` line to the top of your code. This allows you to shorten the length of the names of all of the standard library containers you import, for example: `std::cout` becomes just `cout`. Keep in mind that this is barely ever a good idea outside of informatics competitions.
+It is *always* advisable in Informatics competitions to add a `using namespace std` line to the top of your code. This allows you to shorten the length of the names of all of the standard library containers you import, for example: `std::cout` becomes just `cout`. Keep in mind that this is barely ever a good idea outside of informatics competitions.
 
 ## `cppreference`
 The online resource http://cppreference.com/ is very useful for informatics competitions. In particular, it gives you information about the runtime complexities of all the STL data structures. (It also tells you the headers which the classes are located in if you're not using the `bits` trick.) Most competitions will allow you to use any online C++ documentation, in which case `cppreference` is highly recommended.
