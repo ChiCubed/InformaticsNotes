@@ -3,3 +3,4 @@ A specifier for `printf` or `scanf` to indicate that, when the function is execu
 ```
 printf("%d\n",0);
 ```
+Here the `%d` acts as a format specifier. 
