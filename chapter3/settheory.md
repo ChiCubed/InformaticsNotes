@@ -34,8 +34,11 @@ We say that $$*$$ distributes over $$+$$ iff $$a+(b*c) = (a*b) + (a*c)$$.
 
 ## Existence of an identity
 $$e \in S$$ is an identity of $$*$$ iff:
+
 $$
-\forall a \in S\;a*e = e*a = a$$.
+\forall a \in S\;a*e = e*a = a
+$$
+
 Examples include $$0$$ for the $$gcd$$ function and $$1$$ for the $$lcm$$ function.
 
 ## Semigroups
