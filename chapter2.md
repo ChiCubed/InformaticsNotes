@@ -190,4 +190,4 @@ Enter `printf`. `printf` is almost always preferable to using `cout`, due to the
 ```
 printf("The value of x is %d",x);
 ```
-
+We've used a format argument here.
