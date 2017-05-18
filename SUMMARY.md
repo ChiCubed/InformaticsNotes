@@ -2,13 +2,11 @@
 
 ### Introduction
 
-### General notes
+### Section 1: General notes
 * [General notes](chapter1.md)
-
-### C++ notes
 * [C++ notes](chapter2.md)
 
-### Mathematics
+### Section 2: Mathematics
 * [Set theory](chapter3/settheory.md)
 * [Complexity](chapter3/complexity.md)
 * [Graph theory](chapter3/graphtheory.md)
