@@ -1,3 +1,5 @@
+# Asymptotic complexity
+
 # Amortized complexity
 The amortized complexity of an algorithm can be seen as an average runtime of a function, slightly different from the asymptotic complexity. In particular, amortized complexity should not be greatly impacted by a single case which has an extremely long runtime.
 
