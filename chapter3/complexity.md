@@ -35,7 +35,10 @@ $$\hat{c}_i$$ represents the total runtime; we then divide this by $$N$$ to get 
 We have an integer $$x$$. $$x$$ is initially set to $$0$$. $$x$$ is incremented $$N$$ times. The cost of incrementing $$x$$ is the number of bit flips performed, i.e. the cost of incrementing $$2$$ to $$3$$ is $$1$$ and the cost of incrementing $$7$$ to $$8$$ is $$4$$.
 
 Let $$\Phi$$ be the number of ones.
-$$\Phi_0 = 0$$
+
+$$
+\Phi_0 = 0
+$$
 
 For the $$i$$th operation:
 $$
