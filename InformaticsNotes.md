@@ -1,5 +1,5 @@
 ## Graph Theory
-### Data Structures
+### Storing a graph
 #### Adjacency matrix
 Stores the distance between any two vertices, i.e.:
 `graph[i][j]` is the distance between vertices `i` and `j`. If there is no edge between two vertices a value representing inifinity can be used, and there is obviously 0 distance from a vertex to itself.
