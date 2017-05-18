@@ -136,6 +136,9 @@ We see that because we have left the brackets out around the definition of `VARI
 ```
 which of course evaulates to 70.
 
+While you could use variable constants for the above examples, there are some instances where it is useful to use `#define`s for other purposes. For example
+
+
 
 If you wish to define a type, you can use the `typedef` keyword.
 
