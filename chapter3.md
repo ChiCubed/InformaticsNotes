@@ -1,5 +1,9 @@
 # Mathematics
 ## Set / Group theory
+_Hold up. What's a set?_
+A set is just a group of numbers, like this:
+
+
 ### Unary / binary operators
 A unary operator is an operation that is performed on a single element of a set $$S$$. For example, negation can be a unary operator: $$-x$$.
 
