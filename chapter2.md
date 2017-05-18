@@ -162,5 +162,4 @@ using pi = pair<int,int>;
 ```
 
 ## Printing
-
-
+You may be used to using `cout` for all your priting. For example:
