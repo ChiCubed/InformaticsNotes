@@ -22,7 +22,7 @@ The online resource [http://cppreference.com/](http://cppreference.com/) is very
 ## Vectors vs. Arrays
 The `vector` class (defined in header `<vector>`) is similar to an array, but dynamically resizes, so one can 'push back' and 'pop' from a vector. Unlike an array, one does not need to specify the size of a `vector` beforehand (although you can if you want - see the `resize` and `reserve` functions.)
 
-Vectors are slower than arrays but only slightly. It may be adviseable to use vectors instead of arrays in the general case.
+Vectors are slower than arrays but only slightly. It may be advisable to use vectors instead of arrays in the general case.
 
 ## Set and Unordered Set
 The `set` class (`<set>`) is a collection of elements that maintains sorted order, i.e. any new element inserted into the set is automatically placed in the set such that the set is sorted, and popping off the set always returns the lowest element. In this regard it is similar to a `priority_queue`, but you can access elements in the middle of the set (and a set is slower.)
