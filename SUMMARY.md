@@ -2,9 +2,12 @@
 
 * [General notes](chapter1.md)
 * [C++ notes](chapter2.md)
-* [Mathematics](chapter3/README.md)
-    * [Set theory](chapter3/settheory.md)
-    * [Complexity](chapter3/complexity.md)
-    * [Graph theory](chapter3/graphtheory.md)
+
+### Mathematics
+* [Set theory](chapter3/settheory.md)
+* [Complexity](chapter3/complexity.md)
+* [Graph theory](chapter3/graphtheory.md)
+
+
 * [Data structures](chapter4.md)
 * [Algorithms](chapter5.md)
