@@ -139,19 +139,7 @@ which of course evaulates to 70.
 If you wish to define a type, you can use the `typedef` keyword.
 
 ```
-#include <bits/stdc++.h>
-
-using namespace std;
-
 typedef pair<int,int> pi;
-
-int main(int argc, char* argv[]) {
-  pi a;
-  
-  cout << a.first << a.second << endl; // 00
-  
-  return 0;
-}
 ```
 
 One other method is to use the `using` keyword. This may seem more logical than using `typedef`, as the syntax carries the connotations of variable assignment.
