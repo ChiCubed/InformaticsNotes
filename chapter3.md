@@ -54,7 +54,7 @@ If $$a \in S$$ has an inverse $$b \in S$$ s.t. $$a \cdot b = e$$ and $$b$$ is un
 
 With a group, we can use a prefix sum / cumulative sum array to calculate what we wanted to find above; namely $$A_l \cdot A_{l+1} \cdot A_{l+2} \cdot \ldots \cdot A_r$$ in a range $$[L,R]$$ and an array $$A$$. A prefix sum data structure has only an $$O(N)$$ preprocessing time and $$O(inverse)$$ query, where $$inverse$$ is the inverse of $$\cdot$$.
 
-## Amortized complexity \small a.k.a. Big O notation
+## Amortized complexity a.k.a. Big O notation
 The amortized complexity of an algorithm can be seen as an average runtime of a function, slightly different from the asymptotic complexity. In particular, amortized complexity should not be greatly impacted by a single case which has an extremely long runtime.
 
 One definition is that, if $$f(x)$$ has an amortized complexity of $$O(1)$$, then over $$N$$ operations the total time divided by $$N$$ is approximately $$1$$.
