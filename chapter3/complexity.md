@@ -1,4 +1,4 @@
-# Amortized complexity a.k.a. Big O notation
+# Amortized complexity
 The amortized complexity of an algorithm can be seen as an average runtime of a function, slightly different from the asymptotic complexity. In particular, amortized complexity should not be greatly impacted by a single case which has an extremely long runtime.
 
 One definition is that, if $$f(x)$$ has an amortized complexity of $$O(1)$$, then over $$N$$ operations the total time divided by $$N$$ is approximately $$1$$.
