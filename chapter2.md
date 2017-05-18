@@ -29,7 +29,7 @@ The `set` class (`<set>`) is a collection of elements that maintains sorted orde
 
 The `unordered_set` class (`<unordered_set>`) is a collecion of elements where order is not maintained, and popping could return any element from the set. (Technically popping actually involves checking the element at `set.begin()`; erasing is a different method.) This is *always* better than `set` if the order of elements is not important, i.e. you are storing which of a group of people are currently in a room. One alternative is, if the identifiers of the people (or whatever it may be) are integers or can be transformed into integers, to create an array of booleans, corresponding to whether element `i` is in the set. (Also look into the `bitset` class.)
 
-## Range based for loops, auto specifier
+## Range based for loops, `auto`
 C++11 introduces both range-based for loops and the `auto` specifier. To compile your code using C++11, insert the flag `-std=c++11` into your compilation command.
 
 The `auto` specifier works as follows:
