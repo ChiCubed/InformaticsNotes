@@ -3,9 +3,10 @@
 _Hold up. What's a set?_
 A set is just a group of numbers, like this:
 $$
-S = {1, 2, 3}
+S = \{1, 2, 3\}
 $$
 
+In C++, a `set` is similar but is always sorted.
 
 ### Unary / binary operators
 A unary operator is an operation that is performed on a single element of a set $$S$$. For example, negation can be a unary operator: $$-x$$.
