@@ -4,6 +4,8 @@
 
 ### General notes
 * [General notes](chapter1.md)
+
+### C++ notes
 * [C++ notes](chapter2.md)
 
 ### Mathematics
