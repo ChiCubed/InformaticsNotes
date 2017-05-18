@@ -1,4 +1,4 @@
-#   to a PDFInformaticsNotes
+# InformaticsNotes
 
 Notes for computer-based informatics, particularly for use in a competition setting\[
 
