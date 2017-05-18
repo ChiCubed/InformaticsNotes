@@ -136,7 +136,17 @@ We see that because we have left the brackets out around the definition of `VARI
 ```
 which of course evaulates to 70.
 
-While you don't have to use `#define`s for the above examples, there are some instances where it is useful to use `#define`s for other purposes. For example
+While you don't have to use `#define` for the above examples, there are some instances where it is useful to use `#define`. For example, if working with points in a plane:
+
+```
+#define x first
+#define y second
+
+...
+
+pair<int,int> a;
+a.x = a.y + 3;
+```
 
 
 
