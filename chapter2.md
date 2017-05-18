@@ -141,8 +141,6 @@ While you don't have to use `#define` for the above examples, there are some ins
 #define x first
 #define y second
 
-...
-
 pair<int,int> a;
 a.x = a.y + 3;
 ```
