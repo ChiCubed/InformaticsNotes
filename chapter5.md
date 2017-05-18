@@ -381,10 +381,10 @@ It works as follows:
 We can optimise this algorithm to the aformentioned $$O(n2^{\frac{n}{2}})$$ runtime by sorting subsets of the second set by weight, discarding those which weigh more than those of greater / equal value, and using binary search.
 
 **Pseudocode:**  
-$w$: amount of storage in knapsack  
-$n$: number of items  
-$vals$: values of items  
-$weights$: weights of items  
+$$w$$: amount of storage in knapsack  
+$$n$$: number of items  
+$$vals$$: values of items  
+$$weights$$: weights of items  
 ```
 Create an array 'dp' of size n+1 by w+1
 - dp[i][j] represents the maximum
