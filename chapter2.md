@@ -186,4 +186,4 @@ It may be intuitive, but you will probably find when debugging that the simplici
 
 (Also, `cout` and `endl` are _slow_.)
 
-Enter `printf`. `printf` is almost always preferable to using `cout`, due to the speed improvements
+Enter `printf`. `printf` is almost always preferable to using `cout`, due to the speed improvements - in terms of both typing and code execution. 
