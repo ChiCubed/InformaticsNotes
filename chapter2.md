@@ -159,6 +159,7 @@ If you wish to define a type, you can use the `typedef` keyword. The main use ca
 typedef pair<int,int> pi;
 ```
 
+
 One other method is to use the `using` keyword. This may seem more logical than using `typedef`, as the syntax carries the connotations of variable assignment.
 
 ```
