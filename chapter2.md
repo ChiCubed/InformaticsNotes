@@ -190,6 +190,6 @@ Enter `printf`. `printf` is almost always preferable to using `cout`, due to the
 ```
 printf("The value of x is %d\n",x);
 ```
-We've used a format specifier here, namely `%d`. Note that we've included a carriage return (`\n`).
+We've used a format specifier here, namely `%d`. Note that we've included a carriage return (`\n`); unlike Python, C++ will not include newlines by default (`endl` has a similar effect.)
 
 A full list of format specifiers is available at [http://en.cppreference.com/w/cpp/io/c/fprintf](http://en.cppreference.com/w/cpp/io/c/fprintf). Note that many of the format specifiers are the same between `printf` and `scanf`. (Ensure that you use the correct format specifier, i.e. to print a long long integer you must use `%lld`. This is one disadvantage of `printf` as opposed to `cout`: with `cout` you don't have to worry about types.
