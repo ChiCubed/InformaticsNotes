@@ -39,8 +39,9 @@ $$\Phi_0 = 0$$
 
 For the $$i$$th operation:
 $$
-c_i = t_i + 1\\
+c_i = t_i + 1
 $$
+
 $$
 \begin{aligned}
 \Delta{\Phi} &= \Phi_i - \Phi_{i-1}\\
