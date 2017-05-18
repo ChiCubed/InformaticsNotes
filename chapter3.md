@@ -6,7 +6,9 @@ $$
 S = \{1, 2, 3\}
 $$
 
-In C++, a `set` is similar but is always sorted.
+Sets never have repeating elements.
+
+A similar structure in C++ would be `unordered_set`.
 
 ### Unary / binary operators
 A unary operator is an operation that is performed on a single element of a set $$S$$. For example, negation can be a unary operator: $$-x$$.
