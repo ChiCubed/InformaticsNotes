@@ -11,6 +11,6 @@
 * [Complexity](chapter3/complexity.md)
 * [Graph theory](chapter3/graphtheory.md)
 
-### Programming
+### Implementation
 * [Data structures](chapter4.md)
 * [Algorithms](chapter5.md)
