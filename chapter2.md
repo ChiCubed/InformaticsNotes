@@ -136,7 +136,7 @@ We see that because we have left the brackets out around the definition of `VARI
 ```
 which of course evaulates to 70.
 
-While you could use variable constants for the above examples, there are some instances where it is useful to use `#define`s for other purposes. For example
+While you don't have to use `#define`s for the above examples, there are some instances where it is useful to use `#define`s for other purposes. For example
 
 
 
