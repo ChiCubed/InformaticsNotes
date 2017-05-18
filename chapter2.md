@@ -170,8 +170,10 @@ You may be used to using `cout` for all your priting. For example:
 
 ```
 #include <bits/stdc++.h>
+
 using namespace std;
+
 int main(int argc, char* argv[]) {
-  
+  cout << 
 }
 ```
