@@ -182,4 +182,8 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-It may be intuitive, but you will probably find when debugging that the simplicity of this solution is just too cumbersome to type. It's annoying to have to type a debug statement that prints multiple variables at once using `cout`, due to the fact you have to separate each of the variables with `<<`. 
+It may be intuitive, but you will probably find when debugging that the simplicity of this solution is just too cumbersome to type. It's annoying to have to type a debug statement that prints multiple variables at once using `cout`, due to the fact you have to separate each of the variables with `<<`.
+
+(Also, `cout` and `endl` are _slow_.)
+
+Enter `printf`. `printf` is 
