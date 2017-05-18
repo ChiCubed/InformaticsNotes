@@ -136,7 +136,7 @@ We see that because we have left the brackets out around the definition of `VARI
 ```
 which of course evaulates to 70.
 
-C++ also has a `typedef` keyword.
+If you wish to define a type, you can use the `typedef` keyword.
 
 ```
 #include <bits/stdc++.h>
