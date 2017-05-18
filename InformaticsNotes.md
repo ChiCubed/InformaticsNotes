@@ -2,15 +2,15 @@
 ### Representing a graph
 #### Adjacency matrix
 Stores the distance between any two vertices, i.e.:
-`graph[i][j]` is the distance between vertices `i` and `j`. If there is no edge between two vertices a value representing inifinity can be used, and there is obviously 0 distance from a vertex to itself.
+`graph[i][j]` is the distance between vertices `i` and `j`. If there is no edge between two vertices a value representing inifinity can be used, and there is obviously $$0$$ distance from a vertex to itself.
 
-$O(V^2)$ space.
+$$O(V^2)$$ space.
 
 #### Adjacency list
 Stores the distance from every vertex to every vertex it has an edge to, i.e.
 `graph[i][j]` represents the `j`-th outgoing edge from vertex `i`.
 
-$O(EV)$ space. Typically much less. Normally one would use a list of vectors to represent the outgoing edges, to account for sparse and dense graphs alike.
+$$O(EV)$$ space. Typically much less, if using vectors. Normally one would use a list of vectors to represent the outgoing edges, to account for sparse and dense graphs alike.
 
 #### Conversion
 ```
