@@ -1,13 +1,7 @@
-
-
-
-
-
-
 # Data Structures
 ## Range Tree
 ### Summary
-A range tree allows querying the minimum / sum / product / other operations (see Requirements) of the range $[L,R]$ in an array in $O(log N)$ time. It is typically the best option for range queries, and its fast updates normally make it the best option for querying a range. There are a few exceptions; for example, when there are no updates and the operation you are using has a unique inverse, prefix tables are a better (and much faster) option; sparse tables can also be used in some cases.
+A range tree allows querying the minimum / sum / product / other operations (see Requirements) of the range $$[L,R]$$ in an array in $$O(log N)$$ time. It is typically the best option for range queries, and its fast updates normally make it the best option for querying a range. There are a few exceptions; for example, when there are no updates and the operation you are using has a unique inverse, prefix tables are a better (and much faster) option; sparse tables can also be used in some cases.
 
 A range tree essentially allows reduction of a query to a lowest common ancestor problem.
 
@@ -96,20 +90,22 @@ func update takes pos, s, e, new, ind as input:
 ### Requirements
 A range tree works on any associative operators.
 
-Identities are not necessary if you implement a range tree differently, that is by returning a placeholder value if a node is out of range in the query function and checking for that placeholder being returned. There *are* actually associative operators without identities; for example, strictly upper triangular matrix multiplication, an example from [here](http://math.stackexchange.com/a/1053410/169841). Although of course it is very unlikely these will turn up in an informatics competition.
+Identities are not necessary if you implement a range tree differently, that is by returning a placeholder value if a node is out of range in the query function and checking for that placeholder being returned.
+
+**ASIDE**: There *are* actually associative operators without identities; for example, strictly upper triangular matrix multiplication, an example from [here](http://math.stackexchange.com/a/1053410/169841). Although of course it is very unlikely these will turn up in an informatics competition.
 
 ## Prefix sum
 ### Summary
-A prefix sum array is a data structure which stores the 'sum' of all of the operations up to an index. For example, if you wished to construct a prefix sum array on the array $[1, 2, 3]$ using addition as your operation, the prefix sum array would be $[1, 1+2, 1+2+3]$.
+A prefix sum array is a data structure which stores the 'sum' of all of the operations up to an index. For example, if you wished to construct a prefix sum array on the array $$[1, 2, 3]$$ using addition as your operation, the prefix sum array would be $$[1, 1+2, 1+2+3]$$.
 
-The name carries connotations of addition but a prefix sum array works on any operation that forms a group with its set $S$; see the Requirements section.
+The name carries connotations of addition but a prefix sum array works on any operation that forms a group with its set $$S$$; see the Requirements section.
 
 ### Complexity
 | Preprocessing |     Query     |   Update   |  Space  |
 | :-----------: |     :---:     |   :----:   |  :---:  |
-| $O(N)$        | $O(inverse)$* |   $O(N)$   | $O(N)$  |
+| $$O(N)$$        | $$O(inverse)$$* |   $$O(N)$$   | $$O(N)$$  |
 
-*$inverse$ is the cost of performing the inverse of whatever function you have chosen to perform. For example, if you have a prefix sum array using multiplication, the cost of the inverse would be the cost of division.
+*$$inverse$$ is the cost of performing the inverse of whatever function you have chosen to perform. For example, if you have a prefix sum array using multiplication, the cost of the inverse would be the cost of division.
 
 ### Pseudocode
 ```
@@ -158,24 +154,24 @@ func update takes two integers newval and index as input:
 ```
 
 ### Requirements
-A prefix sum array is only guaranteed to work on a group. (See the section on Group theory.) For example, prefix sum arrays do not work with operations such as $min$. In part this is because the operation needs a (unique) inverse. For example, the min function does not work with prefix sum tables.
+A prefix sum array is only guaranteed to work on a group. (See the section on Group theory.) For example, prefix sum arrays do not work with operations such as $$min$$. In part this is because the operation needs a (unique) inverse. For example, the min function does not work with prefix sum tables.
 
 ### Tips
-A prefix sum array is not well suited to cases where updates are required due to its $O(N)$ update time complexity; in these cases it is overwhelmingly likely that a range tree will be a better choice.
+A prefix sum array is not well suited to cases where updates are required due to its $$O(N)$$ update time complexity; in these cases it is overwhelmingly likely that a range tree will be a better choice.
 
 ## Sparse Tables
 ### Summary
-A sparse table is represented as a 2D array of size $log N$ by $N$. `Table[i][j]` represents the result of the 'product' of the elements $j$ through $2^i+j$. (Non-inclusive in this case.) The solution is then found by finding the 'product' of the 2-power 'bucket' starting at the left edge of the query range and that ending at the right. Since these may overlap Sparse Tables only work for idempotent operators such as $min$, $max$ and $lcm$.
+A sparse table is represented as a 2D array of size $$log N$$ by $$N$$. `Table[i][j]` represents the result of the 'product' of the elements $$j$$ through $$2^i+j$$. (Non-inclusive in this case.) The solution is then found by finding the 'product' of the 2-power 'bucket' starting at the left edge of the query range and that ending at the right. Since these may overlap Sparse Tables only work for idempotent operators such as $$min$$, $$max$$ and $$lcm$$.
 
-We can also represent a sparse table as a 1D array, meaning we only use $N$ space, rather than $N log N$. This can be done by representing each row of the original table as a consecutive segment of the 1D array. The example given here is $N log N$, which is good enough for any practical example: N up to $67\,108\,864$ works within $64$ MiB and up to $268\,435\,436$ within $256$ MiB, which tends to be the upper bound in programming contests.
+We can also represent a sparse table as a 1D array, meaning we only use $$N$$ space, rather than $$N log N$$. This can be done by representing each row of the original table as a consecutive segment of the 1D array. The example given here is $$N log N$$, which is good enough for any practical example: N up to $$67\,108\,864$$ works within $$64$$ MiB and up to $$268\,435\,436$$ within $$256$$ MiB, which tends to be the upper bound in programming contests.
 
-A sparse table allows us to do queries in $O(1)$ time, although updates are $O(N)$ - if there are any updates a range tree is a better option.
+A sparse table allows us to do queries in $$O(1)$$ time, although updates are $$O(N)$$ - if there are any updates a range tree is a better option.
 
 
 ### Complexity
 | Preprocessing | Query  |   Update   |     Space    |
 | :-----------: | :---:  |   :----:   |     :---:    |
-| $O(N)$        | $O(1)$ |   $O(N)$   | $O(N log N)$ |
+| $$O(N)$$        | $$O(1)$$ |   $$O(N)$$   | $$O(N log N)$$ |
 
 ### Pseudocode
 ```
@@ -211,7 +207,7 @@ func update takes pos, new, array arr as input:
 ```
 
 ### Requirements
-A sparse table only works on a set S and operator $*$ if $*$ is associative, commutative and idempotent. Examples include the $min$ function. (No inverse is required.)
+A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associative, commutative and idempotent. Examples include the $min$ function. (No inverse is required.)
 
 ### Tips
 Don't bother using the inclusion-exclusion principle on sparse tables as you could equally well have used a prefix sum array.
@@ -265,7 +261,7 @@ An efficient data structure for storing the connected components of a graph.
 ### Complexity
 |  Find  |    Union   |     Space    |
 | :---:  |   :----:   |     :---:    |
-| $O(1)$ |   $O(1)$   |    $O(N)$    |
+| $$O(1)$$ |   $$O(1)$$   |    $$O(N)$$    |
 (Assuming both path compression and union by rank are implemented.)
 Technically the functions Find and Union are inverse Ackermann complexity; however, for all practical values, this is less than 5.
 
@@ -320,14 +316,14 @@ func fibonacci takes an integer n:
   return fibonacci(n-1) + fibonacci(n-2)
 ```
 
-When $n = 2$, this only has to call fibonacci(0) and fibonacci(1):
+When $$n = 2$$, this only has to call fibonacci(0) and fibonacci(1):
 ```
       2
      / \
     0   1
 ```
 
-However, when $n = 4$, this has to call the following:
+However, when $$n = 4$$, this has to call the following:
 ```
          4
         / \
@@ -379,7 +375,7 @@ The shortest path problem is used a lot in informatics competitions. It involves
 Finds the shortest path between two nodes on a graph.
 
 #### Complexity
-$O(E log V)$ where $E$ is the number of edges and $V$ is the number of vertices.
+$$O(E log V)$$ where $$E$$ is the number of edges and $$V$$ is the number of vertices.
 
 #### Pseudocode
 ```
@@ -421,7 +417,7 @@ The pseudocode assumes a `set` type with the same API as the C++ one, and assume
 The Floyd-Warshall algorithm is an algorithm which finds the shortest path between every two vertices in a graph.
 
 #### Complexity
-$O(V^3)$.
+$$O(V^3)$$.
 
 #### Pseudocode
 ```
@@ -457,7 +453,7 @@ See the section under Mathematics on Graph Theory.
 Prim's Algorithm is a greedy algorithm which finds the minimum spanning tree of a weighted undirected graph by choosing the lowest-cost edge from any vertex currently in the minimum spanning tree at any point.
 
 #### Complexity
-$O(E log V)$.
+$$O(E log V)$$.
 
 #### Pseudocode
 ```
@@ -523,7 +519,7 @@ While the above function prints every edge of the MST, it can easily be modified
 A greedy algorithm for finding the minimum spanning tree of a graph. Essentially works by continually adding the smallest edge to the MST, and then removing it again if it would result in a cycle.
 
 #### Complexity
-$O(E log V)$.
+$$O(E log V)$$.
 
 #### Pseudocode
 ```
@@ -561,18 +557,18 @@ This assumes input is given in *edge list* format. This is similar to an adjacen
 
 
 ### Tips
-While the above function prints every edge of the MST, it can easily be modified to store these in a list of pairs of integers. Keep in mind that by definition an MST has $V-1$ edges, where $V$ is the number of vertices in the graph.
+While the above function prints every edge of the MST, it can easily be modified to store these in a list of pairs of integers. Keep in mind that by definition an MST has $$V-1$$ edges, where $$V$$ is the number of vertices in the graph.
 
 
 
 
 
 ## Convex Hull Trick
-This could also be classified as a data structure. This essentially involves finding the minimum (sometimes maximum) y-value of a group of linear functions at any x value. The example given here (http://wcipeg.com/wiki/Convex_hull_trick) is of four functions: $y=4, y=4/3 + 2/3x, y=12-3x, y=3-1/2x$. If the query was $x=1$, the answer would be the value $2$, with the function $y=4/3+2/3x$.
+This could also be classified as a data structure. This essentially involves finding the minimum (sometimes maximum) y-value of a group of linear functions at any x value. The example given here (http://wcipeg.com/wiki/Convex_hull_trick) is of four functions: $$y=4, y=4/3 + 2/3x, y=12-3x, y=3-1/2x$$. If the query was $$x=1$$, the answer would be the value $$2$$, with the function $$y=4/3+2/3x$$.
 
-The naive approach is $O(MQ)$, with $M$ lines and $Q$ queries. The trick enables us to increase this to a speed of $O((Q+M) log M)$. The space required is $O(M)$, and the construction time is $O(M log M)$.
+The naive approach is $$O(MQ)$$, with $$M$$ lines and $$Q$$ queries. The trick enables us to increase this to a speed of $$O((Q+M) log M)$$. The space required is $$O(M)$$, and the construction time is $$O(M log M)$$.
 
-In the example given above, we first note that $y=4$ will never be the lowest. The trick is to find the intervals at which each line is the minimum and binary search these intervals to answer each query, of course after removing irrelevant lines such as $y=4$.
+In the example given above, we first note that $$y=4$$ will never be the lowest. The trick is to find the intervals at which each line is the minimum and binary search these intervals to answer each query, of course after removing irrelevant lines such as $$y=4$$.
 
 It is significant to note that each line that we add must only be compared with the two lines before it.
 
@@ -615,20 +611,20 @@ function minValue takes integer x as input:
 ## Range minimum query \small (and variants)
 (Variants include finding the sum of a range, the product of a range, the max of a range etc.)
 
-A range minimum query entails finding the minimum value in an array between indices $L$ and $R$. The na&iuml;ve approach is to iterate over every value, which takes $O(N)$ time. Therefore we are only interested in algorithms that take $< O(N)$ time.
+A range minimum query entails finding the minimum value in an array between indices $$L$$ and $$R$$. The na&iuml;ve approach is to iterate over every value, which takes $$O(N)$$ time. Therefore we are only interested in algorithms that take $$< O(N)$$ time.
 
 A range minimum query is best performed with one of the Range Tree, Prefix Sum and Sparse Table data structures. (Each of these have requirements; see the *Data Structures* section.)
 
-One alternative to Sparse Tables and Prefix Sums are Square Root Decompositions, which are good because they are quick to implement and have reasonably quick $O(\sqrt{n})$ query for $O(\sqrt{n})$ space complexity (as well as $O(\sqrt{n})$ update and $O(n)$ preprocessing.) In most cases a sparse table is a better option however, or, if updates are needed, a range tree is probably best.
+One alternative to Sparse Tables and Prefix Sums are Square Root Decompositions, which are good because they are quick to implement and have reasonably quick $$O(\sqrt{n})$$ query for $$O(\sqrt{n})$$ space complexity (as well as $$O(\sqrt{n})$$ update and $$O(n)$$ preprocessing.) In most cases a sparse table is a better option however, or, if updates are needed, a range tree is probably best.
 
-A Square Root Decomposition works by dividing the array into $\sqrt{n}$ blocks of size $\sqrt{n}$ each. Square Root Decompositions work for any associative operators.
+A Square Root Decomposition works by dividing the array into $$\sqrt{n}$$ blocks of size $$\sqrt{n}$$ each. Square Root Decompositions work for any associative operators.
 
 Query: Calculate the 'product' of each of the buckets in the preprocessed array which are contained entirely within the query range, linearly scan elements that are only partially within the buckets.
 
 ### With range updates
-If we need to query ranges and update a range with operations such as 'set everything in this range to $0$' or 'multiply everything in this range by $a$', we can use a modified range tree. For the latter case, you would store a 'multiplication factor' for each node that was entirely contained within the range. This could be done by traversing up through the tree, changing every node's multiplication factor accordingly if they were a part of the range. This is only $O(log N)$.
+If we need to query ranges and update a range with operations such as 'set everything in this range to $$0$$' or 'multiply everything in this range by $$a$$', we can use a modified range tree. For the latter case, you would store a 'multiplication factor' for each node that was entirely contained within the range. This could be done by traversing up through the tree, changing every node's multiplication factor accordingly if they were a part of the range. This is only $$O(log N)$$.
 
-This solution works with any pair of distributive semigroups. Since multiplication distributes over addition, the above solution works. Another example is that addition distributes over $min$, so the solution would work if we stored an amount to be added on each node and our queries were of the minimum element in a range.
+This solution works with any pair of distributive semigroups. Since multiplication distributes over addition, the above solution works. Another example is that addition distributes over $$min$$, so the solution would work if we stored an amount to be added on each node and our queries were of the minimum element in a range.
 
 
 
@@ -641,7 +637,7 @@ Refers to any of a group of problems in which a set of items each with weights a
 ### Unbounded
 There are no constraints; each item can be taken as many times as desired.
 
-**Complexity:** $O(NW,W)$
+**Complexity:** $$O(NW,W)$$
 
 **Potential Optimisations:**
 - Divide all of the weights by their greatest common divisor to reduce space / complexity. Should be unnecessary in most cases
@@ -673,11 +669,11 @@ for i in range 0 to w+1:
 ### 0/1 (Binary)
 Each item can be taken at most once.
 
-**Complexity:** $O(NW,NW)$
+**Complexity:** $$O(NW,NW)$$
 
 **Potential Optimisations:**
-'Flatten' the array, storing only one one-dimensional array of length W+1 and rewriting from indexes W to 1 each time, giving the same result for $O(W)$ space.  
-There is another approach commonly named "meet-in-the-middle" which uses $O(2^{\frac{n}{2}})$ space and $O(n2^{\frac{n}{2}})$ runtime. It may be more optimal for very large values of W.
+'Flatten' the array, storing only one one-dimensional array of length W+1 and rewriting from indexes W to 1 each time, giving the same result for $$O(W)$$ space.  
+There is another approach commonly named "meet-in-the-middle" which uses $$O(2^{\frac{n}{2}})$$ space and $$O(n2^{\frac{n}{2}})$$ runtime. It may be more optimal for very large values of W.
 It works as follows:
 
   - partition the set of items into two sets of approximately equal size</li>
@@ -686,7 +682,7 @@ It works as follows:
     find the subset of the second set of greatest value such that their combined weight is less than W
   - keep track of the greatest value so far
 
-We can optimise this algorithm to the aformentioned $O(n2^{\frac{n}{2}})$ runtime by sorting subsets of the second set by weight, discarding those which weigh more than those of greater / equal value, and using binary search.a
+We can optimise this algorithm to the aformentioned $$O(n2^{\frac{n}{2}})$$ runtime by sorting subsets of the second set by weight, discarding those which weigh more than those of greater / equal value, and using binary search.
 
 **Pseudocode:**  
 $w$: amount of storage in knapsack  
