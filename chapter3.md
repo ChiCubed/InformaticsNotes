@@ -8,7 +8,7 @@ $$
 
 Sets never have repeating elements.
 
-A similar structure in C++ would be `unordered_set`.
+A similar structure in C++ would be `unordered_set`. (`set` is similar but is always sorted.)
 
 ### Unary / binary operators
 A unary operator is an operation that is performed on a single element of a set $$S$$. For example, negation can be a unary operator: $$-x$$.
