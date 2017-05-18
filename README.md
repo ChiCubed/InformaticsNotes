@@ -1,4 +1,4 @@
-# InformaticsNotes
+# Informatics Notes
 
 Revision notes for informatics, particularly for use in a competition setting
 
