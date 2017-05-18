@@ -164,8 +164,6 @@ using pi = pair<int,int>;
 ## Do I really have to add arguments to `main`?
 No.
 
-(You're probably looking for more of an answer than 'No'.)
-
 ## Printing
 You may be used to using `cout` for all your priting. For example:
 
