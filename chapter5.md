@@ -339,10 +339,10 @@ There are no constraints; each item can be taken as many times as desired.
 - Divide all of the weights by their greatest common divisor to reduce space / complexity. Should be unnecessary in most cases
 
 **Pseudocode:**  
-$w$: amount of storage in knapsack  
-$n$: number of items  
-$vals$: values of items  
-$weights$: weights of items  
+$$w$$: amount of storage in knapsack  
+$$n$$: number of items  
+$$vals$$: values of items  
+$$weights$$: weights of items  
 ```
 Create an array 'dp' of length w+1
 - dp[i] represents the highest
