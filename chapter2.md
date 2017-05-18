@@ -161,5 +161,13 @@ using pi = pair<int,int>;
 ...
 ```
 
+## Do I really have to add arguments to `main`?
+No.
+
 ## Printing
 You may be used to using `cout` for all your priting. For example:
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+int main(int argc, char* argv[]) {
