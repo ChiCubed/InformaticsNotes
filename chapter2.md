@@ -139,19 +139,18 @@ We see that because we have left the brackets out around the definition of `VARI
 which of course evaulates to 70.
 
 While you don't have to use `#define` for the above examples, there are some instances where it is useful to use `#define`. For example, if working with points in a plane:
-
-
 ```
 
 #define x first
 #define y second
 
+...
+
 pair<int,int> a;
 printf("%d %d",a.x,a.y);
-
 ```
 
-
+You would obviously have to make sure you didn't use a variable named `x` or `y` anywhere else in your program.
 
 
 If you wish to define a type, you can use the `typedef` keyword.
