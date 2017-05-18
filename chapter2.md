@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-One other method is to use the `using` keyword. This may seem more logical than using `typedef`, as it carries the connotations of variable assignment: `a = b`.
+One other method is to use the `using` keyword. This may seem more logical than using `typedef`, as it carries the connotations of variable assignment.
 
 ```
 ...
