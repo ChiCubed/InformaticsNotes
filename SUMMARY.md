@@ -1,5 +1,5 @@
 # Summary
 
-* \[General notes\]\(chapter1.md\)
+* [General notes](chapter1.md)
 
 
