@@ -5,4 +5,4 @@
 * [Mathematics](chapter3/README.md)
     * [Set theory](chapter3/settheory.md)
     * [Complexity](chapter3/complexity.md)
-    * p
+    * [Graph theory](chapter3/graphtheory.md)
