@@ -17,7 +17,7 @@ Now write a test program which prints `Hello World!` using the `bits/stdc++.h` h
 It is *always* advisable in Informatics competitions to add a `using namespace std` line to the top of your code. This allows you to shorten the length of the names of all of the standard library containers you import, for example: `std::cout` becomes just `cout`. Keep in mind that this is barely ever a good idea outside of informatics competitions.
 
 ## `cppreference`
-The online resource http://cppreference.com/ is very useful for informatics competitions. In particular, it gives you information about the runtime complexities of all the STL data structures. (It also tells you the headers which the classes are located in if you're not using the `bits` trick.) Most competitions will allow you to use any online C++ documentation, in which case `cppreference` is highly recommended.
+The online resource [http://cppreference.com/](http://cppreference.com/) is very useful for informatics competitions. In particular, it gives you information about the runtime complexities of all the STL data structures. (It also tells you the headers which the classes are located in if you're not using the `bits` trick.) Most competitions will allow you to use any online C++ documentation, in which case `cppreference` is highly recommended.
 
 ## Vectors vs. Arrays
 The `vector` class (defined in header `<vector>`) is similar to an array, but dynamically resizes, so one can 'push back' and 'pop' from a vector. Unlike an array, one does not need to specify the size of a `vector` beforehand (although you can if you want - see the `resize` and `reserve` functions.)
