@@ -145,7 +145,6 @@ typedef pair<int,int> pi;
 
 int main(int argc, char* argv[]) {
   pi a;
-  // Technically this isn't uninitialised?
   
   cout << a.first << a.second << endl; // 00
   
