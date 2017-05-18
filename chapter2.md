@@ -158,7 +158,6 @@ One other method is to use the `using` keyword. This may seem more logical than 
 
 ```
 ...
-
 using pi = pair<int,int>;
 ...
 ```
