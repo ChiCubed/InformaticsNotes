@@ -174,6 +174,11 @@ You may be used to using `cout` for all your priting. For example:
 using namespace std;
 
 int main(int argc, char* argv[]) {
-  cout << 
+  int x = 1;
+  
+  cout << "The value of x is " << x << endl;
+  
+  return 0;
 }
 ```
+
