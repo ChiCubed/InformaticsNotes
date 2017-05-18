@@ -1,7 +1,6 @@
 # Summary
 
-* \[Chapter 1\]\(chapter1/README.md\)
-  * 
-
+* \[General notes\]\(chapter1.md\)
+* 
 
 
