@@ -1,6 +1,6 @@
 # InformaticsNotes
 
-Notes for computer-based informatics, particularly for use in a competition setting\[
+Notes for computer-based informatics, particularly for use in a competition setting
 
 The notes are written in Markdown format for two main reasons:
 
