@@ -131,9 +131,11 @@ int main(int argc, char* argv[]) {
 ```
 
 We see that because we have left the brackets out around the definition of `VARIABLE` and in the `ANOTHER` function, the arithmetic rules take over. In the above example, line 10 is substituted to:
+
 ```
   cout << (50+10*2) << endl;
 ```
+
 which of course evaulates to 70.
 
 While you don't have to use `#define` for the above examples, there are some instances where it is useful to use `#define`. For example, if working with points in a plane:
