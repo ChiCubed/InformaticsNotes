@@ -153,7 +153,7 @@ printf("%d %d",a.x,a.y);
 You would obviously have to make sure you didn't use a variable named `x` or `y` anywhere else in your program.
 
 
-If you wish to define a type, you can use the `typedef` keyword. The main use case for `typedef` 
+If you wish to define a type, you can use the `typedef` keyword. The main use case for `typedef` is to increase typing speed if you're going to be using a type frequently, for example:
 
 ```
 typedef pair<int,int> pi;
