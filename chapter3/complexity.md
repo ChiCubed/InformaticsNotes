@@ -1,5 +1,5 @@
 # Complexity
-Big-O notation refers to complexity of an algorithm. Unless explicitly stated otherwise, this is "asymptotic complexity": the worst-case runtime of an algorithm. The purpose of Big-O notation is to show only the "order" of an algorithm. For example, if an algorithm is _always_ 10 times slower than another algorithm, no matter the input size, they would have the same Big-O complexity.
+Big-O notation refers to complexity of an algorithm. Unless explicitly stated otherwise, this is "asymptotic complexity": the worst-case runtime of an algorithm. The purpose of Big-O notation is to show only the "order" of an algorithm. For example, if an algorithm is _always_ 10 times slower than another algorithm, regardless of the input size, they would have the same Big-O complexity.
 
 ## Amortized complexity
 The amortized complexity of an algorithm can be seen as an average runtime of a function, slightly different from the asymptotic complexity. In particular, amortized complexity should not be greatly impacted by a single case which has an extremely long runtime.
