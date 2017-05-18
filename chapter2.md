@@ -153,7 +153,7 @@ printf("%d %d",a.x,a.y);
 You would obviously have to make sure you didn't use a variable named `x` or `y` anywhere else in your program.
 
 
-If you wish to define a type, you can use the `typedef` keyword.
+If you wish to define a type, you can use the `typedef` keyword. The main use case for `typedef` 
 
 ```
 typedef pair<int,int> pi;
@@ -165,7 +165,7 @@ One other method is to use the `using` keyword. This may seem more logical than 
 using pi = pair<int,int>;
 ```
 
-## Do I really have to add arguments to `main`?
+## Do I have to add arguments to `main`?
 No.
 
 ## Printing
