@@ -5,7 +5,7 @@ A unary operator is an operation that is performed on a single element of a set 
 
 Binary operators, on the other hand, are performed on pairs of elements. Examples include: $a+b,\;a-b,\;a \times b,\;a/b,\;gcd(a,b),\;a*b$, where $*$ represents an arbitrary operation.
 
-We say that a set $S$ is *closed* under an operation $*$ if $a*b \in S\;\forall a,b \in S$.
+We say that a set $S$ is *closed* under an operation $$*$$ if $$a*b \in S\;\forall a,b \in S$$.
 
 ### Properties of binary operators
 Some properties that binary operators can have are:
