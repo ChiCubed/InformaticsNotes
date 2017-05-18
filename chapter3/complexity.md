@@ -1,13 +1,14 @@
-# Asymptotic complexity
+# Complexity
+Big O notation is complexity.
 
-# Amortized complexity
+## Amortized complexity
 The amortized complexity of an algorithm can be seen as an average runtime of a function, slightly different from the asymptotic complexity. In particular, amortized complexity should not be greatly impacted by a single case which has an extremely long runtime.
 
 One definition is that, if $$f(x)$$ has an amortized complexity of $$O(1)$$, then over $$N$$ operations the total time divided by $$N$$ is approximately $$1$$.
 
 One example would be an STL vector in C++. It takes constant time to push some number of elements onto the vector, but when the vector's size is doubled to fit more elements the push operation can take up to $$O(N)$$ time. However, the amortized complexity of the push function remains $$O(1)$$, as these doubling slowdowns only occur very rarely.
 
-## Amortized analysis
+### Amortized analysis
 
 There are a number of methods for amortized analysis, such as aggregate analysis (essentially finding the upper bound on $$N$$ operations and dividing by N), the accounting method (taking into account the costs, execution time and influence on future operations' run time) and the potential method, also called the physicist's method. The potential method is what will be described here.
 
