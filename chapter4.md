@@ -14,7 +14,7 @@ A range tree essentially allows reduction of a query to a lowest common ancestor
 | :---: | :---: | :---: | :---: |
 | $$O(N)$$ | $$O(log N)$$ | $$O(log N)$$ | $$O(N)$$ |
 
-### Pseudocode
+### Code
 
 ```
 array tree of length at least 2*MAX_N-1
