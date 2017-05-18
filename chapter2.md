@@ -95,7 +95,7 @@ cout << graph[0] << graph[1] << graph[2] << endl; // 100
 
 (If you want to initialise everything in the array to some value other than `0`, you'll have to use a for loop.)
 
-## `#define` and `typedef`
+## `#define`, `typedef`, `using`
 C++ includes a `#define` preprocessor macro.
 ```
 #include <bits/stdc++.h>
