@@ -1,5 +1,5 @@
 # Set / Group theory
-_Hold up. What's a set?_
+_Hold up. What's a set?_  
 A set is just a group of numbers, like this:
 $$
 S = \{1, 2, 3\}
