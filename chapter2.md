@@ -226,4 +226,4 @@ Bit shifting works by literally shifting the bits in the binary representation o
 Bit shifting uses the `<<` and `>>` operators, which you may recognise if you have used `cin` or `cout`.
 
 Two examples of the syntax:
-`0b00010110` 
+`0b00010110` &rarr;
