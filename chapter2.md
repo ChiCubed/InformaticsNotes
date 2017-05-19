@@ -218,3 +218,5 @@ The $$0$$ to the left is equal to $$0*2^1$$. While this doesn't actually change 
 The $$1$$ three before the last digit is equal to $$1*2^3$$, or $$8$$. If the number were in Base 10, the $$1$$ would represent $$1*10^3$$, or $$1000$$.
 
 As you can see the number being raised to a power is the Base, and the power it is being raised to is the distance from the end. Therefore a digit $$d$$ that is $$a$$ places from the end is equal to $$d*b^a$$ in base $$b$$.
+
+Great, now I speak binary. 
