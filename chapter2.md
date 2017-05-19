@@ -221,4 +221,6 @@ As you can see the number being raised to a power is the Base, and the power it 
 
 Great, now I speak binary. What does this have to do with Bit Shifting?
 
-Bit shifting works by literally shifting the bits in the binary representation of a number (the individual digits in a binary number are called bits).
+Bit shifting works by literally shifting the bits in the binary representation of a number (the individual digits in a binary number are called bits). You can think of it  as multiplying or dividing by a power of 2.
+
+Bit shifting uses the `<<` and `>>` operators which you may recognise if you have used `cin` or `cout`.
