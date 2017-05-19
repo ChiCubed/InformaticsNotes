@@ -191,7 +191,7 @@ It may be intuitive, but you will probably find when debugging that this syntax 
 (Also, `cout` and `endl` are _slow_.)
 
 Enter `printf`. `printf` is almost always preferable to using `cout`, due to the speed improvements in terms of both typing and code execution. Initially `printf` will seem slower to type, and there are a number of format specifiers you will have to remember. The equivalent of the `cout` statement in the above code is:
-```
+```cpp
 printf("The value of x is %d\n",x);
 ```
 We've used a format specifier here, namely `%d`. Note that we've included a carriage return (`\n`).
