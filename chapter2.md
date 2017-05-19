@@ -200,8 +200,17 @@ A full list of format specifiers is available at [http://en.cppreference.com/w/c
 
 Ensure that you use the correct format specifier, i.e. to print a long long you must use `%lld`. This is one disadvantage of `printf` as opposed to `cout`: with `cout` you don't have to worry about types.
 
+If you're using a `std::string` to represent string types, you'll have to print the underlying C-string when using `printf`, as follows:
+```
+printf("%s\n",somestr.c_str());
+```
+
 ## Bit shifting
 **Q**: How do I quickly find $$2^x$$?
 **A**: You use bit shifting.
 
-Bit shifting has the following syntax:
+In C++ (as well as most major programming languages) integers are represented as binary numbers.
+
+(Obligatory Decimal to Binary code:
+```
+```)
