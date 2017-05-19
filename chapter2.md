@@ -212,5 +212,6 @@ printf("%s\n",somestr.c_str());
 In C++ (as well as most major programming languages) integers are represented as binary numbers.
 
 (Obligatory Decimal to Binary code:
-```
+```cpp
+Test
 ```)
