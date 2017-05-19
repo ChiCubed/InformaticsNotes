@@ -230,3 +230,5 @@ Two examples of the syntax:
 `0b00100111 >> 1` &rarr; `0b00010011`
 
 Note that in the second case the `1` at the end has been truncated.
+
+(Important **NOTE**: 
