@@ -227,3 +227,5 @@ Bit shifting uses the `<<` and `>>` operators, which you may recognise if you ha
 
 Two examples of the syntax:
 `0b00010110 << 2` &rarr; `0b01011000`
+`0b00100111 >> 1` &rarr; `0b00010011`
+We note that 
