@@ -33,13 +33,13 @@ The `unordered_set` class (`<unordered_set>`) is a collecion of elements where o
 C++11 introduces both range-based for loops and the `auto` specifier. To compile your code using C++11, insert the flag `-std=c++11` into your compilation command.
 
 The `auto` specifier works as follows:
-```
+```cpp
 auto x = 1;
 ```
 This creates a new variable `x` whose type is inferred to be `int`.
 
 Range-based for loops work as follows:
-```
+```cpp
 vector<vector<pair<int,int>>> graph;
 
 ... populate graph ...
@@ -60,7 +60,7 @@ Firstly, check that you actually shouldn't be out of memory.
 
 Also note that huge arrays in `main` or another function will probably crash your program, as it is being initialised on the *stack* (where currently run functions are stored in the memory.)
 
-```
+```cpp
 int main(int argc, char* argv[]) {
   int huge[134217728]; // 128 MiB - probably cause a crash
   
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 
 Such arrays should be placed in global scope, outside of any functions, so they are allocated on the *heap* (which is much larger than the stack, although slower):
 
-```
+```cpp
 int huge[134217728];
 
 int main(int argc, char* argv[]) {
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
 
 ## Array initialisation
 You can initialise an n-dimensional array to all 0s as follows: (this only works at initialisation)
-```
+```cpp
 int graph[1000][1000][2] = {0};
 ```
 
@@ -88,7 +88,7 @@ int graph[1000][1000][2] = {0};
 
 Note this does not work with other integers such as `1`; doing this will only initialise the first value in the array to the value in braces, and everything else will be given a 'default value' of sorts, which happens to be `0`. This is fine if this is what you want to happen.
 
-```
+```cpp
 int graph[1000] = {1};
 cout << graph[0] << graph[1] << graph[2] << endl; // 100
 ```
@@ -97,7 +97,7 @@ cout << graph[0] << graph[1] << graph[2] << endl; // 100
 
 ## `#define`, `typedef`, `using`
 C++ includes a `#define` preprocessor macro.
-```
+```cpp
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
 ```
 This substitutes the strings at runtime. The brackets in the defined function are quite significant. In the below example:
 
-```
+```cpp
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -132,7 +132,7 @@ int main(int argc, char* argv[]) {
 
 We see that because we have left the brackets out around the definition of `VARIABLE` and in the `ANOTHER` function, the arithmetic rules take over. In the above example, line 10 is substituted to:
 
-```
+```cpp
   cout << (50+10*2) << endl;
 ```
 
@@ -140,7 +140,7 @@ which of course evaulates to 70.
 
 While you don't have to use `#define` for the above examples, there are some instances where it is useful to use `#define`. For example, if working with points in a plane:
 
-```
+```cpp
 #define x first
 #define y second
 
@@ -155,14 +155,14 @@ You would obviously have to make sure you didn't use a variable named `x` or `y`
 
 If you wish to define a type, you can use the `typedef` keyword. The main use case for `typedef` is to increase typing speed if you're going to be using a type frequently, for example:
 
-```
+```cpp
 typedef pair<int,int> pi;
 ```
 
 
 One other method is to use the `using` keyword. This may seem more logical than using `typedef`, as the syntax carries the connotations of variable assignment.
 
-```
+```cpp
 using pi = pair<int,int>;
 ```
 
@@ -172,7 +172,7 @@ No.
 ## Printing
 You may be used to using `cout` for all your priting. For example:
 
-```
+```cpp
 #include <bits/stdc++.h>
 
 using namespace std;
