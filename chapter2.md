@@ -213,3 +213,6 @@ In C++ (as well as most major programming languages) integers are represented as
 
 In binary, also known as Base 2, every place value is a power of 2 rather than a power of 10. To illustrate this, let's calculate the decimal value of a binary number: `0b00101001`. (The `0b` is a convention to indicate that you're using binary.)
 
+The $$1$$ at the end is equal to $$1$$ in decimal. No surprises there.
+The $$0$$ to the left is equal to $$0*2^1$$. While this doesn't actually change anything here, in Base 10 the $$0$$ would represent $$0*10^1$$.
+The $$1$$ four from the end is equal to 1*
