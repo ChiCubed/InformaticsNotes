@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
 We see that because we have left the brackets out around the definition of `VARIABLE` and in the `ANOTHER` function, the arithmetic rules take over. In the above example, line 10 is substituted to:
 
 ```cpp
-  cout << (50+10*2) << endl;
+cout << (50+10*2) << endl;
 ```
 
 which of course evaulates to 70.
