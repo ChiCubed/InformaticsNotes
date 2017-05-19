@@ -242,3 +242,5 @@ Important **NOTE**: Bit shifting has a very low 'operator precedence'. That mean
 This may not be what you were expecting: you usually want the left shift to be performed first, and indeed this seems intuitive. The fix is to wrap the `<<` in brackets to make sure that the compiler knows which one you want:
 
 `10 + (1<<2)` &rarr; `10 + 4` &rarr; `14`
+
+How do I use this to find $$2^x$$? You can find `1<<x`, which evaluates to $$2^x$$.
