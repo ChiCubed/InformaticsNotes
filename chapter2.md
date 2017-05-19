@@ -220,3 +220,5 @@ The $$1$$ three before the last digit is equal to $$1*2^3$$, or $$8$$. If the nu
 As you can see the number being raised to a power is the Base, and the power it is being raised to is the distance from the end. Therefore a digit $$d$$ that is $$a$$ places from the end is equal to $$d*b^a$$ in base $$b$$.
 
 Great, now I speak binary. What does this have to do with Bit Shifting?
+
+Bit shifting works by literally shifting the bits in the binary representation of a number (the individual digits in a binary number are called bits).
