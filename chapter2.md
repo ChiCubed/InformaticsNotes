@@ -231,4 +231,8 @@ Two examples of the syntax:
 
 Note that in the second case the `1` at the end has been truncated.
 
-(Important **NOTE**: 
+Translating these examples to decimal:
+`22 << 2` &rarr; `88`
+`39 >> 1` &rarr; `19`
+
+(Important **NOTE**: Bit shifting has a low 'operator precedence', essentially the lowest. That means
