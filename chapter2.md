@@ -215,4 +215,6 @@ In binary, also known as Base 2, every place value is a power of 2 rather than a
 
 The $$1$$ at the end is equal to $$1$$ in decimal. No surprises there.
 The $$0$$ to the left is equal to $$0*2^1$$. While this doesn't actually change anything here, in Base 10 the $$0$$ would represent $$0*10^1$$.
-The $$1$$ three before the last digit is equal to $$1*2^3$$, or $$8$$. If the number were in Base 10, the $$1$$ would represent $$1*10^3$$, or $$1000$$. As you can see the number being raised to a power is the Base, and the power it is being raised to is the distance from the end.
+The $$1$$ three before the last digit is equal to $$1*2^3$$, or $$8$$. If the number were in Base 10, the $$1$$ would represent $$1*10^3$$, or $$1000$$.
+
+As you can see the number being raised to a power is the Base, and the power it is being raised to is the distance from the end. Therefore a digit $$d$$ that is $$a$$ places from the end is equal to $$d*b^a$$ in base $$b$$.
