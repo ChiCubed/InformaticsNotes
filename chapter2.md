@@ -210,8 +210,3 @@ printf("%s\n",somestr.c_str());
 **A**: You use bit shifting.
 
 In C++ (as well as most major programming languages) integers are represented as binary numbers.
-
-Obligatory Decimal to Binary code:
-```cpp
-Test
-```
