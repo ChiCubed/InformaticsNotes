@@ -212,3 +212,4 @@ printf("%s\n",somestr.c_str());
 In C++ (as well as most major programming languages) integers are represented as binary numbers.
 
 In binary, also known as Base 2, every place value is a power of 2 rather than a power of 10. To illustrate this, let's calculate the decimal value of a binary number: `0b00101001`. (The `0b` is a convention to indicate that you're using binary.)
+
