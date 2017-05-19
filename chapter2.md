@@ -205,8 +205,10 @@ If you're using a `std::string` to represent string types, you'll have to print 
 printf("%s\n",somestr.c_str());
 ```
 
-## Bit shifting
+## Binary and Bit Shifting
 **Q**: How do I quickly find $$2^x$$?
 **A**: You use bit shifting.
 
 In C++ (as well as most major programming languages) integers are represented as binary numbers.
+
+In Base 10, the number system we use in 
