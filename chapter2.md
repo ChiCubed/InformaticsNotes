@@ -245,6 +245,4 @@ This may not be what you were expecting: you usually want the left shift to be p
 
 How do I use this to find $$2^x$$? You can find `1<<x`, which evaluates to $$2^x$$.
 
-Therefore the final **A**nswer is `1<<x`.
-
 (By the way, bit shifting is usually faster than multiplication or division. So if you want to delude yourself that the incremental speed increase will make the difference between a `50` and a `100`, go ahead and replace all instances of `x*2` with `(x<<1)`.)
