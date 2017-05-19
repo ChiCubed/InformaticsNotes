@@ -236,3 +236,9 @@ Translating these examples to decimal:
 `39 >> 1` &rarr; `19`
 
 Important **NOTE**: Bit shifting has a very low 'operator precedence'. That means it will be evaluated after other operations, such as addition. For example:
+
+`10 + 1<<2` &rarr; `11<<2` &rarr; `44`
+
+This may not be what you were expecting: you usually want the left shift to be performed first, and indeed this seems intuitive. The fix is to wrap the `<<` in brackets to make sure that the compiler knows which one you want:
+
+`10 + (1<<2)` &rarr; `10 + 4` &rarr; `14`
