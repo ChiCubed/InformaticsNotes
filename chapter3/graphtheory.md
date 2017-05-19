@@ -10,7 +10,7 @@ $$O(V^2)$$ space.
 Stores the distance from every vertex to every vertex it has an edge to, i.e.
 `graph[i][j]` represents the `j`th outgoing edge from vertex `i`.
 
-$$O(EV)$$ space. Typically much less, if using vectors. Normally one would use a list of vectors to represent the outgoing edges, to account for sparse and dense graphs alike.
+$$O(EV)$$ space. Typically much less; normally one would use a list of vectors to represent the outgoing edges, to account for sparse and dense graphs alike.
 
 ### Conversion
 ```
