@@ -235,4 +235,4 @@ Translating these examples to decimal:
 `22 << 2` &rarr; `88`
 `39 >> 1` &rarr; `19`
 
-(Important **NOTE**: Bit shifting has a low 'operator precedence', essentially the lowest. That means
+Important **NOTE**: Bit shifting has a very low 'operator precedence'. That means it will be evaluated after other operations, such as addition. For example:
