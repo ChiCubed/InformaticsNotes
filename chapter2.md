@@ -203,3 +203,5 @@ Ensure that you use the correct format specifier, i.e. to print a long long you 
 ## Bit shifting
 **Q**: How do I quickly find $$2^x$$?
 **A**: You use bit shifting.
+
+Bit shifting has the following syntax:
