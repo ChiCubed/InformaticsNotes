@@ -269,7 +269,7 @@ Logarithms aren't practically constant time; precalculating them should increase
 
 ## Priority Queue
 
-A data structure which allows adding elements and popping the smallest / largest / some other as defined by a comparator function. If implemented as a binary heap, a common implementation, has `O(log N)` update and pop.
+A data structure which allows adding elements and popping the smallest / largest / some other as defined by a comparator function. If implemented as a binary heap, a common implementation, has $$O(log N)$$ update and pop.
 
 You can provide comparator functions as per the entry on [http://cppreference.com](http://cppreference.com).
 
@@ -295,7 +295,7 @@ q.pop();
 
 ## Binary Heap
 
-One implementation of a priority queue. In particular a binary heap consists of a root node with two children, who may have children and so on; the children satisfy the heap invariant, which states that each of the children have a higher value than their parent; in the way it is implemented in the C++ STL, this becomes each of the children having a lower value than their parent. Binary heaps have `O(log N)` update and pop.
+One implementation of a priority queue. In particular a binary heap consists of a root node with two children, who may have children and so on; the children satisfy the heap invariant, which states that each of the children have a higher value than their parent; in the way it is implemented in the C++ STL, this becomes each of the children having a lower value than their parent. Binary heaps have $$O(log N)$$ update and pop.
 
 This is already implemented in the C++ STL. Details on asymptotic time complexity can be found at [http://cppreference.com](http://cppreference.com). Please note the implemented heap is a max heap. It is often adviseable to use a priority queue: `#include <queue> ... priority_queue<int> q;` as custom comparator functions are easier to work with, along with the API being easier in general.
 
