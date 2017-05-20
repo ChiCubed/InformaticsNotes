@@ -332,7 +332,7 @@ pop_heap(vec.begin(), vec.end());
 (Assuming both path compression and union by rank are implemented.)
 Technically the functions Find and Union are inverse Ackermann complexity; however, for all practical values, this is less than 5.
 
-### Pseudocode
+### Code
 
 ```
 int parent[MAX_N+1]
