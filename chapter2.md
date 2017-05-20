@@ -213,6 +213,7 @@ The syntax is as follows:
 
 
 
+
 ## Binary and Bit Shifting
 **Q**: How do I quickly find $$2^x$$?
 **A**: You use bit shifting.
