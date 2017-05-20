@@ -205,6 +205,14 @@ If you're using a `std::string` to represent string types, you'll have to print 
 printf("%s\n",somestr.c_str());
 ```
 
+## Ternary operator
+This is basically a shortcut for an if/else statement, and is useful if you need to calculate a value based on a conditional.
+
+The syntax is as follows:
+`condition ? value_if_true : value_if_false`
+
+
+
 ## Binary and Bit Shifting
 **Q**: How do I quickly find $$2^x$$?
 **A**: You use bit shifting.
