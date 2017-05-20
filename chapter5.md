@@ -175,7 +175,7 @@ function dijkstra takes an array of vectors of pairs graph and two integers from
 ```
 
 #### Requirements
-A graph with no negative cycles (i.e. cycles with a negative length.) The algorithm assumes a directed graph, and an undirected graph can easily be used as well by changing each edge of the graph to two directed edges with the same weight and opposite directions, i.e. `1 - 2` becomes `1 -> 2` and `2 -> 1`.
+A graph with no negative cycles (i.e. cycles with a negative length.) The algorithm assumes a directed graph, and an undirected graph can easily be used as well by changing each edge of the graph to two directed edges with the same weight and opposite directions, i.e. `1 -- 2` becomes `1 -> 2` and `2 -> 1`.
 
 #### Tips
 The code assumes the graph is in [adjacency list](/chapter3/graphtheory.md#adjacency-list) format.
