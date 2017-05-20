@@ -336,36 +336,56 @@ Technically the functions Find and Union are inverse Ackermann complexity; howev
 
 ### Code
 
-```
-int parent[MAX_N+1]
-int rank[MAX_N+1]
-int N
+```cpp
+#include <bits/stdc++.h>
 
-function create takes number of nodes n as input:
-  N = n
-  for i in range 0 to n inclusive:
-    rank[i] = 0
-    parent[i] = i
+using namespace std;
 
-function find takes integer x as input:
-  - this is path compression
-  if x != parent[x]:
-    parent[x] = find(parent[x])
+const int MAX_NODES = 100000;
 
-  return parent[x]
+int parent[MAX_NODES+1];
+// we can't name it rank because
+// my compiler gets angry
+int  nrank[MAX_NODES+1];
 
-- union by rank
-function union takes two integers x and y as input:
-  x = find(x)
-  y = find(y)
 
-  if rank[x] > rank[y]:
-    parent[y] = x
-  else:
-    parent[x] = y
+void create(int num_nodes) {
+  // note the    <= instead of <
+  for (int i=0; i<=num_nodes; ++i) {
+    nrank[i] = 0;
+    parent[i] = i;
+  }
+}
 
-  if rank[x] == rank[y]:
-    rank[y]++
+int find(int x) {
+  // This is path compression
+  if (x != parent[x]) parent[x] = find(parent[x]);
+  return parent[x];
+}
+
+// We cannot use the name 'union'
+// because it is a specifier in C++
+void join(int x, int y) {
+  x = find(x); y = find(y);
+  
+  // This is union by rank
+  if (nrank[x] > nrank[y]) parent[y] = x;
+  else                   parent[x] = y;
+  
+  if (nrank[x] == nrank[y]) nrank[y]++;
+}
+
+int main(int argc, char* argv[]) {
+  create(10);
+  
+  join(1,3);
+  
+  printf("%d %d\n", find(1), find(3));
+  
+  join(3,4);
+  
+  printf("%d %d %d\n", find(3), find(4), find(5));
+}
 ```
 
 This implements union by rank and path compression.
