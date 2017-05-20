@@ -265,6 +265,8 @@ A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associat
 
 Don't bother using the inclusion-exclusion principle on sparse tables as you could equally well have used a prefix sum array.
 
+Logarithms aren't practically constant time; 
+
 ## Priority Queue
 
 A data structure which allows adding elements and popping the smallest / largest / some other as defined by a comparator function. If implemented as a binary heap, a common implementation, has `O(log N)` update and pop.
