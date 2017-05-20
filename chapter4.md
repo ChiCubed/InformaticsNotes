@@ -315,7 +315,7 @@ pop_heap(vec.begin(), vec.end());
 
 ### Summary
 
-(Also known as Disjoint Set.) An efficient data structure for storing the connected components of a graph.
+(Also known as a Disjoint Set data structure.) An efficient data structure for storing the connected components of a graph. Could also be considered an algorithm.
 
 ### Complexity
 
