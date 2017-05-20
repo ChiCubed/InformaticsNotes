@@ -59,8 +59,6 @@ This means we only have to call the following:
 
 `fibonacci(1)` and `fibonacci(2)` take very minimal time to compute the second time, simply returning elements of an array. Therefore we have cut the runtime in half, and the improvement is much more dramatic for larger values of n.
 
-<br>
-
 **ASIDE**: To illustrate this graphically, I set up a debug version of the above program which prints the number being passed as an argument and indents it. Here's the code:
 ```cpp
 #include <bits/stdc++.h>
