@@ -66,9 +66,11 @@ This means we only have to call the following:
 using namespace std;
 
 int fib1(int n) {
-  for (int i=0; i<n; ++i) printf(" ");
-  printf("%d\n",n);
   if (n < 0) throw domain_error("Input value out of range");
+
+  for (int i=0; i<n; ++i) printf(" ");
+  printf("%d\n",n);  
+  
   return (n < 2 ? 1 : fib1(n-1) + fib1(n-2));
 }
 
