@@ -273,7 +273,7 @@ A data structure which allows adding elements and popping the smallest / largest
 
 You can provide comparator functions as per the entry on [http://cppreference.com](http://cppreference.com).
 
-```
+```cpp
 #include <queue> // or <bits/stdc++.h>
 
 ...
