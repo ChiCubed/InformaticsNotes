@@ -247,7 +247,7 @@ The code above assumes the graph is in [adjacency matrix](/chapter3/graphtheory.
 
 
 ## Minimum spanning tree
-See the section under Mathematics on Graph Theory.
+See the [section](/chapter3/graphtheory.md#minimum-spanning-tree) on Graph Theory.
 
 ### Prim's Algorithm
 #### Summary
