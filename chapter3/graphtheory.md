@@ -6,8 +6,6 @@ Stores the distance between any two vertices, i.e.:
 
 $$O(V^2)$$ space.
 
-[test](#tree)
-
 ### Adjacency list
 Stores the distance from every vertex to every vertex it has an edge to, i.e.
 `graph[i][j]` represents the `j`th outgoing edge from vertex `i`.
