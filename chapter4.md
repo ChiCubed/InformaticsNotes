@@ -224,7 +224,7 @@ func update takes pos, new, array arr as input:
 
 ### Requirements
 
-A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associative, commutative and idempotent. Examples include the $min$ function. \(No inverse is required.\)
+A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associative, commutative and idempotent. Examples include the $$min$$ function. \(No inverse is required.\)
 
 ### Tips
 
