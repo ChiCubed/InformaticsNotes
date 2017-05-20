@@ -425,7 +425,7 @@ function minValue takes integer x as input:
 
 
 
-## Range minimum query \small (and variants)
+## Range minimum query
 (Variants include finding the sum of a range, the product of a range, the max of a range etc.)
 
 A range minimum query entails finding the minimum value in an array between indices $$L$$ and $$R$$. The na&iuml;ve approach is to iterate over every value, which takes $$O(N)$$ time. Therefore we are only interested in algorithms that take $$< O(N)$$ time.
