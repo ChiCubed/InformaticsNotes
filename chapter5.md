@@ -67,15 +67,29 @@ using namespace std;
 
 int fib1(int n) {
   if (n < 0) throw domain_error("Input value out of range");
-
+  
+  // graphical representation
   for (int i=0; i<n; ++i) printf(" ");
-  printf("%d\n",n);  
+  printf("%d\n",n);
   
   return (n < 2 ? 1 : fib1(n-1) + fib1(n-2));
 }
 
+int cache[100005]; // initialised to 0
+int fib2(int n) {
+  if (n < 0) throw domain_error("Input value out of range");
+  if (cache[n]) return cache[n];
+  
+  // graphical representation
+  for (int i=0; i<n; ++i) printf(" ");
+  printf("%d\n",n);
+  
+  return cache[n] = (n < 2 ? 1 : fib2(n-1) + fib2(n-2));
+}
+
 int main(int argc, char* argv[]) {
   printf("fib1(4): %d\n", fib1(4));
+  printf("fib2(4): %d\n", fib2(4));
 }
 ```
 The output produced is this:
