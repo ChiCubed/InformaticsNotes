@@ -48,6 +48,20 @@ int main(int argc, char* argv[]) {
   printf("fib1(4): %d\n", fib1(4));
 }
 ```
+The output produced is this:
+```
+    4
+   3
+  2
+ 1
+0
+ 1
+  2
+ 1
+0
+fib1(4): 5
+```
+As you can see, many numbers are called more than once, which is more than necessary.
 
 The way to solve this is through *caching*. This is the basic premise of dynamic programming.
 ```
