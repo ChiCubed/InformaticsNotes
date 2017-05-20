@@ -13,4 +13,5 @@
 
 ### Data structures and Algorithms
 * [Data structures](chapter4.md)
+    * [Test](chapter4.md#range-tree)
 * [Algorithms](chapter5.md)
