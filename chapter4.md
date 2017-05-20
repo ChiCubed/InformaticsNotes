@@ -16,80 +16,87 @@ A range tree essentially allows reduction of a query to a lowest common ancestor
 
 ### Code
 
-```
-array tree of length at least 2*MAX_N-1
+```cpp
+#include <bits/stdc++.h>
 
-func mid takes a, b as input:
-   - remember outer brackets - order of ops
-  return a + ((b-a)>>1)
+using namespace std;
 
-func preprocess takes an array arr, l, r, pos as input:
-  - We can store the children of the current node
-  - as indices 2i+1 and 2i+2.
-  - The maximum depth of a range tree is log N.
-  - In this example we are using the operation
-  - min; range trees work on any associative operators.
-  - l and r are the range of the current
-  - node in the array;
-  - pos is the index in the tree.
-  if l == r:
-    tree[pos] = arr[l]
-    return arr[l]
+const int VERY_BIG_NUMBER = 1000000;
+const int MAX_ARRAY_LENGTH = 100000;
+const int INF           = 100000000;
 
-  middle = mid(l,r)
-  - if we were using, say, addition, this would be +
-  tree[pos] = min(preprocess(arr, l, middle, 2*pos+1),
-                  preprocess(arr, middle+1, r, 2*pos+2))
-  return tree[pos]
+int tree[VERY_BIG_NUMBER];
+int arr[MAX_ARRAY_LENGTH];
 
+// Helper function so we
+// don't have to type the
+// same thing over and over again.
+inline int mid(int a, int b) {
+  return ((a+b)>>1);
+}
 
-func query takes pos, l, r, s, e as input:
-  - pos represents the current node i.e. where to
-  - start searching from; when query is called this
-  - should almost always be set to 0.
-  - l and r are the edges of the query range.
-  - s and e should be 0 and n-1 respectively,
-  - or otherwise the range of start.
-  if l <= s and r >= e:
-    return tree[pos]
+// Preprocess the array.
+// Initially this is called as follows:
+// preprocess(0, ARRAY_LENGTH - 1, 0)
+// Returns the new minimum in range
+// [l,r].
+int preprocess(int l, int r, int pos) {
+  // The children of the current node
+  // (represented by pos)
+  // are at indices 2*pos+1 and 2*pos+2.
+  
+  // Note we have used a single
+  // equals sign. The default return
+  // value of a=b is the result,
+  // i.e. a=b returns b.
+  // This is just for conciseness.
+  if (l==r) return tree[pos]=arr[l];
+  
+  // In this example we are using
+  // the min operation. We could
+  // equally well have used sum or
+  // any other associative operation.
+  int m=mid(l,r);
+  return tree[pos]=min(preprocess(l,  m,(pos<<1)+1),
+                       preprocess(m+1,r,(pos<<1)+2));
+}
 
-  if e < l or s > r:
-    return INFINITY - or whatever the identity is;
-                    - for addition this would be 0
+// Returns the minimum in range [s,e].
+// This should be called as follows:
+// query(0, ARRAY_LENGTH - 1, 0, rangeStart, rangeEnd)
+int query(int l, int r, int pos, int s, int e) {
+  // If we're within the query range:
+  // just return the minimum here
+  if (s <= l && r <= e) return tree[pos];
+  
+  // If we're completely outside the query range:
+  // return the identity of the operation.
+  // Since the operation is min, the identity
+  // in this case is INF.
+  if (e < l || r < s) return INF;
+  
+  // We partially overlap the query range.
+  int m=mid(l,r);
+  return min(query(l,  m,(pos<<1)+1,s,e),
+             query(m+1,r,(pos<<1)+2,s,e));
+}
 
-  middle = mid(s,e)
-  - since we are using min in this example
-  - if we were using addition we would use +
-  return min(query(2*pos + 1, l, r, s, middle),
-             query(2*pos + 2, l, r, middle+1, e))
-
-
-func update takes pos, s, e, new, ind as input:
-  - s and e are the bounds of the current node.
-  - pos is the same as query.
-  - new is the value of the new element.
-  - ind is the position of the new element.
-
-  - if the destination index is outside our range
-  if ind < s or ind > e:
-    return
-
-  if s != e:
-    middle = mid(s,e)
-    update(2*pos+1, s, middle, new, ind)
-    update(2*pos+2, middle+1, new, ind)
-
-    - Another way of doing this is
-    - minning each element of the tree
-    - with new as we go along;
-    - I find this clearer.
-    - we use min as, again, it is the operator
-    - we have chosen.
-    tree[pos] = min(tree[2*pos+1],
-                    tree[2*pos+2])
-  else:
-    arr[ind] = new
-    tree[pos] = arr[ind]
+// Update the element at index i to value val.
+// Returns the new value of a node.
+int update(int l, int r, int pos, int i, int val) {
+  // if the index to be updated is outside the range:
+  // do nothing
+  if (i < l || r < i) return tree[pos];
+  
+  // We're on a node at the bottom of the tree:
+  // we update its value
+  if (l==r) return tree[pos]=arr[l]=val;
+  
+  // We contain the index to update.
+  int m=mid(l,r);
+  return tree[pos]=min(update(l,  m,(pos<<1)+1,i,val),
+                       update(m+1,r,(pos<<1)+2,i,val));
+}
 ```
 
 ### Requirements
