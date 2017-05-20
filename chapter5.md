@@ -31,7 +31,7 @@ However, when $$n = 4$$, this has to call the following:
 ```
 As should be obvious from the diagram, many functions are called more times than necessary. While in this small case it does not matter much, in larger algorithms it can be extremely significant if the same solution is calculated multiple times.
 
-**ASIDE**: To illustrate this graphically, I set up a debug version of the above program which prints the number being passed as an argument and indents it. Here's the code:
+> **ASIDE**: To illustrate this graphically, I set up a debug version of the above program which prints the number being passed as an argument and indents it. Here's the code:
 ```cpp
 #include <bits/stdc++.h>
 
