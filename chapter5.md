@@ -104,8 +104,16 @@ The output produced is this:
  1
 0
 fib1(4): 5
+    4
+   3
+  2
+ 1
+0
+fib2(4): 5
 ```
-As you can see, the function is called repeatedly with smaller numbers: `fib1(0)` and `fib1(2)` are called twice each and `fib1(1)` is called three times.
+As you can see, the function `fib1` is called repeatedly with smaller numbers: `fib1(0)` and `fib1(2)` are called twice each and `fib1(1)` is called three times.
+
+However, the function `fib2` only needs to calculate the values once each; the rest of the time the stored cached values are used.
 
 
 ## Shortest path
