@@ -311,11 +311,11 @@ cout << vec.front() << endl; // 6
 pop_heap(vec.begin(), vec.end());
 ```
 
-## Disjoint set
+## Union find
 
 ### Summary
 
-An efficient data structure for storing the connected components of a graph.
+(Also known as Disjoint Set.) An efficient data structure for storing the connected components of a graph.
 
 ### Complexity
 
