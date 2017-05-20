@@ -130,10 +130,6 @@ The name carries connotations of addition but a prefix sum array works on any op
 
 using namespace std;
 
-// This example uses vectors
-// although it is generally adviseable
-// to use global arrays.
-
 const int MAX_ARRAY_LENGTH = 100000;
 
 int arr[MAX_ARRAY_LENGTH];
