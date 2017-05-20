@@ -265,7 +265,7 @@ A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associat
 
 Don't bother using the inclusion-exclusion principle on sparse tables as you could equally well have used a prefix sum array.
 
-Logarithms aren't practically constant time; 
+Logarithms aren't practically constant time; precalculating them should increase speed quite significantly. This is implemented in the code sample above.
 
 ## Priority Queue
 
