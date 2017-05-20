@@ -323,7 +323,7 @@ pop_heap(vec.begin(), vec.end());
 
 (Also known as a Disjoint Set data structure.) An efficient data structure for storing the connected components of a graph. Could also be considered an algorithm.
 
-Has two operations: find and union (hence the name). Each node can be considered to be in a 'group'. 'Find' checks if two nodes are in the same group. 'Union' merges two groups, given a node in each of the groups. (Note this is nothing to do with set theory.)
+Has two operations: find and union (hence the name). Each node can be considered to be in a 'group'. 'Find' checks if two nodes are in the same group. 'Union' merges two groups, given a node in each of the groups.
 
 ### Complexity
 
