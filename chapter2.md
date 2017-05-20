@@ -224,7 +224,7 @@ Using the ternary operator, we can shorten this to:
 
 ```cpp
 int fact(int n) {
-  return (n<=0?1:n*fact(n-1));
+  return (n>0?n*fact(n-1):1);
 }
 ```
 
