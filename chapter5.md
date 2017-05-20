@@ -36,6 +36,7 @@ The way to solve this is through *caching*. This is the basic premise of dynamic
 int cache[100005]; // initialised to 0
 int fib2(int n) {
   if (n < 0) throw domain_error("Input value out of range");
+  
   // we can do this because cache[n] is only zero
   // if it hasn't been calculated yet; no fibonacci
   // number is zero
