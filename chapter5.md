@@ -180,7 +180,7 @@ A graph with no negative cycles (i.e. cycles with a negative length.) The algori
 #### Tips
 The code assumes the graph is in [adjacency list](/chapter3/graphtheory.md#adjacency-list) format.
 
-The code only calculates distances, not the nodes visited; it is relatively easy to backtrack the path, by storing the node that each node came from, i.e. when updating a node's minimum distance, update a pointer to the previous value of a node.
+The code only calculates distances, not the nodes visited; it is relatively easy to backtrack the path, by storing the node that each node came from, i.e. when updating a node's minimum distance, update a pointer to the previously visited node.
 
 ### Floyd-Warshall
 #### Summary
