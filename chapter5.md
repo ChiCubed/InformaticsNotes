@@ -31,6 +31,36 @@ However, when $$n = 4$$, this has to call the following:
 ```
 As should be obvious from the diagram, many functions are called more times than necessary. While in this small case it does not matter much, in larger algorithms it can be extremely significant if the same solution is calculated multiple times.
 
+The way to solve this is through *caching*. This is the basic premise of dynamic programming.
+```
+array cache of length MAX_N default value 0
+
+func fibonacci takes an integer n:
+  if n < 0:
+    throw BAD_VALUE
+  if cache[n] != 0:
+    return cache[n]
+  if n < 2:
+    cache[n] = 1
+    return 1
+  cache[n] = fibonacci(n-1) + fibonacci(n-2)
+  return cache[n]
+```
+
+This means we only have to call the following:
+```
+         4
+        / \
+       /   \
+      2     3
+     / \   / \
+    0   1 1   2
+```
+
+`fibonacci(1)` and `fibonacci(2)` take very minimal time to compute the second time, simply returning elements of an array. Therefore we have cut the runtime in half, and the improvement is much more dramatic for larger values of n.
+
+<br>
+
 **ASIDE**: To illustrate this graphically, I set up a debug version of the above program which prints the number being passed as an argument and indents it. Here's the code:
 ```cpp
 #include <bits/stdc++.h>
@@ -62,36 +92,6 @@ The output produced is this:
 fib1(4): 5
 ```
 As you can see, the function is called repeatedly with smaller numbers: `fib1(0)` and `fib1(2)` are called twice each and `fib1(1)` is called three times.
-
-The way to solve this is through *caching*. This is the basic premise of dynamic programming.
-```
-array cache of length MAX_N default value 0
-
-func fibonacci takes an integer n:
-  if n < 0:
-    throw BAD_VALUE
-  if cache[n] != 0:
-    return cache[n]
-  if n < 2:
-    cache[n] = 1
-    return 1
-  cache[n] = fibonacci(n-1) + fibonacci(n-2)
-  return cache[n]
-```
-
-This means we only have to call the following:
-```
-         4
-        / \
-       /   \
-      2     3
-     / \   / \
-    0   1 1   2
-```
-
-`fibonacci(1)` and `fibonacci(2)` take very minimal time to compute the second time, simply returning elements of an array. Therefore we have cut the runtime in half, and the improvement is much more dramatic for larger values of n.
-
-
 
 
 ## Shortest path
