@@ -115,7 +115,7 @@ As you can see, the function `fib1` is called repeatedly with smaller numbers: `
 
 However, the function `fib2` only needs to calculate the values once each; the rest of the time the stored cached values are used.
 
-The difference is minimal here; to illustrate it better, I tried running it with N=7.
+The difference is minimal here; to illustrate it better, I tried running it with N=10.
 
 
 ## Shortest path
