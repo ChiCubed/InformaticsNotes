@@ -116,6 +116,23 @@ As you can see, the function `fib1` is called repeatedly with smaller numbers: `
 However, the function `fib2` only needs to calculate the values once each; the rest of the time the stored cached values are used.
 
 The difference is minimal here; to illustrate it better, I tried running it with N=10.
+```
+[177 lines omitted]
+fib1(10): 89
+          10
+         9
+        8
+       7
+      6
+     5
+    4
+   3
+  2
+ 1
+0
+fib2(10): 89
+```
+This example much more clearly illustrates how much of an improvement a function using caching is.
 
 
 ## Shortest path
