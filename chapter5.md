@@ -220,7 +220,7 @@ The Floyd-Warshall algorithm is an algorithm which finds the shortest distance b
 #### Complexity
 $$O(V^3)$$.
 
-#### Pseudocode
+#### Code
 ```
 function floydwarshall takes an array of arrays graph as input:
   array best of size graph size by graph size
