@@ -61,7 +61,7 @@ The output produced is this:
 0
 fib1(4): 5
 ```
-As you can see, many numbers are called more than once, which is more than necessary.
+As you can see, the function is called repeatedly with smaller numbers: `fib1(0)` and `fib1(2)` are called twice each and `fib1(1)` is called three times.
 
 The way to solve this is through *caching*. This is the basic premise of dynamic programming.
 ```
