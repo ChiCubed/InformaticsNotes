@@ -188,38 +188,73 @@ A sparse table allows us to do queries in $$O(1)$$ time, although updates are $$
 | :---: | :---: | :---: | :---: |
 | $$O(N)$$ | $$O(1)$$ | $$O(N)$$ | $$O(N log N)$$ |
 
-### Pseudocode
+### Code
 
-```
-array table of size [log MAX_N][MAX_N]
+```cpp
+#include <bits/stdc++.h>
 
-func preprocess takes array arr as input:
-  - We are using min as an example here.
-  - Keep in mind operators need to be idempotent
-  - so operations such as addition do not work.
-  For i in 0 to length of arr:
-    table[0][i] = arr[i]
+using namespace std;
 
-  for p in 0 to the floor of log2(length of arr):
-    for i in 0 to length of arr:
-      table[p+1][i] = min(table[p][i],
-                          table[p][i+(1<<p)])
+const int MAX_ARRAY_LENGTH = 100000;
+// technically this is 17.
+// it's always good to overestimate
+// slightly to reduce the risk of
+// being out of bounds
+const int LOG2_MAX_ARR_LEN = 18;
 
-func query takes two integers l, r as input:
-  - l and r represent the query range.
-  if l == r:
-    return table[0][l]
+// Preprocessed logarithm array, because
+// practically logarithms aren't constant time
+int logs[MAX_ARRAY_LENGTH];
 
-  p = floor of log2(r-l + 1)
+int sparse[LOG2_MAX_ARR_LEN][MAX_ARRAY_LENGTH];
 
-  return min(table[p][l], table[p][b-(1<<p)+1])
+int arr[MAX_ARRAY_LENGTH];
 
-func update takes pos, new, array arr as input:
-  - You can actually implement an update
-  - for sparse tables, but the $O(N)$ speed means
-  - you might as well just preprocess.
-  arr[pos] = new
-  preprocess(arr)
+void preprocess(int array_size) {
+  for (int i=0; i<array_size; ++i) {
+    sparse[0][i] = arr[i];
+  }
+  
+  for (int l=0; l<LOG2_MAX_ARR_LEN; ++l) {
+    if (l) {
+      // note the    <= rather than <
+      for (int i=0; i<=array_size-(1<<l); ++i) {
+        // process the next 'level'
+        // We're using min in this example;
+        // we could have used any other
+        // associative + commutative + idempotent
+        // operator
+        sparse[l][i] = min(sparse[l-1][i],
+                           sparse[l-1][i + (1<<(l-1))]);
+      }
+    }
+    
+    // Preprocess logarithms
+    for (int j=(1<<l); j<(1<<(l+1)) && j<array_size; ++j) {
+      logs[j]=l;
+    }
+  }
+}
+
+int query(int l, int r) {
+  // returns the result of query
+  // over range [l,r]
+  int level = logs[r-l + 1];
+  return min(sparse[level][l],
+             sparse[level][r-(1<<level) + 1]);
+}
+
+void update(int i, int val, int array_size) {
+  // Might as well recalculate everything.
+  // We can optimise this slightly but sparse
+  // tables aren't designed to be recalculated.
+  // Also, in this example, this would recalculate
+  // all the logarithms. There's no practical
+  // use case for updating a sparse table anyway,
+  // this function only exists for completeness.
+  arr[i] = val;
+  preprocess(array_size);
+}
 ```
 
 ### Requirements
