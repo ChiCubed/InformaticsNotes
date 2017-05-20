@@ -3,13 +3,12 @@
 Dynamic programming is not an algorithm; rather, it is a method of approaching a problem. Dynamic programming can be used whenever a problem exhibits *overlapping subproblems*, or *optimal substructure*, where to calculate the answer to a problem often in a solution you would have to calculate the same number twice.
 
 One example is the following recursive definition of the nth Fibonacci number:
-```
-func fibonacci takes an integer n:
-  if n < 0:
-    throw BAD_VALUE
-  if n < 2:
-    return 1
-  return fibonacci(n-1) + fibonacci(n-2)
+```cpp
+int fib1(int n) {
+  if (n < 0) throw domain_error("Input value out of range");
+  // ternary operator; returns 1 if n == 0 or n == 1
+  return (n < 2 ? 1 : fib1(n-1) + fib1(n-2));
+}
 ```
 
 When $$n = 2$$, this only has to call fibonacci(0) and fibonacci(1):
