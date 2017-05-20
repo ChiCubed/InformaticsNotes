@@ -287,6 +287,10 @@ q.push(6);
 
 cout << q.top() << endl; // 8
 q.pop();
+
+cout << q.top() << endl; // 6
+q.pop();
+
 ```
 
 ## Binary Heap
