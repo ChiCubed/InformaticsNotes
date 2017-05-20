@@ -32,7 +32,7 @@ However, when $$n = 4$$, this has to call the following:
 ```
 As should be obvious from the diagram, many functions are called more times than necessary. While in this small case it does not matter much, in larger algorithms it can be extremely significant if the same solution is calculated multiple times.
 
-The way to solve this is through *caching*.
+The way to solve this is through *caching*. This is the basic premise of dynamic programming.
 ```
 array cache of length MAX_N default value 0
 
