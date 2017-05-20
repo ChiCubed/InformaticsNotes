@@ -123,7 +123,7 @@ The name carries connotations of addition but a prefix sum array works on any op
 
 \*$$inverse$$ is the cost of performing the inverse of whatever function you have chosen to perform. For example, if you have a prefix sum array using multiplication, the cost of the inverse would be the cost of division.
 
-### Pseudocode
+### Code
 
 ```
 func preprocess takes an array arr as input:
