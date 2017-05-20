@@ -180,6 +180,8 @@ A graph with no negative cycles (i.e. cycles with a negative length.) The algori
 #### Tips
 The code assumes the graph is in [adjacency list](/chapter3/graphtheory.md#adjacency-list) format.
 
+The code only calculates distances, not the nodes visited; it is relatively easy to backtrack the path, by storing the node that each node came from, i.e. when updating a node's minimum distance, update a pointer to the previous value of a node.
+
 ### Floyd-Warshall
 #### Summary
 The Floyd-Warshall algorithm is an algorithm which finds the shortest distance between every pair of vertices in a graph.
