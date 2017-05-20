@@ -178,7 +178,7 @@ function dijkstra takes an array of vectors of pairs graph and two integers from
 A graph with no negative cycles (i.e. cycles with a negative length.) The algorithm assumes a directed graph, and an undirected graph can easily be used as well by changing each edge of the graph to two directed edges with the same weight and opposite directions, i.e. `1 - 2` becomes `1 -> 2` and `2 -> 1`.
 
 #### Tips
-The pseudocode assumes a `set` type with the same API as the C++ one, and assumes that the graph is in adjacency list format.
+The code assumes the graph is in adjacency list format.
 
 ### Floyd-Warshall
 #### Summary
