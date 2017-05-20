@@ -31,37 +31,37 @@ However, when $$n = 4$$, this has to call the following:
 ```
 As should be obvious from the diagram, many functions are called more times than necessary. While in this small case it does not matter much, in larger algorithms it can be extremely significant if the same solution is calculated multiple times.
 
-**ASIDE**: To illustrate this graphically, I set up a debug version of the above program which prints the number being passed as an argument and indents it. Here's the code:
-  ```cpp
-  #include <bits/stdc++.h>
-  
-  using namespace std;
-  
-  int fib1(int n) {
-    for (int i=0; i<n; ++i) printf(" ");
-    printf("%d\n",n);
-    if (n < 0) throw domain_error("Input value out of range");
-    return (n < 2 ? 1 : fib1(n-1) + fib1(n-2));
-  }
-  
-  int main(int argc, char* argv[]) {
-    printf("fib1(4): %d\n", fib1(4));
-  }
-  ```
-  The output produced is this:
-  ```
-      4
-     3
-    2
-   1
-  0
-   1
-    2
-   1
-  0
-  fib1(4): 5
-  ```
-  As you can see, the function is called repeatedly with smaller numbers: `fib1(0)` and `fib1(2)` are called twice each and `fib1(1)` is called three times.
+> **ASIDE**: To illustrate this graphically, I set up a debug version of the above program which prints the number being passed as an argument and indents it. Here's the code:
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int fib1(int n) {
+  for (int i=0; i<n; ++i) printf(" ");
+  printf("%d\n",n);
+  if (n < 0) throw domain_error("Input value out of range");
+  return (n < 2 ? 1 : fib1(n-1) + fib1(n-2));
+}
+
+int main(int argc, char* argv[]) {
+  printf("fib1(4): %d\n", fib1(4));
+}
+```
+The output produced is this:
+```
+    4
+   3
+  2
+ 1
+0
+ 1
+  2
+ 1
+0
+fib1(4): 5
+```
+As you can see, the function is called repeatedly with smaller numbers: `fib1(0)` and `fib1(2)` are called twice each and `fib1(1)` is called three times.
 
 The way to solve this is through *caching*. This is the basic premise of dynamic programming.
 ```
