@@ -25,7 +25,7 @@ using namespace std;
 // to be easily sorted.
 // All indices are assumed to be 0-indexed.
 
-// obviously you don't have to use vectors,
+// Obviously you don't have to use vectors,
 // you can just use arrays that are large enough.
 // With adjacency lists, I would recommend that you
 // use an array of vector<pair<int,int>>
@@ -36,9 +36,11 @@ using namespace std;
 const int INF = 100000000;
 
 typedef pair<int,int> pi;
+typedef vector<vector<pi>> adjlist_t;
+typedef vector<vector<int>> adjmat_t;
 
-vector<vector<pi>> matrixToList(vector<vector<int>> matrix) {
-  vector<vector<pi>> list;
+adjlist_t matrixToList(adjmat_t matrix) {
+  adjlist_t list;
   // for every pair of nodes
   for (int i=0; i<matrix.size(); ++i) {
     list.push_back({});
@@ -54,8 +56,8 @@ vector<vector<pi>> matrixToList(vector<vector<int>> matrix) {
 }
 
 // nodes represents the number of nodes in the graph
-vector<vector<int>> listToMatrix(vector<vector<pi>> list, int nodes) {
-  vector<vector<int>> matrix;
+adjmat_t listToMatrix(adjlist_t list, int nodes) {
+  adjmat_t matrix;
   
   // build the adjacency matrix
   for (int i=0; i<nodes; ++i) {
