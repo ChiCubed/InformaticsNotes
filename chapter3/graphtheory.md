@@ -13,34 +13,70 @@ Stores the distance from every vertex to every vertex it has an edge to, i.e.
 $$O(EV)$$ space. Typically much less; normally one would use a list of vectors to represent the outgoing edges, to account for sparse and dense graphs alike.
 
 ### Conversion
-```
-- The following functions assume adjacency lists
-- store edges in the format {dist, node}
-- instead of what may seem more logical,
-- {node, dist}. This is to allow the lists
-- to be easily sorted.
+```cpp
+#include <bits/stdc++.h>
 
-function matrixToList takes array of arrays graph:
-  array of vectors of pairs result
+using namespace std;
+
+// The following functions assume adjacency lists
+// store edges in the format {dist, node}
+// instead of what may seem more logical,
+// {node, dist}. This is to allow the lists
+// to be easily sorted.
+// All indices are assumed to be 0-indexed.
+
+// obviously you don't have to use vectors,
+// you can just use arrays that are large enough.
+// With adjacency lists, I would recommend that you
+// use an array of vector<pair<int,int>>
+// rather than a 2d array of pairs of integers
+// because in dense graphs this can waste a lot
+// of space.
+
+const int INF = 100000000;
+
+typedef pair<int,int> pi;
+
+vector<vector<pi>> matrixToList(vector<vector<int>> matrix) {
+  vector<vector<pi>> list;
+  // for every pair of nodes
+  for (int i=0; i<matrix.size(); ++i) {
+    list.push_back({});
+    for (int j=0; j<matrix[i].size(); ++j) {
+      if (i!=j && matrix[i][j] != INF) {
+        // there is an edge from i to j
+        list[i].push_back({matrix[i][j],j});
+      }
+    }
+  }
   
-  for i in range 0 to size of graph:
-    for j in range 0 to size of graph:
-      if i != j and graph[i][j] != INFINITY:
-        result[i].push_back( {graph[i][j],j} )
+  return list;
+}
+
+// nodes represents the number of nodes in the graph
+vector<vector<int>> listToMatrix(vector<vector<pi>> list, int nodes) {
+  vector<vector<int>> matrix;
   
-  return result
+  // build the adjacency matrix
+  for (int i=0; i<nodes; ++i) {
+    matrix.push_back({});
+    for (int j=0; j<nodes; ++j) {
+      matrix[i].push_back(INF);
+    }
+  }
   
-function listToMatrix takes array of vectors of pairs graph:
-  array of arrays result with default value INFINITY
+  for (int i=0; i<nodes; ++i) {
+    matrix[i][i]=0;
+    for (auto j : list[i]) {
+      // sanity check
+      if (j.second >= nodes) continue;
+      
+      matrix[i][j.second] = j.first;
+    }
+  }
   
-  for i in range 0 to size of graph:
-    - C++11 range-based for loop.
-    - see the C++ tips section
-    result[i][i] = 0
-    for ( auto j : graph[i] ):
-      result[i][j.second] = j.first
-  
-  return result
+  return matrix;
+}
 ```
 
 ## Tree
