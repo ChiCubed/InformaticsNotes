@@ -147,33 +147,62 @@ Can be quite easily modified to find the shortest path from a node to every othe
 #### Complexity
 $$O(E log V)$$ where $$E$$ is the number of edges and $$V$$ is the number of vertices.
 
-#### Pseudocode
-```
-Use a C++ pair type
+#### Code
+```cpp
+#include <bits/stdc++.h>
 
-- graph represents the outgoing edges from each vertex i.e. graph[1] is outgoing
-- edges from vertex 1
-- graph[1][0] is, say, {2,3}, representing an edge to node 2 with length 3
-function dijkstra takes an array of vectors of pairs graph and two integers from and to:
-  vector of integers dist of length graph size and with default value INFINITY
-  set of pairs active
+using namespace std;
+
+typedef pair<int,int> pi;
+const int INF       = 100000000;
+const int MAX_NODES =    100000;
+
+// Adjacency list.
+// Pairs are formatted as {dist,node}
+// rather than {node,dist}.
+vector<pi> graph[MAX_NODES];
+
+int dist[MAX_NODES];
+
+int dijkstra(int s, int t, int num_nodes) {
+  // s is start, t is destination
   
-  - for simplicity active contains pairs of form {dist, node} for easy sorting.
+  // sort the nodes by distance
+  priority_queue<pi, vector<pi>, greater<pi>> active;
   
-  dist[from] = 0
-  active.push( {0, from} )
+  // if this function is going to be called
+  // multiple times, dist must be reset
+  // each time.
+  for (int i=0; i<num_nodes; ++i) dist[i] = INF;
   
-  while (!active.empty()):
-    curr = active.begin()->second
-    if curr == target: return dist[curr]
-    active.erase(active.begin())
-    for nxt in graph[curr]:
-      if dist[nxt.first] > dist[curr] + graph[nxt.second]:
-        active.erase( {dist[nxt.first], nxt.first})
-        dist[nxt.first] = dist[curr] + graph[nxt.second]
-        active.insert( {dist[nxt.first], nxt.first})
+  dist[s] = 0;
+  active.push({0,s});
   
-  return INFINITY
+  while (!active.empty()) {
+    pi top = active.top();
+    active.pop();
+    
+    // if it's not the newest version in the pq: ignore it
+    if (top.first != dist[top.second]) continue;
+    
+    int curr = top.second;
+    
+    // remove this line if you don't have
+    // one specific target
+    if (curr == t) return dist[curr];
+    
+    for (auto nxt : graph[curr]) {
+      // nxt = {dist,node}
+      if (dist[nxt.second] > dist[curr] + nxt.first) {
+        dist[nxt.second] = dist[curr] + nxt.first;
+        active.push({dist[nxt.second],nxt.second});
+      }
+    }
+  }
+  
+  // there's no path :(
+  return INF;
+}
 ```
 
 #### Requirements
