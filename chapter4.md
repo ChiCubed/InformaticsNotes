@@ -273,6 +273,8 @@ A data structure which allows adding elements and popping the smallest / largest
 
 You can provide comparator functions as per the entry on [http://cppreference.com](http://cppreference.com).
 
+A Priority Queue is defined in the C++ STL; there is no need to create one manually.
+
 ```cpp
 #include <queue> // or <bits/stdc++.h>
 
