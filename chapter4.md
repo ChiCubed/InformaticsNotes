@@ -125,49 +125,49 @@ The name carries connotations of addition but a prefix sum array works on any op
 
 ### Code
 
-```
-func preprocess takes an array arr as input:
-  Create a new array pre with the same
-  length as the original
+```cpp
+#include <bits/stdc++.h>
 
-  pre[0] = arr[0]
-  For i in 1 to the length of arr:
-    - In this example we are using
-    - addition. As discussed in the
-    - Requirements section, a prefix
-    - sum array works on any operation
-    - forming a group, so the addition below
-    - can be replaced with, for example, multiplication.
-    pre[i] = pre[i-1] + arr[i]
+using namespace std;
 
-  return pre
+// This example uses vectors
+// although it is generally adviseable
+// to use global arrays.
 
-func query takes two integers start and end as input:
-  - We assume that start and end are zero-indexed.
-  - We also assume that we want to query inclusive.
-  - Since we used addition in preprocessing, we will
-  - use the inverse of addition here, subtraction.
-  if start == 0:
-    return pre[end]
-  else:
-    return pre[end] - pre[start-1]
+const int MAX_ARRAY_LENGTH = 100000;
 
-func update takes two integers newval and index as input:
-  - We assume that we are replacing values
-  - already in the array, rather than inserting
-  - any.
-  arr[index] = newval
+int arr[MAX_ARRAY_LENGTH];
+int pre[MAX_ARRAY_LENGTH];
 
-  if index == 0:
-    pre[0] = arr[i]
-    For i in 1 to the length of arr:
-      - Again, the statements about changing this
-      - if you use a different operator than addition
-      - hold.
-      pre[i] = pre[i-1] + arr[i]
-  else:
-    For i in index to the length of arr:
-      pre[i] = pre[i-1] + arr[i]
+void preprocess(int array_size) {
+  pre[0] = arr[0];
+  
+  for (int i=0; i<array_size; ++i) {
+    // In this example we are using addition.
+    // We can use any operation with an inverse.
+    pre[i] = pre[i-1] + arr[i];
+  }
+}
+
+int query(int l, int r) {
+  // Query range [l,r]
+  // We must use the inverse of addition
+  // here, which is subtraction.
+  // if l=0, we want to query from the start,
+  // so we don't subtract anything.
+  return pre[r] - (l?pre[l-1]:0);
+}
+
+void update(int array_size, int i, int val) {
+  // i is the index, val is the new value
+  
+  // We can technically optimise this but
+  // if there are going to be updates
+  // prefix sum is the wrong data structure.
+  
+  arr[i]=val;
+  preprocess(array_size);
+}
 ```
 
 ### Requirements
