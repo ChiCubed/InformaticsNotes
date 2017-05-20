@@ -136,7 +136,7 @@ This example much more clearly illustrates how much of an improvement a function
 
 
 ## Shortest path
-The shortest path problem involves finding the shortest path between two nodes on a graph; a number of variants exist such as restricting the graph to being directed and acyclic, or finding the shortest path between all nodes on a graph. The most common algorithm is Dijkstra's algorithm, which finds the shortest path between two nodes on a directed graph with no negative edge weights (it can easily be extended to undirected graphs.)
+The shortest path problem involves finding the shortest path between two nodes on a graph; a number of variants exist such as restricting the graph to being directed and acyclic, or finding the shortest distance between all nodes on a graph. The most common algorithm is Dijkstra's algorithm, which finds the shortest path between two nodes on a directed graph with no negative edge weights (it can easily be extended to undirected graphs.)
 
 ### Dijkstra's Algorithm
 #### Summary
