@@ -105,7 +105,7 @@ A range tree works on any associative operators.
 
 Identities are not necessary if you implement a range tree differently, that is by returning a placeholder value if a node is out of range in the query function and checking for that placeholder being returned.
 
-**ASIDE**: There _are_ actually associative operators without identities. Although of course it is very unlikely these will turn up in an informatics competition.
+**ASIDE**: There _are_ actually associative operators without identities, although of course it is very unlikely these will turn up in an informatics competition.
 
 ## Prefix sum
 
