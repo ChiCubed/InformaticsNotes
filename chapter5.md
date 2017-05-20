@@ -182,7 +182,7 @@ The code assumes the graph is in [adjacency list](/chapter3/graphtheory.md#adjac
 
 ### Floyd-Warshall
 #### Summary
-The Floyd-Warshall algorithm is an algorithm which finds the shortest path between every two vertices in a graph.
+The Floyd-Warshall algorithm is an algorithm which finds the shortest distance between every pair of vertices in a graph.
 
 #### Complexity
 $$O(V^3)$$.
