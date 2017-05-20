@@ -142,6 +142,8 @@ The shortest path problem involves finding the shortest path between two nodes o
 #### Summary
 Finds the shortest path between two nodes on a graph.
 
+Can be quite easily modified to find the shortest path from a node to every other node in a graph.
+
 #### Complexity
 $$O(E log V)$$ where $$E$$ is the number of edges and $$V$$ is the number of vertices.
 
@@ -479,3 +481,4 @@ for i in range 0 to n:
         dp[i][j-weights[i+1]]+vals[i+1]
         )
 ```
+ 
