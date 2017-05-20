@@ -439,7 +439,7 @@ A Square Root Decomposition works by dividing the array into $$\sqrt{n}$$ blocks
 Query: Calculate the 'product' of each of the buckets in the preprocessed array which are contained entirely within the query range, linearly scan elements that are only partially within the buckets.
 
 ### With range updates
-If we need to query ranges and update a range with operations such as 'set everything in this range to $$0$$' or 'multiply everything in this range by $$a$$', we can use a modified range tree. For the latter case, you would store a 'multiplication factor' for each node that was entirely contained within the range. This could be done by traversing up through the tree, changing every node's multiplication factor accordingly if they were a part of the range. This is only $$O(log N)$$.
+If we need to query ranges and update a range with operations such as 'set everything in this range to $$0$$' or 'multiply everything in this range by $$a$$', we can use a modified range tree. This is known as a 'lazy update range tree'. For the latter case, you would store a 'multiplication factor' for each node that was entirely contained within the range. This could be done by traversing up through the tree, changing every node's multiplication factor accordingly if they were a part of the range. This is only $$O(log N)$$.
 
 This solution works with any pair of distributive semigroups. Since multiplication distributes over addition, the above solution works. Another example is that addition distributes over $$min$$, so the solution would work if we stored an amount to be added on each node and our queries were of the minimum element in a range.
 
