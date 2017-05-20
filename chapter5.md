@@ -221,20 +221,36 @@ The Floyd-Warshall algorithm is an algorithm which finds the shortest distance b
 $$O(V^3)$$.
 
 #### Code
-```
-function floydwarshall takes an array of arrays graph as input:
-  array best of size graph size by graph size
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX_NODES = 1005;
+const int INF  = 100000000;
+
+// adjacency matrix
+int graph[MAX_NODES][MAX_NODES];
+// the resulting distance
+// dist[i][j] = distance from i to j
+int  dist[MAX_NODES][MAX_NODES];
+
+void floydwarshall(int num_nodes) {
+  for (int i=0; i<num_nodes; ++i) {
+    for (int j=0; j<num_nodes; ++j) {
+      dist[i][j] = graph[i][j];
+    }
+  }
   
-  for i in range 0 to graph size:
-    for j in range 0 to graph size:
-      best[i][j] = graph[i][j]
-  
-  for k in range 0 to graph size:
-    for i in range 0 to graph size:
-      for j in range 0 to graph size:
-        best[i][j] = min(best[i][j], best[i][k] + best[k][j])
-  
-  return best
+  for (int k=0; k<num_nodes; ++k) {
+    for (int i=0; i<num_nodes; ++i) {
+      for (int j=0; j<num_nodes; ++j) {
+        dist[i][j] = min(dist[i][j],
+                         dist[i][k]+dist[k][j]);
+      }
+    }
+  }
+}
 ```
 
 #### Requirements
