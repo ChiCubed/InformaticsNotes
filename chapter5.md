@@ -115,6 +115,8 @@ As you can see, the function `fib1` is called repeatedly with smaller numbers: `
 
 However, the function `fib2` only needs to calculate the values once each; the rest of the time the stored cached values are used.
 
+The difference is minimal here; to illustrate it better, I tried running it with N=7.
+
 
 ## Shortest path
 The shortest path problem is used a lot in informatics competitions. It involves finding the shortest path between two nodes on a graph; a number of variants exist such as restricting the graph to being directed and acyclic, or finding the shortest path between all nodes on a graph. The most common algorithm is Dijkstra's algorithm, which finds the shortest path between two nodes on a directed graph with no negative edge weights (it can easily be extended to undirected graphs.)
