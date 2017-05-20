@@ -220,6 +220,13 @@ int fact(int n) {
 }
 ```
 
+Using the ternary operator, we can shorten this to:
+
+```cpp
+int fact(int n) {
+  return (n<=0?1:n*fact(n-1));
+```
+
 
 ## Binary and Bit Shifting
 **Q**: How do I quickly find $$2^x$$?
