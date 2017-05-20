@@ -180,8 +180,6 @@ A prefix sum array is not well suited to cases where updates are required due to
 
 A sparse table is represented as a 2D array of size $$log N$$ by $$N$$. `Table[i][j]` represents the result of the 'product' of the elements $$j$$ through $$2^i+j$$. \(Non-inclusive in this case.\) The solution is then found by finding the 'product' of the 2-power 'bucket' starting at the left edge of the query range and that ending at the right. Since these may overlap Sparse Tables only work for idempotent operators such as $$min$$, $$max$$ and $$lcm$$.
 
-We can also represent a sparse table as a 1D array, meaning we only use $$N$$ space (technically $$2N$$), rather than $$N log N$$. This can be done by representing each row of the original table as a consecutive segment of the 1D array. The example given here is $$N log N$$, which is good enough for any practical example: N up to $$67\,108\,864$$ works within $$64$$ MiB and up to $$268\,435\,436$$ within $$256$$ MiB, which tends to be the upper bound in programming contests.
-
 A sparse table allows us to do queries in $$O(1)$$ time, although updates are $$O(N)$$ - if there are any updates a range tree is a better option.
 
 ### Complexity
