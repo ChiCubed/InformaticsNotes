@@ -6,6 +6,7 @@ One example is the following recursive definition of the nth Fibonacci number:
 ```cpp
 int fib1(int n) {
   if (n < 0) throw domain_error("Input value out of range");
+  
   // ternary operator; returns 1 if n == 0 or n == 1
   return (n < 2 ? 1 : fib1(n-1) + fib1(n-2));
 }
