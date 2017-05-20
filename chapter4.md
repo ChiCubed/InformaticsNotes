@@ -274,7 +274,7 @@ A data structure which allows adding elements and popping the smallest / largest
 You can provide comparator functions as per the entry on [http://cppreference.com](http://cppreference.com).
 
 ```
-#include <queue>
+#include <queue> // or <bits/stdc++.h>
 
 ...
 
@@ -293,8 +293,8 @@ One implementation of a priority queue. In particular a binary heap consists of 
 
 This is already implemented in the C++ STL. Details on asymptotic time complexity can be found at [http://cppreference.com](http://cppreference.com). Please note the implemented heap is a max heap. It is often adviseable to use a priority queue: `#include <queue> ... priority_queue<int> q;` as custom comparator functions are easier to work with, along with the API being easier in general.
 
-```
-#include <algorithm>
+```cpp
+#include <algorithm> // or <bits/stdc++.h>
 
 ...
 
@@ -323,7 +323,7 @@ pop_heap(vec.begin(), vec.end());
 | :---: | :---: | :---: |
 | $$O(1)$$ | $$O(1)$$ | $$O(N)$$ |
 
-\(Assuming both path compression and union by rank are implemented.\)  
+(Assuming both path compression and union by rank are implemented.)
 Technically the functions Find and Union are inverse Ackermann complexity; however, for all practical values, this is less than 5.
 
 ### Pseudocode
