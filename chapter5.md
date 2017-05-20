@@ -142,8 +142,6 @@ The shortest path problem involves finding the shortest path between two nodes o
 #### Summary
 Finds the shortest path between two nodes on a graph.
 
-Essentially works by 
-
 #### Complexity
 $$O(E log V)$$ where $$E$$ is the number of edges and $$V$$ is the number of vertices.
 
