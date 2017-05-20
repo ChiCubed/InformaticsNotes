@@ -259,7 +259,7 @@ void update(int i, int val, int array_size) {
 
 ### Requirements
 
-A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associative, commutative and idempotent (see the section on [Set Theory](/chapter3/settheory.md#properties-of-binary-operators) for explanation). Examples include the $$min$$ function. \(No inverse is required.\)
+A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associative, commutative and idempotent (see the section on [Set Theory](/chapter3/settheory.md#properties-of-binary-operators) for explanation). Examples include the $$min$$ function. (No inverse is required.)
 
 ### Tips
 
