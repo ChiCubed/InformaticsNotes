@@ -81,8 +81,6 @@ adjmat_t listToMatrix(adjlist_t list, int nodes) {
 }
 ```
 
-[Hey look a test](#tree)
-
 ## Tree
 An undirected graph in which any two vertices are connected by exactly one path.
 
