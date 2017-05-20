@@ -211,7 +211,14 @@ This is basically a shortcut for an if/else statement, and is useful if you need
 The syntax is as follows:
 `condition ? value_if_true : value_if_false`
 
+One example of where this is useful is calculating a factorial (recursively). Normally when calculating a factorial recursively you must put a 'base case' on a different line to the `return` statement:
 
+```cpp
+int fact(int n) {
+  if (n <= 0) return 1;
+  return n*fact(n-1);
+}
+```
 
 
 ## Binary and Bit Shifting
