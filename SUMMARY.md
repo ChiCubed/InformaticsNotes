@@ -9,7 +9,7 @@
 ### Mathematics
 * [Set theory](chapter3/settheory.md)
 * [Complexity](chapter3/complexity.md)
-* [Graph theory](chapter3/graphtheory.md)
+* [Graph theory](chapter3/graphtheory.md#tree)
 
 ### Data structures and Algorithms
 * [Data structures](chapter4.md)
