@@ -32,19 +32,17 @@ However, when $$n = 4$$, this has to call the following:
 As should be obvious from the diagram, many functions are called more times than necessary. While in this small case it does not matter much, in larger algorithms it can be extremely significant if the same solution is calculated multiple times.
 
 The way to solve this is through *caching*. This is the basic premise of dynamic programming.
-```
-array cache of length MAX_N default value 0
-
-func fibonacci takes an integer n:
-  if n < 0:
-    throw BAD_VALUE
-  if cache[n] != 0:
-    return cache[n]
-  if n < 2:
-    cache[n] = 1
-    return 1
-  cache[n] = fibonacci(n-1) + fibonacci(n-2)
-  return cache[n]
+```cpp
+int cache[100005]; // initialised to 0
+int fib2(int n) {
+  if (n < 0) throw domain_error("Input value out of range");
+  // we can do this because cache[n] is only zero
+  // if it hasn't been calculated yet; no fibonacci
+  // number is zero
+  if (cache[n]) return cache[n];
+  
+  return cache[n] = (n < 2 ? 1 : fib2(n-1) + fib2(n-2));
+}
 ```
 
 This means we only have to call the following:
