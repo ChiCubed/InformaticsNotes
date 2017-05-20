@@ -241,7 +241,7 @@ function floydwarshall takes an array of arrays graph as input:
 Same as Dijkstra.
 
 #### Tips
-The code above assumes the graph is in [adjacency matrix](/chapter3/graphtheory.md "adjacency-matrix") format.
+The code above assumes the graph is in [adjacency matrix](/chapter3/graphtheory.md#adjacency-matrix) format.
 
 
 
