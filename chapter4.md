@@ -136,6 +136,13 @@ int tree[MAX_ARRAY_LENGTH+1];
 int arr[MAX_ARRAY_LENGTH];
 
 
+// Get the last set bit of the integer
+// x.
+inline int lsb(int x) {
+  return x&(-x);
+}
+
+
 // Preprocess the array.
 void preprocess() {
 
