@@ -244,6 +244,64 @@ void update(int n, int i, int val) {
 }
 ```
 
+### Golfed
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX_ARRAY_LENGTH = 100000;
+
+int tree[MAX_ARRAY_LENGTH+1];
+int arr[MAX_ARRAY_LENGTH];
+
+#define lsb(x) ((x)&(-x))
+
+void update(int n, int i, int val);
+
+void preprocess(int n) {
+  for (int i=0;i<n;++i)update(n, i, arr[i]);
+}
+
+// Returns the sum of the array
+// up to index i.
+// For range query, one can simply
+// query(r) - query(l-1).
+int query(int i) {
+  int s = 0;
+  
+  // Since BIT[0] is a dummy...
+  int ind = i+1;
+  
+  // go through the ancestors
+  // of the index in the array
+  while (ind>0) {
+    s += tree[ind];
+    ind -= lsb(ind);
+  }
+  
+  return s;
+}
+
+// Increment the element at index i by value val.
+// n should be the length of the array.
+// If one wishes to update the element, each update
+// may be made along with an update in the original
+// array, and the difference to the original
+// array's value may be passed to this function
+// rather than the new value.
+void update(int n, int i, int val) {
+  // For the same reason as in the query function
+  int ind = i+1;
+  
+  while (ind <= n) {
+    tree[ind] += val;
+    ind += lsb(ind);
+  }
+}
+```
+
 ### Requirements
 
 A binary indexed tree works on any associative binary operation e.g. addition.
