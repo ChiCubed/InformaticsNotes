@@ -474,26 +474,20 @@ int sparse[LOG2_MAX_ARR_LEN][MAX_ARRAY_LENGTH];
 int arr[MAX_ARRAY_LENGTH];
 
 void preprocess(int n) {
-  for (int i=0;i<n;++i)sparse[0][i] = arr[i];
-  for (int l=0;l<LOG2_MAX_ARR_LEN;++l) {
+  for(int i=0;i<n;++i)sparse[0][i] = arr[i];
+  for(int l=0;l<LOG2_MAX_ARR_LEN;++l) {
     if(l){
-      for (int i=0;i<=n-(1<<l);++i)
+      for(int i=0;i<=n-(1<<l);++i)
         sparse[l][i]=min(sparse[l-1][i],
                 sparse[l-1][i+(1<<l-1)]);
-      }
     }
     
-    // Preprocess logarithms
-    for (int j=(1<<l); j<(1<<l+1) && j<n; ++j) {
-      logs[j]=l;
-    }
+    for(int j=(1<<l);j<(1<<l+1)&&j<n;++j)logs[j]=l;
   }
 }
 
 int query(int l, int r) {
-  // returns the result of query
-  // over range [l,r]
-  int level = logs[r-l + 1];
+  int level=logs[r-l+1];
   return min(sparse[level][l],
              sparse[level][r-(1<<level)+1]);
 }
