@@ -363,8 +363,7 @@ int query(int l, int r) {
 }
 
 void update(int n, int i, int val) {
-  arr[i]=val;
-  preprocess(n);
+  arr[i]=val;preprocess(n);
 }
 ```
 
