@@ -266,9 +266,7 @@ void preprocess(int n) {
 
 int query(int i) {
   int s=0;
-  
-  for(int a=i+1;a>0;a-=lsb(a),s+=tree[a]);
-  
+  for(int a=i+1;a>0;a-=lsb(a))s+=tree[a];
   return s;
 }
 
