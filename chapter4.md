@@ -589,7 +589,7 @@ int parent[MAX_NODES+1];
 int  nrank[MAX_NODES+1];
 
 // n is the number of nodes
-void create(int n) {
+void create (int n) {
   // note the    <= instead of <
   for (int i=0; i<=n; ++i) {
     // nrank is already zeroed - don't bother
@@ -597,7 +597,7 @@ void create(int n) {
   }
 }
 
-int find(int x) {
+int find (int x) {
   // This is path compression
   if (x != parent[x]) parent[x] = find(parent[x]);
   return parent[x];
@@ -605,7 +605,7 @@ int find(int x) {
 
 // We cannot use the name 'union'
 // because it is a specifier in C++
-void join(int x, int y) {
+void join (int x, int y) {
   x = find(x); y = find(y);
   
   // This is union by rank
@@ -630,17 +630,16 @@ const int MAX_NODES = 100000;
 int parent[MAX_NODES+1];
 int  nrank[MAX_NODES+1];
 
-void create(int n) {
+void create (int n) {
   for(int i=0;i<=n;++i)parent[i]=i;
 }
 
-int find(int x) {
-  // This is path compression
+int find (int x) {
   if(x^parent[x])parent[x]=find(parent[x]);
   return parent[x];
 }
 
-void join(int x, int y) {
+void join (int x, int y) {
   x=find(x);y=find(y);
   if(nrank[x]>nrank[y]){parent[y]=x};
   else{parent[x]=y};
