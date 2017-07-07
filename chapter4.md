@@ -168,6 +168,15 @@ int query(int i) {
   
   // Since BIT[0] is a dummy...
   int i=i+1;
+  
+  // go through the ancestors
+  // of the index in the array
+  while (i>0) {
+    s += tree[i];
+    i -= lsb(i);
+  }
+  
+  return s;
 }
 
 // Increment the element at index i by value val.
