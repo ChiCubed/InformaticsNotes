@@ -32,7 +32,8 @@ int arr[MAX_ARRAY_LENGTH];
 // don't have to type the
 // same thing over and over again.
 inline int mid(int a, int b) {
-  return ((a+b)>>1);
+  // The addition is evaluated first.
+  return (a+b>>1);
 }
 
 // Preprocess the array.
