@@ -163,6 +163,8 @@ void preprocess(int n) {
 
 // Returns the sum of the array
 // up to index i.
+// For range query, one can simply
+// query(r) - query(l-1).
 int query(int i) {
   int s = 0;
   
