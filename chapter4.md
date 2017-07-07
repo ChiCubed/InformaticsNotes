@@ -147,7 +147,7 @@ inline int lsb(int x) {
 
 // We include the function declaration
 // here so we can use it in preprocess.
-void update(int n, int i, int v);
+void update(int n, int i, int val);
 
 
 // Preprocess the array.
@@ -156,11 +156,8 @@ void update(int n, int i, int v);
 void preprocess(int n) {
   // Assumes the array tree is already zeroed.
   
-  int j;
-  for (int i=0; i<n; ++i) {
-    j = i + lsb(i + 1);
-    if (j < n) tree[j] 
-  }
+  for (int i = 0; i < n; ++i) {
+  
 }
 
 // Returns the sum of the range [s,e].
@@ -168,12 +165,13 @@ int query() {
 }
 
 // Increment the element at index i by value val.
+// n should be the length of the array.
 // If one wishes to update the element, each update
 // may be made along with an update in the original
 // array, and the difference to the original
 // array's value may be passed to this function
 // rather than the new value.
-void update() {
+void update(int n, int i, int val) {
 
 }
 ```
