@@ -588,10 +588,10 @@ int parent[MAX_NODES+1];
 // my compiler gets angry
 int  nrank[MAX_NODES+1];
 
-
-void create(int num_nodes) {
+// n is the number of nodes
+void create(int n) {
   // note the    <= instead of <
-  for (int i=0; i<=num_nodes; ++i) {
+  for (int i=0; i<=n; ++i) {
     // nrank is already zeroed - don't bother
     parent[i] = i;
   }
