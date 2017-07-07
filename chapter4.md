@@ -614,19 +614,10 @@ void join(int x, int y) {
   
   if (nrank[x] == nrank[y]) nrank[y]++;
 }
-
-int main(int argc, char* argv[]) {
-  create(10);
-  
-  join(1,3);
-  
-  printf("%d %d\n", find(1), find(3));
-  
-  join(3,4);
-  
-  printf("%d %d %d\n", find(3), find(4), find(5));
-}
 ```
 
 This implements union by rank and path compression.
 
+### Requirements
+
+Nothing really.
