@@ -118,6 +118,8 @@ const int INF           = 100000000;
 int tree[VERY_BIG_NUMBER];
 int arr[MAX_ARRAY_LENGTH];
 
+// to get rid of warnings,
+// add brackets around (a)+(b)
 #define mid(a,b) ((a)+(b)>>1)
 
 int preprocess(int l, int r, int pos) {
