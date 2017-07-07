@@ -90,11 +90,55 @@ int update(int l, int r, int pos, int i, int val) {
   
   // We're on a node at the bottom of the tree:
   // we update its value
+  // Remove arr[l] from this expression if
+  // you don't want to update the original
+  // array.
   if (l==r) return tree[pos]=arr[l]=val;
   
   // We contain the index to update.
   int m=mid(l,r);
   return tree[pos]=min(update(l,  m,(pos<<1)+1,i,val),
+                       update(m+1,r,(pos<<1)+2,i,val));
+}
+```
+
+### Golfed
+
+To 'golf' code means to make it shorter.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const int VERY_BIG_NUMBER = 1000000;
+const int MAX_ARRAY_LENGTH = 100000;
+const int INF           = 100000000;
+
+int tree[VERY_BIG_NUMBER];
+int arr[MAX_ARRAY_LENGTH];
+
+#define mid(a,b) (((a)+(b))>>1)
+
+int preprocess(int l, int r, int pos) {
+  if (l==r)return tree[pos]=arr[l];
+  int m=mid(l,r);
+  return tree[pos]=min(preprocess(l,m,pos<<1+1),
+                       preprocess(m+1,r,pos<<1+2));
+}
+
+int query(int l, int r, int pos, int s, int e) {
+  if (s<=l&&r<=e)return tree[pos];
+  if (e<l||r<s)return INF;
+  int m=mid(l,r);
+  return min(query(l,m,(pos<<1)+1,s,e),
+             query(m+1,r,(pos<<1)+2,s,e));
+}
+
+int update(int l, int r, int pos, int i, int val) {
+  if (i<l||r<i)return tree[pos];
+  if (l==r)return tree[pos]=arr[l]=val;
+  int m=mid(l,r);
+  return tree[pos]=min(update(l,m,(pos<<1)+1,i,val),
                        update(m+1,r,(pos<<1)+2,i,val));
 }
 ```
