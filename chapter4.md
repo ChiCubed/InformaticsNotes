@@ -132,7 +132,6 @@ int tree[MAX_ARRAY_LENGTH+1];
 int arr[MAX_ARRAY_LENGTH];
 
 
-
 // Preprocess the array.
 int preprocess(int l, int r, int pos) {
 
