@@ -161,8 +161,13 @@ void preprocess(int n) {
   }
 }
 
-// Returns the sum of the range [s,e].
-int query() {
+// Returns the sum of the array
+// up to index i.
+int query(int i) {
+  int s = 0;
+  
+  // Since BIT[0] is a dummy...
+  int i=i+1;
 }
 
 // Increment the element at index i by value val.
