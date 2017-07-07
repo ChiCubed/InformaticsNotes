@@ -476,12 +476,10 @@ int arr[MAX_ARRAY_LENGTH];
 void preprocess(int n) {
   for(int i=0;i<n;++i)sparse[0][i] = arr[i];
   for(int l=0;l<LOG2_MAX_ARR_LEN;++l) {
-    if(l){
+    if(l)
       for(int i=0;i<=n-(1<<l);++i)
         sparse[l][i]=min(sparse[l-1][i],
                 sparse[l-1][i+(1<<l-1)]);
-    }
-    
     for(int j=(1<<l);j<(1<<l+1)&&j<n;++j)logs[j]=l;
   }
 }
