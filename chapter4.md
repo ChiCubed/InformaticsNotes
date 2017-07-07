@@ -128,19 +128,21 @@ using namespace std;
 
 const int MAX_ARRAY_LENGTH = 100000;
 
+// This is, by default, initialised to 0.
+// If not in the global scope, ensure that
+// this array is manually zeroed.
 int tree[MAX_ARRAY_LENGTH+1];
+
 int arr[MAX_ARRAY_LENGTH];
 
 
 // Preprocess the array.
-int preprocess(int l, int r, int pos) {
+void preprocess() {
 
 }
 
 // Returns the sum of the range [s,e].
-// This should be called as follows:
-// query(0, ARRAY_LENGTH - 1, 0, rangeStart, rangeEnd)
-int query(int l, int r, int pos, int s, int e) {
+void query() {
 }
 
 // Update the element at index i to value val.
