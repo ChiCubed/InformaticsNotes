@@ -111,7 +111,7 @@ Identities are not necessary if you implement a range tree differently, that is 
 
 ### Summary
 
-A binary indexed tree is used to calculate the result of the application of some associative operator (e.g. addition) across a range in an array, similar to a range tree. (It is designed to make the prefix sum easy to calculate, so it may be described as a blend between a range tree and a prefix sum data structure.) It only requires less than half the space, however, and is easier/quicker to implement.
+A binary indexed tree is used to calculate the result of the application of some associative operator (e.g. addition) across a range in an array, similar to a range tree. (It is designed to make the prefix sum easy to calculate, so it may be described as a blend between a range tree and a prefix sum data structure.) It only requires less than half the space of a range tree, however, and is easier/quicker to implement.
 
 ### Complexity
 
