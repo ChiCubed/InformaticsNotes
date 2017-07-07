@@ -341,6 +341,33 @@ void update(int n, int i, int val) {
 }
 ```
 
+### Golfed
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX_ARRAY_LENGTH = 100000;
+
+int arr[MAX_ARRAY_LENGTH];
+int pre[MAX_ARRAY_LENGTH];
+
+void preprocess(int n) {
+  pre[0]=arr[0];
+  for (int i=0;i<n;++i)pre[i]=pre[i-1]+arr[i];
+}
+
+int query(int l, int r) {
+  return pre[r]-(l?pre[l-1]:0);
+}
+
+void update(int n, int i, int val) {
+  arr[i]=val;
+  preprocess(n);
+}
+```
+
 ### Requirements
 
 A prefix sum array is only guaranteed to work on a group. \(See the section on Group theory.\) For example, prefix sum arrays do not work with operations such as $$min$$. In part this is because the operation needs a \(unique\) inverse. For example, the min function does not work with prefix sum tables.
