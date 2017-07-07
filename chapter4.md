@@ -630,14 +630,13 @@ const int MAX_NODES = 100000;
 int parent[MAX_NODES+1];
 int  nrank[MAX_NODES+1];
 
-
 void create(int n) {
   for(int i=0;i<=n;++i)parent[i]=i;
 }
 
 int find(int x) {
   // This is path compression
-  if (x != parent[x]) parent[x] = find(parent[x]);
+  if(x^parent[x])parent[x]=find(parent[x]);
   return parent[x];
 }
 
