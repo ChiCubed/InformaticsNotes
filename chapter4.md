@@ -309,10 +309,11 @@ const int MAX_ARRAY_LENGTH = 100000;
 int arr[MAX_ARRAY_LENGTH];
 int pre[MAX_ARRAY_LENGTH];
 
-void preprocess(int array_size) {
+// n is the array size
+void preprocess(int n) {
   pre[0] = arr[0];
   
-  for (int i=0; i<array_size; ++i) {
+  for (int i=0; i<n; ++i) {
     // In this example we are using addition.
     // We can use any operation with an inverse.
     pre[i] = pre[i-1] + arr[i];
@@ -328,7 +329,7 @@ int query(int l, int r) {
   return pre[r] - (l?pre[l-1]:0);
 }
 
-void update(int array_size, int i, int val) {
+void update(int n, int i, int val) {
   // i is the index, val is the new value
   
   // We can technically optimise this but
@@ -336,7 +337,7 @@ void update(int array_size, int i, int val) {
   // prefix sum is the wrong data structure.
   
   arr[i]=val;
-  preprocess(array_size);
+  preprocess(n);
 }
 ```
 
