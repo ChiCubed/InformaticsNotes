@@ -127,7 +127,6 @@ A binary indexed tree is used to calculate the result of the application of some
 using namespace std;
 
 const int MAX_ARRAY_LENGTH = 100000;
-const int INF           = 100000000;
 
 int tree[MAX_ARRAY_LENGTH+1];
 int arr[MAX_ARRAY_LENGTH];
