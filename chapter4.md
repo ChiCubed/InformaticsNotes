@@ -246,6 +246,8 @@ void update(int n, int i, int val) {
 
 ### Golfed
 
+As you may have noticed, the golfed code is a _lot_ shorter than for a range tree.
+
 ```cpp
 #include <bits/stdc++.h>
 
@@ -261,7 +263,7 @@ int arr[MAX_ARRAY_LENGTH];
 void update(int n, int i, int val);
 
 void preprocess(int n) {
-  for(int i=0;i<n;++i)update(n, i, arr[i]);
+  for(int i=0;i<n;++i)update(n,i,arr[i]);
 }
 
 int query(int i) {
@@ -270,21 +272,8 @@ int query(int i) {
   return s;
 }
 
-// Increment the element at index i by value val.
-// n should be the length of the array.
-// If one wishes to update the element, each update
-// may be made along with an update in the original
-// array, and the difference to the original
-// array's value may be passed to this function
-// rather than the new value.
 void update(int n, int i, int val) {
-  // For the same reason as in the query function
-  int ind = i+1;
-  
-  while (ind <= n) {
-    tree[ind] += val;
-    ind += lsb(ind);
-  }
+  for(int a=i+1;a<=n;a+=lsb(a))tree[a]+=val;
 }
 ```
 
