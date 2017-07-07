@@ -268,12 +268,12 @@ void preprocess(int n) {
 
 int query(int i) {
   int s=0;
-  for(int a=i+1;a>0;a-=lsb(a))s+=tree[a];
+  for(++i;i>0;i-=lsb(i))s+=tree[i];
   return s;
 }
 
 void update(int n, int i, int val) {
-  for(int a=i+1;a<=n;a+=lsb(a))tree[a]+=val;
+  for(++i;i<=n;i+=lsb(i))tree[i]+=val;
 }
 ```
 
@@ -592,7 +592,7 @@ int  nrank[MAX_NODES+1];
 void create(int num_nodes) {
   // note the    <= instead of <
   for (int i=0; i<=num_nodes; ++i) {
-    nrank[i] = 0;
+    // nrank is already zeroed - don't bother
     parent[i] = i;
   }
 }
@@ -617,6 +617,40 @@ void join(int x, int y) {
 ```
 
 This implements union by rank and path compression.
+
+### Golfed
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX_NODES = 100000;
+
+int parent[MAX_NODES+1];
+int  nrank[MAX_NODES+1];
+
+
+void create(int n) {
+  for(int i=0;i<=n;++i)parent[i]=i;
+}
+
+int find(int x) {
+  // This is path compression
+  if (x != parent[x]) parent[x] = find(parent[x]);
+  return parent[x];
+}
+
+void join(int x, int y) {
+  x=find(x);y=find(y);
+  
+  // This is union by rank
+  if (nrank[x] > nrank[y]) parent[y] = x;
+  else                   parent[x] = y;
+  
+  nrank[y]+=nrank[x]==nrank[y];
+}
+```
 
 ### Requirements
 
