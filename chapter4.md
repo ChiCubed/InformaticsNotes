@@ -261,25 +261,13 @@ int arr[MAX_ARRAY_LENGTH];
 void update(int n, int i, int val);
 
 void preprocess(int n) {
-  for (int i=0;i<n;++i)update(n, i, arr[i]);
+  for(int i=0;i<n;++i)update(n, i, arr[i]);
 }
 
-// Returns the sum of the array
-// up to index i.
-// For range query, one can simply
-// query(r) - query(l-1).
 int query(int i) {
-  int s = 0;
+  int s=0;
   
-  // Since BIT[0] is a dummy...
-  int ind = i+1;
-  
-  // go through the ancestors
-  // of the index in the array
-  while (ind>0) {
-    s += tree[ind];
-    ind -= lsb(ind);
-  }
+  for(int a=i+1;a>0;a-=lsb(a),s+=tree[a]);
   
   return s;
 }
