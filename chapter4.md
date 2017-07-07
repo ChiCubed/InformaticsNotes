@@ -513,6 +513,8 @@ You can provide comparator functions as per the entry on [http://cppreference.co
 
 A Priority Queue is defined in the C++ STL; there is no need to create one manually.
 
+(So no, you won't be getting a golfed version.)
+
 ```cpp
 #include <queue> // or <bits/stdc++.h>
 
