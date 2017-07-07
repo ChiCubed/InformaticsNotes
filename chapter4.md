@@ -139,20 +139,40 @@ int arr[MAX_ARRAY_LENGTH];
 // Get the last set bit of the integer
 // x.
 inline int lsb(int x) {
-  return x&(-x);
+  // Because of the operator precedence
+  // in C++, the unary negation on x
+  // is performed before the bitwise and.
+  return x&-x;
 }
+
+// We include the function declaration
+// here so we can use it in preprocess.
+void update(int n, int i, int v);
 
 
 // Preprocess the array.
-void preprocess() {
-
+// Initially this should be called as follows:
+// preprocess(ARRAY_LENGTH);
+void preprocess(int n) {
+  // Assumes the array tree is already zeroed.
+  
+  int j;
+  for (int i=0; i<n; ++i) {
+    j = i + lsb(i + 1);
+    if (j < n) tree[j] 
+  }
 }
 
 // Returns the sum of the range [s,e].
-void query() {
+int query() {
 }
 
-// Update the element at index i to value val.
+// Increment the element at index i by value val.
+// If one wishes to update the element, each update
+// may be made along with an update in the original
+// array, and the difference to the original
+// array's value may be passed to this function
+// rather than the new value.
 void update() {
 
 }
