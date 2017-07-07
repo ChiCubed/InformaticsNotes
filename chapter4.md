@@ -411,15 +411,16 @@ int sparse[LOG2_MAX_ARR_LEN][MAX_ARRAY_LENGTH];
 
 int arr[MAX_ARRAY_LENGTH];
 
-void preprocess(int array_size) {
-  for (int i=0; i<array_size; ++i) {
+// n is the array size
+void preprocess(int n) {
+  for (int i=0; i<n; ++i) {
     sparse[0][i] = arr[i];
   }
   
   for (int l=0; l<LOG2_MAX_ARR_LEN; ++l) {
     if (l) {
       // note the    <= rather than <
-      for (int i=0; i<=array_size-(1<<l); ++i) {
+      for (int i=0; i<=n-(1<<l); ++i) {
         // process the next 'level'
         // We're using min in this example;
         // we could have used any other
@@ -445,7 +446,7 @@ int query(int l, int r) {
              sparse[level][r-(1<<level) + 1]);
 }
 
-void update(int i, int val, int array_size) {
+void update(int i, int val, int n) {
   // Might as well recalculate everything.
   // We can optimise this slightly but sparse
   // tables aren't designed to be recalculated.
@@ -454,7 +455,51 @@ void update(int i, int val, int array_size) {
   // use case for updating a sparse table anyway,
   // this function only exists for completeness.
   arr[i] = val;
-  preprocess(array_size);
+  preprocess(n);
+}
+```
+
+### Golfed
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX_ARRAY_LENGTH = 100000;
+const int LOG2_MAX_ARR_LEN = 18;
+
+int logs[MAX_ARRAY_LENGTH];
+int sparse[LOG2_MAX_ARR_LEN][MAX_ARRAY_LENGTH];
+int arr[MAX_ARRAY_LENGTH];
+
+void preprocess(int n) {
+  for (int i=0;i<n;++i)sparse[0][i] = arr[i];
+  for (int l=0;l<LOG2_MAX_ARR_LEN;++l) {
+    if(l){
+      for (int i=0;i<=n-(1<<l);++i)
+        sparse[l][i]=min(sparse[l-1][i],
+                sparse[l-1][i+(1<<l-1)]);
+      }
+    }
+    
+    // Preprocess logarithms
+    for (int j=(1<<l); j<(1<<l+1) && j<n; ++j) {
+      logs[j]=l;
+    }
+  }
+}
+
+int query(int l, int r) {
+  // returns the result of query
+  // over range [l,r]
+  int level = logs[r-l + 1];
+  return min(sparse[level][l],
+             sparse[level][r-(1<<level)+1]);
+}
+
+void update(int i, int val, int n) {
+  arr[i]=val;preprocess(n);
 }
 ```
 
