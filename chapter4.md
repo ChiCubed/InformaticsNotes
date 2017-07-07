@@ -105,7 +105,7 @@ int update(int l, int r, int pos, int i, int val) {
 
 ### Golfed
 
-To 'golf' code means to make it shorter.
+To 'golf' code essentially means to make it shorter.
 
 ```cpp
 #include <bits/stdc++.h>
