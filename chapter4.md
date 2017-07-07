@@ -117,13 +117,13 @@ const int INF           = 100000000;
 int tree[VERY_BIG_NUMBER];
 int arr[MAX_ARRAY_LENGTH];
 
-#define mid(a,b) (((a)+(b))>>1)
+#define mid(a,b) ((a)+(b)>>1)
 
 int preprocess(int l, int r, int pos) {
   if (l==r)return tree[pos]=arr[l];
   int m=mid(l,r);
-  return tree[pos]=min(preprocess(l,m,pos<<1+1),
-                       preprocess(m+1,r,pos<<1+2));
+  return tree[pos]=min(preprocess(l,m,(pos<<1)+1),
+                       preprocess(m+1,r,(pos<<1)+2));
 }
 
 int query(int l, int r, int pos, int s, int e) {
