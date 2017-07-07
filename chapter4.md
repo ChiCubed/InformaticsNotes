@@ -107,6 +107,18 @@ Identities are not necessary if you implement a range tree differently, that is 
 
 **ASIDE**: There _are_ actually associative operators without identities, although of course it is very unlikely these will turn up in an informatics competition.
 
+## Binary Indexed Tree
+
+### Summary
+
+### Complexity
+
+### Code
+
+### Requirements
+
+A binary indexed tree works on some associative binary operation e.g. addition.
+
 ## Prefix sum
 
 ### Summary
