@@ -111,7 +111,13 @@ Identities are not necessary if you implement a range tree differently, that is 
 
 ### Summary
 
+A binary indexed tree is used to calculate the result of the application of some associative operator (e.g. addition) across a range in an array, similar to a range tree. It only requires less than half the space, however, and is easier/quicker to implement.
+
 ### Complexity
+
+| Preprocessing | Query | Update | Space |
+| :---: | :---: | :---: | :---: |
+| $$O(N)$$ | $$O(log N)$$ | $$O(log N)$$ | $$O(N)$$ |
 
 ### Code
 
