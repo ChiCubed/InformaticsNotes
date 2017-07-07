@@ -167,13 +167,13 @@ int query(int i) {
   int s = 0;
   
   // Since BIT[0] is a dummy...
-  int i=i+1;
+  int ind = i+1;
   
   // go through the ancestors
   // of the index in the array
-  while (i>0) {
-    s += tree[i];
-    i -= lsb(i);
+  while (ind>0) {
+    s += tree[ind];
+    ind -= lsb(ind);
   }
   
   return s;
@@ -187,7 +187,13 @@ int query(int i) {
 // array's value may be passed to this function
 // rather than the new value.
 void update(int n, int i, int val) {
-
+  // For the same reason as in the query function
+  int ind = i+1;
+  
+  while (ind <= n) {
+    tree[ind] += val;
+    ind += lsb(ind);
+  }
 }
 ```
 
