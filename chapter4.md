@@ -121,9 +121,39 @@ A binary indexed tree is used to calculate the result of the application of some
 
 ### Code
 
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX_ARRAY_LENGTH = 100000;
+const int INF           = 100000000;
+
+int tree[MAX_ARRAY_LENGTH+1];
+int arr[MAX_ARRAY_LENGTH];
+
+
+
+// Preprocess the array.
+int preprocess(int l, int r, int pos) {
+
+}
+
+// Returns the sum of the range [s,e].
+// This should be called as follows:
+// query(0, ARRAY_LENGTH - 1, 0, rangeStart, rangeEnd)
+int query(int l, int r, int pos, int s, int e) {
+}
+
+// Update the element at index i to value val.
+void update() {
+
+}
+```
+
 ### Requirements
 
-A binary indexed tree works on some associative binary operation e.g. addition.
+A binary indexed tree works on any associative binary operation e.g. addition.
 
 ## Prefix sum
 
