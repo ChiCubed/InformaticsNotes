@@ -157,7 +157,8 @@ void preprocess(int n) {
   // Assumes the array tree is already zeroed.
   
   for (int i = 0; i < n; ++i) {
-  
+    
+  }
 }
 
 // Returns the sum of the range [s,e].
