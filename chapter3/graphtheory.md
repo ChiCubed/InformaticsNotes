@@ -81,6 +81,53 @@ adjmat_t listToMatrix(adjlist_t list, int nodes) {
 }
 ```
 
+### Conversion (golfed)
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int INF = 100000000;
+
+#define pb push_back
+
+typedef pair<int,int> pi;
+typedef vector<vector<pi>> adjlist_t;
+typedef vector<vector<int>> adjmat_t;
+
+adjlist_t matrixToList(adjmat_t m) {
+  adjlist_t l;
+  for (int i=0;i<m.size();++i) {
+    l.pb({});
+    for(int j=0;j<m[i].size();++j)
+      if (i^j&&m[i][j]^INF)
+        l[i].pb({m[i][j],j});
+    }
+  }
+  return l;
+}
+
+adjmat_t listToMatrix(adjlist_t l, int n) {
+  adjmat_t m;
+  for(int i=0;i<n;++i){
+    m.pb({});
+    for(int j=0;j<n;++j)m[i].pb(INF);
+  }
+  
+  for(int i=0;i<n;++i){
+    m[i][i]=0;
+    for(pi j:l[i]){
+      if(j.second>=n)continue;      
+      m[i][j.second]=j.first;
+    }
+  }
+  
+  return m;
+}
+```
+
+
 ## Tree
 An undirected graph in which any two vertices are connected by exactly one path.
 
