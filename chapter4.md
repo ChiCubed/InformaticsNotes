@@ -160,6 +160,8 @@ Identities are not necessary if you implement a range tree differently, that is 
 
 A binary indexed tree is used to calculate the result of the application of some associative operator (e.g. addition) across a range in an array, similar to a range tree. (It is designed to make the prefix sum easy to calculate, so it may be described as a blend between a range tree and a prefix sum data structure.) It only requires less than half the space of a range tree, however, and is easier/quicker to implement.
 
+A binary indexed tree is typically faster than a range tree.
+
 ### Complexity
 
 | Preprocessing | Query | Update | Space |
@@ -283,8 +285,6 @@ void update(int n, int i, int val) {
 Technically, a binary indexed tree works on any associative binary operation e.g. addition. However, the implementation given here is unable to handle the case where the operation does not have an inverse (for example, when one wants to find the minimum of a range.) In particular, it cannot find the minimum in an arbitrary range without using some roundabout tricks.
 
 Generally a range tree is better for querying the minimum in a range, and a binary indexed tree is better for almost anything else.
-
-Binary indexed trees are almost always faster than range trees.
 
 ## Prefix sum
 
