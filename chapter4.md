@@ -280,8 +280,11 @@ void update(int n, int i, int val) {
 
 ### Requirements
 
-Technically, a binary indexed tree works on any associative binary operation e.g. addition. However, the implementation given here is unable to handle the case where the operation does not have an inverse (for example, when one wants to find the minimum of a range.) For these cases, a range tree is normally used; one can, however, adapt a binary indexed tree to work with associative operators without identities.
+Technically, a binary indexed tree works on any associative binary operation e.g. addition. However, the implementation given here is unable to handle the case where the operation does not have an inverse (for example, when one wants to find the minimum of a range.) In particular, it cannot find the minimum in an arbitrary range without using some roundabout tricks.
 
+Generally a range tree is better for querying the minimum in a range, and a binary indexed tree is better for almost anything else.
+
+Binary indexed trees are almost always faster than range trees.
 
 ## Prefix sum
 
