@@ -280,9 +280,8 @@ void update(int n, int i, int val) {
 
 ### Requirements
 
-Technically, a binary indexed tree works on any associative binary operation e.g. addition. However, the implementation given here is unable to handle the case where the operation does not have an inverse (for example, when one wants to find the minimum of a range.) Normally for these cases a range tree is better suited.
+Technically, a binary indexed tree works on any associative binary operation e.g. addition. However, the implementation given here is unable to handle the case where the operation does not have an inverse (for example, when one wants to find the minimum of a range.) For these cases, a range tree is normally used; one can, however, adapt a binary indexed tree to work with associative operators without identities.
 
-The update function would have to be implemented differently to calculate, for example, the range minimum.
 
 ## Prefix sum
 
