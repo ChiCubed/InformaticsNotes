@@ -613,7 +613,7 @@ void join (int x, int y) {
   
   // This is union by rank
   if (nrank[x] > nrank[y]) parent[y] = x;
-  else                   parent[x] = y;
+  else                     parent[x] = y;
   
   if (nrank[x] == nrank[y]) nrank[y]++;
 }
