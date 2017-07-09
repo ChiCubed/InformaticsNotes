@@ -643,8 +643,7 @@ int find (int x) {
 
 void join (int x, int y) {
   x=find(x);y=find(y);
-  if(nrank[x]>nrank[y]) parent[y]=x;
-  else parent[x]=y;
+  nrank[x]>nrank[y]?parent[y]=x:parent[x]=y;
   nrank[y]+=nrank[x]==nrank[y];
 }
 ```
