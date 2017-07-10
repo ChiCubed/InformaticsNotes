@@ -12,14 +12,16 @@ Here's an oversimplified example with an integer `i`.
 i = i++;
 ```
 
+Obviously one would never write code like this. However, this may produce an unexpected result. Testing with GNU g++ 6.1.0, I 
+
 ## "The bits trick"
-The `bits/stdc++.h` header is a testing header which imports every standard c++ (and c) header, which makes it very useful for programming competitions. You can import `<bits/stdc++.h>` on Linux systems, and with some workarounds on macOS. The issue on some operating systems is that `stdc++.h` is included in GNU G++, which is not what is installed on macOS in particular; by default macOS uses Clang. One way around this is simply to install GNU G++ on your system. It may already be installed - if there is a `g++` command which ends in a `-*`, where `*` represents a version number (e.g. `g++-6`) then this is very likely GNU G++.
+The `bits/stdc++.h` header is a testing header which imports every standard c++ (and c) header, which makes it very useful for programming competitions. You can import `<bits/stdc++.h>` on Linux systems, and with some workarounds on macOS. The issue on some operating systems is that `stdc++.h` is included in GNU g++, which is not what is installed on macOS in particular; by default macOS uses Clang. One way around this is simply to install GNU g++ on your system. It may already be installed - if there is a `g++` command which ends in a `-*`, where `*` represents a version number (e.g. `g++-6`) then this is very likely GNU g++.
 
 One other workaround is as follows.
 
 1. Create a file named `stdc++.h` in a folder named `bits` in the folder that you will be doing all of your programming in (alternatively, you can put it somewhere else and use an absolute pathname in step 3)
-2. Fill the file with the contents of the following file: https://gist.github.com/eduarc/6022859 (Please note that this is the header for `gcc 4.8.0`, so is likely outdated. Also, ensure you do this *before* the exam has begun.) This may not be up in future; if not, you will have to do some digging for the `bits/stdc++.h` source code. I recommend searching something like `bits/stdc++.h source file`.
-3. In a terminal, use the `export` command to change the value of the `CPLUSPLUS_INCLUDE_DIR` variable to either `.` or the absolute path of the `bits` folder's superfolder. On bash and bourne shells, this is similar to the following:  
+2. Fill the file with the contents of the following file: https://gist.github.com/eduarc/6022859 (Please note that this is the header for `gcc 4.8.0`, so is likely outdated.) This may not be up in future; if not, you will have to do some digging for the `bits/stdc++.h` source code. I recommend searching something like `bits/stdc++.h source file`.
+3. In a terminal, use the `export` command to change the value of the `CPLUSPLUS_INCLUDE_DIR` variable to either `.` or the absolute path of the `bits` folder's superfolder. On bash and other Bourne shell derivatives, the following command should work:  
 `export CPLUSPLUS_INCLUDE_DIR='.'`  
 You may want to put this in your `~/.bash_profile` or `~/.profile` files if you are planning on having more than one terminal open. (In particular on macOS `~/.bash_profile` is adviseable as if it exists as *well* as a `~/.profile` file the only one that will be read is `~/.bash_profile`.)  
 **Alternatively**, In your code, use `"bits/stdc++.h"` instead of `<bits/stdc++.h>` everywhere (note the double quotes instead of angle brackets.)
