@@ -2,7 +2,7 @@
 
 ## Vector / array assignment not working
 
-This is an extremely difficult bug to find; I recommend reading this section carefully.
+This is a difficult bug to track; I recommend reading this section carefully. (Or skipping to the last line.)
 
 Essentially this may occur when one assigns the value of a vector or array (or another container) to another expression which involves a modification in the original variable.
 
