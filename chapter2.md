@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-Such arrays should be placed in global scope, outside of any functions, so they are allocated on the *heap* (which is much larger than the stack, although slower):
+Such arrays should be placed in global scope, outside of any functions, so they are allocated on the *heap* (which is much larger than the stack.):
 
 ```cpp
 int huge[134217728]; // should be fine.
