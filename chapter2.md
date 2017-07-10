@@ -53,7 +53,7 @@ This bug fortunately has an easy fix. Simply use an intermediate variable. In th
 
 The advice here essentially boils down to this:
 
-_If an array or vector assignment seems to be 'not working' or producing unexpected results, try adding an intermediate variable._
+**TL;DR**. _If an array or vector assignment seems to be 'not working' or producing unexpected results, try adding an intermediate variable._
 
 ## "The bits trick"
 The `bits/stdc++.h` header is a testing header which imports every standard c++ (and c) header, which makes it very useful for programming competitions. You can import `<bits/stdc++.h>` on Linux systems, and with some workarounds on macOS. The issue on some operating systems is that `stdc++.h` is included in GNU g++, which is not what is installed on macOS in particular; by default macOS uses Clang. One way around this is simply to install GNU g++ on your system. It may already be installed - if there is a `g++` command which ends in a `-*`, where `*` represents a version number (e.g. `g++-6`) then this is very likely GNU g++.
