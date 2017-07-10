@@ -1,4 +1,17 @@
 # C++ notes
+
+## Vector / array assignment not working
+
+This is an extremely difficult bug to find; I recommend reading this section carefully.
+
+Essentially this may occur when one assigns the value of a vector or array (or another container) to another expression which involves a modification in the original variable.
+
+Here's an oversimplified example with an integer `i`.
+
+```cpp
+i = i++;
+```
+
 ## "The bits trick"
 The `bits/stdc++.h` header is a testing header which imports every standard c++ (and c) header, which makes it very useful for programming competitions. You can import `<bits/stdc++.h>` on Linux systems, and with some workarounds on macOS. The issue on some operating systems is that `stdc++.h` is included in GNU G++, which is not what is installed on macOS in particular; by default macOS uses Clang. One way around this is simply to install GNU G++ on your system. It may already be installed - if there is a `g++` command which ends in a `-*`, where `*` represents a version number (e.g. `g++-6`) then this is very likely GNU G++.
 
@@ -278,9 +291,3 @@ How do I use this to find $$2^x$$? You can find `1<<x`, which evaluates to $$2^x
 Sometimes you will be given all of the input before your program begins executing. It is occasionally a good idea to sort this input, as this may make it faster to process later. The function `std::sort` (defined in header `<algorithm>`) sorts an input array `arr` as follows: `std::sort(arr, arr+arr_length);`.
 
 In other problems where the order of input is not important, it is a good idea to randomise the input. If your solution is timing out but only slightly on some larger test cases, it is a good idea to try randomising the input. The function `std::random_shuffle` (defined in header `<algorithm>`) can shuffle an input array `arr` as follows: `std::random_shuffle(arr, arr+arr_length);`.
-
-
-## Vector / array assignment not working
-
-I first encountered this issue attempting to program a persistent range tree.
-
