@@ -111,6 +111,8 @@ for (int n : {1,3,5,6}) {
 
 The `auto` specifier is quite often useful in conjuction with a range-based for loop, as in the example above.
 
+Don't overuse the `auto` specifier; it's usually best to be very clear about what type a variable should be.
+
 ## Out of memory?
 Firstly, check that you actually shouldn't be out of memory.
 
