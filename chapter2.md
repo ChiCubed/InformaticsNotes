@@ -33,9 +33,7 @@ int u(int a,int b,int c,int i){
   
   ...
 
-      r[x]=u(m+1,b,r[c],i); // <--- This is the issue
-                            // along with the corresponding
-                            // assignment to l[x] somewhere else
+      l[x]=u(a,m,l[c],i); // <--- This is the issue
   ...
 
   t[x]=t[c]+1;
@@ -43,7 +41,7 @@ int u(int a,int b,int c,int i){
 }
 ```
 
-This is an excerpt from some code for a persistent range tree, slightly modified for clarity. The assignmen
+This is an excerpt from some code for a persistent range tree, slightly modified for clarity. The issue is that 
 
 ## "The bits trick"
 The `bits/stdc++.h` header is a testing header which imports every standard c++ (and c) header, which makes it very useful for programming competitions. You can import `<bits/stdc++.h>` on Linux systems, and with some workarounds on macOS. The issue on some operating systems is that `stdc++.h` is included in GNU g++, which is not what is installed on macOS in particular; by default macOS uses Clang. One way around this is simply to install GNU g++ on your system. It may already be installed - if there is a `g++` command which ends in a `-*`, where `*` represents a version number (e.g. `g++-6`) then this is very likely GNU g++.
