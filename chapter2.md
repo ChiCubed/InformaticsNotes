@@ -286,6 +286,7 @@ int fact(int n) {
 }
 ```
 
+(The brackets around the ternary expression are unnecessary.)
 
 ## Binary and Bit Shifting
 **Q**: How do I quickly find $$2^x$$?
