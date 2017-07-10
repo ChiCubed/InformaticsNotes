@@ -12,7 +12,38 @@ Here's an oversimplified example with an integer `i`.
 i = i++;
 ```
 
-Obviously one would never write code like this. However, this may produce an unexpected result. Testing with GNU g++ 6.1.0, I 
+Obviously one would never write code like this. However, this may produce an unexpected result. Testing with GNU g++ 6.1.0, this produced a result equivalent to the following:
+
+```cpp
+i = i;
+```
+
+In other words, it left the input value unmodified.
+
+The post-increment operator (the `++` after the `i`) is an operator which uses the original value of a variable in an equation, then increments the variable in question. For example, `x = i++` would be equivalent to two commands: `x = i` and `i = i + 1`. In the case given above, `i = i++`, `i` is being assigned to itself, and also being post-incremented. The result on g++ 6.1.0 was that `i` remained unchanged; the user may have desired `i` to be incremented instead.
+
+Here's a more practical example.
+
+```cpp
+int u(int a,int b,int c,int i){
+  int x=t.size(),y;
+  t.push_back(0);
+  l.push_back(l[c]);
+  r.push_back(r[c]);
+  
+  ...
+
+      r[x]=u(m+1,b,r[c],i); // <--- This is the issue
+                            // along with the corresponding
+                            // assignment to l[x] somewhere else
+  ...
+
+  t[x]=t[c]+1;
+  return x;
+}
+```
+
+This is an excerpt from some code for a persistent range tree, slightly modified for clarity. The assignmen
 
 ## "The bits trick"
 The `bits/stdc++.h` header is a testing header which imports every standard c++ (and c) header, which makes it very useful for programming competitions. You can import `<bits/stdc++.h>` on Linux systems, and with some workarounds on macOS. The issue on some operating systems is that `stdc++.h` is included in GNU g++, which is not what is installed on macOS in particular; by default macOS uses Clang. One way around this is simply to install GNU g++ on your system. It may already be installed - if there is a `g++` command which ends in a `-*`, where `*` represents a version number (e.g. `g++-6`) then this is very likely GNU g++.
