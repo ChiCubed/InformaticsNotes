@@ -114,7 +114,7 @@ The `auto` specifier is quite often useful in conjuction with a range-based for 
 ## Out of memory?
 Firstly, check that you actually shouldn't be out of memory.
 
-Also note that huge arrays in `main` or another function will probably crash your program, as they are being initialised on the *stack* (where currently running functions are stored in the memory.)
+Also note that huge arrays in `main` or another function will probably crash your program, as they are being initialised on the *stack* (where currently running functions are stored in the memory).
 
 ```cpp
 int main(int argc, char* argv[]) {
@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-Such arrays should be placed in global scope, outside of any functions, so they are allocated on the *heap* (which is much larger than the stack.):
+Such arrays should be placed in global scope, outside of any functions, so they are allocated on the *heap* (which is much larger than the stack).:
 
 ```cpp
 int huge[134217728]; // should be fine.
