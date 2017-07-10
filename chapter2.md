@@ -18,7 +18,7 @@ Obviously one would never write code like this. However, this may produce an une
 i = i;
 ```
 
-In other words, it left the input value unmodified.
+In other words, it left the value of `i` unmodified.
 
 The post-increment operator (the `++` after the `i`) is an operator which uses the original value of a variable in an equation, then increments the variable in question. For example, `x = i++` would be equivalent to two commands: `x = i` and `i = i + 1`. In the case given above, `i = i++`, `i` is being assigned to itself, and also being post-incremented. The result on g++ 6.1.0 was that `i` remained unchanged; the user may have desired `i` to be incremented instead.
 
