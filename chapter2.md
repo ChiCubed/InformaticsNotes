@@ -137,10 +137,12 @@ int main(int argc, char* argv[]) {
 ```
 
 ## Array initialisation
-You can initialise an n-dimensional array to all 0s as follows: (this only works at initialisation)
+You can initialise an n-dimensional array to all 0s as follows:
 ```cpp
 int graph[1000][1000][2] = {0};
 ```
+
+(You can only do this at initialisation; if you wish to fill an array with another integer use a for loop or `memset`.)
 
 (If a variable is initialised outside of a function i.e. in global scope, on the heap, it will be initialised by default to 0. You can of course add in the `= {0}` anyway.)
 
