@@ -30,6 +30,7 @@ int u(int a,int b,int c,int i){
   t.push_back(0);
   l.push_back(l[c]);
   r.push_back(r[c]);
+  // assert(l.size() == t.size() && t.size() == r.size());
   
   ...
 
@@ -41,7 +42,18 @@ int u(int a,int b,int c,int i){
 }
 ```
 
-This is an excerpt from some code for a persistent range tree, slightly modified for clarity. The issue is that 
+This is an excerpt from some code for a persistent range tree, slightly modified for clarity. The issue is that l[x] is potentially being modified somehow by the code. `l[x]` is initially equal to `l[c]`, as guaranteed by the assert. So the line commented 'This is the issue' is using `l[x]` in a manner which is not necessarily known to the caller.
+
+This bug fortunately has an easy fix. Simply use an intermediate variable. In the above example, the fix would be:
+
+```cpp
+      int tmp=u(a,m,l[c],i);
+      l[x]=tmp;
+```
+
+The advice here essentially boils down to this:
+
+_If an array or vector assignment seems to be 'not working' or producing unexpected results, try adding an intermediate variable._
 
 ## "The bits trick"
 The `bits/stdc++.h` header is a testing header which imports every standard c++ (and c) header, which makes it very useful for programming competitions. You can import `<bits/stdc++.h>` on Linux systems, and with some workarounds on macOS. The issue on some operating systems is that `stdc++.h` is included in GNU g++, which is not what is installed on macOS in particular; by default macOS uses Clang. One way around this is simply to install GNU g++ on your system. It may already be installed - if there is a `g++` command which ends in a `-*`, where `*` represents a version number (e.g. `g++-6`) then this is very likely GNU g++.
