@@ -278,3 +278,9 @@ How do I use this to find $$2^x$$? You can find `1<<x`, which evaluates to $$2^x
 Sometimes you will be given all of the input before your program begins executing. It is occasionally a good idea to sort this input, as this may make it faster to process later. The function `std::sort` (defined in header `<algorithm>`) sorts an input array `arr` as follows: `std::sort(arr, arr+arr_length);`.
 
 In other problems where the order of input is not important, it is a good idea to randomise the input. If your solution is timing out but only slightly on some larger test cases, it is a good idea to try randomising the input. The function `std::random_shuffle` (defined in header `<algorithm>`) can shuffle an input array `arr` as follows: `std::random_shuffle(arr, arr+arr_length);`.
+
+
+## Vector / array assignment not working
+
+I first encountered this issue attempting to program a persistent range tree.
+
