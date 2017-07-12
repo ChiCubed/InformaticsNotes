@@ -490,7 +490,7 @@ Each item can be taken at most once.
 
 **Potential Optimisations:**
 'Flatten' the array, storing only one one-dimensional array of length W+1 and rewriting from indexes W to 1 each time, giving the same result for $$O(W)$$ space.  
-There is another approach commonly named "meet-in-the-middle" which uses $$O(2^{\frac{n}{2}})$$ space and $$O(n2^{\frac{n}{2}})$$ runtime. It may be more optimal for very large values of W.
+There is another approach commonly named "meet-in-the-middle" which uses $$O(2^{\frac{n}{2}})$$ space and $$O(n \ cdot 2^{\frac{n}{2}})$$ runtime. It may be more optimal for very large values of W.
 It works as follows:
 
   - partition the set of items into two sets of approximately equal size</li>
@@ -499,7 +499,7 @@ It works as follows:
     find the subset of the second set of greatest value such that their combined weight is less than W
   - keep track of the greatest value so far
 
-We can optimise this algorithm to the aformentioned $$O(n2^{\frac{n}{2}})$$ runtime by sorting subsets of the second set by weight, discarding those which weigh more than those of greater / equal value, and using binary search.
+We can optimise this algorithm to the aformentioned $$O(n \cdot 2^{\frac{n}{2}})$$ runtime by sorting subsets of the second set by weight, discarding those which weigh more than those of greater / equal value, and using binary search.
 
 **Pseudocode:**  
 $$w$$: amount of storage in knapsack  
@@ -526,4 +526,11 @@ for i in range 0 to n:
         dp[i][j-weights[i+1]]+vals[i+1]
         )
 ```
+
+
+## Topological Sort
+
+A topological sort of a graph is an ordering of vertices in a directed (acyclic) graph such that, for every edge, the source vertex is guaranteed to be before the destination vertex in the topological sort. (There may be multiple topological sorts of a graph.)
+
+If 
  
