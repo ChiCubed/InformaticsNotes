@@ -536,3 +536,17 @@ Another way of thinking about it is that, if a number of vertices are processed 
 
 Topological sorting obviously only works on directed, acyclic graphs.
 
+Here's an algorithm to find a topological sorting of a graph. It requires the graph to be in adjacency list format.
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool seen[NUM_NODES];
+
+void DFS(int c) {
+  if (seen[c]) return;
+  seen[c]=true;
+}
+```
