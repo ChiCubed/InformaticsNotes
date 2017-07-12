@@ -490,7 +490,7 @@ Each item can be taken at most once.
 
 **Potential Optimisations:**
 'Flatten' the array, storing only one one-dimensional array of length W+1 and rewriting from indexes W to 1 each time, giving the same result for $$O(W)$$ space.  
-There is another approach commonly named "meet-in-the-middle" which uses $$O(2^{\frac{n}{2}})$$ space and $$O(n \ cdot 2^{\frac{n}{2}})$$ runtime. It may be more optimal for very large values of W.
+There is another approach commonly named "meet-in-the-middle" which uses $$O(2^{\frac{n}{2}})$$ space and $$O(n \cdot 2^{\frac{n}{2}})$$ runtime. It may be more optimal for very large values of W.
 It works as follows:
 
   - partition the set of items into two sets of approximately equal size</li>
