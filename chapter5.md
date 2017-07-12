@@ -552,7 +552,7 @@ void DFS(int c) {
   if (seen[c]) return;
   seen[c]=true;
   for (int n : graph[c]) {
-    DFS(n);  
+    DFS(n);
   }
   topoSort.push_back(c);
 }
