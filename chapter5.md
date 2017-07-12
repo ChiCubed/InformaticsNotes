@@ -534,5 +534,5 @@ A topological sort of a graph is an ordering of vertices in a directed (acyclic)
 
 Another way of thinking about it is that, if a number of vertices are processed in order of their topological sort, then each vertex is guaranteed that the vertices with edges going into it have already been processed.
 
-Topological sorting obviously only works on acyclic graphs.
+Topological sorting obviously only works on directed, acyclic graphs.
 
