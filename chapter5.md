@@ -543,10 +543,25 @@ Here's an algorithm to find a topological sorting of a graph. It requires the gr
 
 using namespace std;
 
-bool seen[NUM_NODES];
+bool seen[MAX_NODES];
+vector<int> graph[MAX_NODES];
+
+vector<int> topoSort;
 
 void DFS(int c) {
   if (seen[c]) return;
   seen[c]=true;
+  for (int n : graph[c]) {
+    DFS(n);  
+  }
+  topoSort.push_back(c);
+}
+
+// n is the number of nodes
+void calculateTopoSort(int n) {
+  for (int i=0; i<n; ++i) {
+    DFS(i);
+  }
+  reverse(topoSort.begin(), topoSort.end());
 }
 ```
