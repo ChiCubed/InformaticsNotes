@@ -532,5 +532,7 @@ for i in range 0 to n:
 
 A topological sort of a graph is an ordering of vertices in a directed (acyclic) graph such that, for every edge, the source vertex is guaranteed to be before the destination vertex in the topological sort. (There may be multiple topological sorts of a graph.)
 
-If 
- 
+Another way of thinking about it is that, if a number of vertices are processed in order of their topological sort, then each vertex is guaranteed that the vertices with edges going into it have already been processed.
+
+Topological sorting obviously only works on acyclic graphs.
+
