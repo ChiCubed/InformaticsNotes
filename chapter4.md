@@ -552,6 +552,12 @@ struct AVLNode {
     int height; // height of this subtree
 };
 
+// Gets height of node.
+// Checks for null.
+int height(AVLNode* x) {
+    return (x == NULL) ? 0 : x->height;
+}
+
 AVLNode* newNode(int value) {
     AVLNode* node = (AVLNode*)malloc(sizeof(AVLNode));
     node->value = value;
