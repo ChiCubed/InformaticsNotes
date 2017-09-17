@@ -512,7 +512,7 @@ Logarithms aren't practically constant time; precalculating them should increase
 
 A Self-Balancing Binary Search Tree (SBBST) is a binary tree which can be used for search operations.
 
-There are two significant implementations of SBBSTs, AVL trees and Red-Black trees.
+There are two significant implementations of SBBSTs, AVL trees and Red-Black trees. Generally an AVL tree is preferable when there are more queries than updates, and vice versa for a Red-Black tree.
 
 ### AVL Tree
 
@@ -534,6 +534,8 @@ T2   T3                           T3   T4
 
 It is evident from the above diagram how rotation works. The node in brackets is the root node of the subtree which is being rotated.
 
+The 'balance factor' of a node indicates how balanced it is, and is equal to the height of the left subtree minus the height of the right subtree.
+
 #### Complexity
 
 | Query | Update | Space |
@@ -543,6 +545,8 @@ It is evident from the above diagram how rotation works. The node in brackets is
 #### Code
 
 (Partially sourced from http://www.geeksforgeeks.org/avl-tree-set-1-insertion/).
+
+I have used the term 'value' since it makes more sense, in my opinion, than 'key'; however, note that the technical term is 'key'.
 
 ```cpp
 struct AVLNode {
@@ -581,6 +585,115 @@ AVLNode* rightRotate(AVLNode* y) {
     // return the new root
     return x;
 }
+
+AVLNode* leftRotate(AVLNode* x) {
+    AVLNode* y = x->r;
+    AVLNode* T = y->l;
+    
+    // rotate
+    y->l = x;
+    x->r = T;
+    
+    // update the heights
+    x->height = max(height(x->l), height(x->r)) + 1;
+    y->height = max(height(y->l), height(y->r)) + 1;
+    
+    // return the new root
+    return y;
+}
+
+// Calculate the balance factor
+int getBalance(AVLNode* x) {
+    return (x == NULL)
+           ? 0
+           : height(x->l) - height(x->r);
+}
+
+// Insert 'value' into the subtree
+// with root node.
+AVLNode* insert(AVLNode* node, int value) {
+    if (node == NULL) return newNode(value);
+    
+    if (value < node->value)
+        node->l = insert(node->l, value);
+    else if (value > node->value)
+        node->r = insert(node->r, value);
+    else
+        // This particular BST implementation
+        // disallows multiple keys,
+        // so we do nothing. The easiest way
+        // to handle duplicates is to
+        // store a count of how many times
+        // the key appears for each node.
+        return node;
+    
+    // Update height
+    node->height = max(height(node->l),
+                       height(node->r)) + 1;
+    
+    // Get balance factor
+    int balance = getBalance(node);
+    
+    if (balance > 1 && value > node->l->value)
+        node->l = leftRotate(node->l);
+    if (balance < -1 && value < node->r->value)
+        node->r = rightRotate(node->r);
+    
+    if (balance > 1 && value != node->l->value)
+        return rightRotate(node);
+    if (balance < -1 && value != node->r->value)
+        return leftRotate(node);
+    
+    // Remains unchanged.
+    return node;
+}
+
+// Calculate minimum value in a tree
+AVLNode* minValueNode(AVLNode* x) {
+    AVLNode* curr = x;
+    
+    while (curr->l != NULL) curr = curr->l;
+    
+    return curr;
+}
+
+// Delete node of subtree
+// with value value and root node.
+AVLNode* deleteNode(AVLNode* node, int value) {
+    if (node == NULL) return node;
+    
+    if (value < node->value)
+        node->l = deleteNode(node->l, value);
+    else if (value > node->value)
+        node->r = deleteNode(node->r, value);
+    else {
+        // This has the same value,
+        // so it's the node to be deleted.
+        
+        // Check if this node only has one child.
+        if (node->l == NULL || node->r == NULL) {
+            AVLNode* tmp = node->l ? node->l : node->r;
+            if (tmp == NULL)
+                // This node has no children
+                swap(node,tmp);
+            else
+                // This node has one child
+                *node = *tmp;
+            free(tmp);
+        } else {
+            AVLNode* tmp = minValueNode(node->r);
+            
+            node->value = tmp->value;
+            
+            node->r = deleteNode(node->r, tmp->value);
+        }
+    }
+    
+    // If this subtree only had one child,
+    // we're done.
+    if (root == NULL) return root;
+    
+    
 ```
 
 ## Priority Queue
