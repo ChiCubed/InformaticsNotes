@@ -508,6 +508,49 @@ A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associat
 
 Logarithms aren't practically constant time; precalculating them should increase speed quite significantly. This is implemented in the code sample above.
 
+## Self-Balancing Binary Search Tree
+
+A Self-Balancing Binary Search Tree (SBBST) is a binary tree which can be used for search operations.
+
+There are two significant implementations of SBBSTs, AVL trees and Red-Black trees.
+
+### AVL Tree
+
+#### Summary
+
+An AVL tree is a binary tree where, for each node, the difference between the height of the left subtree and the height of the right subtree is at most one. (In addition, it is a binary search tree, which means that every node has a value greater than or equal to the maximum of all the values in the left subtree, and less than or equal to the minimum of all the values in the right subtree.)
+
+The code makes reference to the notions of 'rotation' of a subtree. This involves 'moving the root', as indicated in the below ASCII art diagram (sourced from GeeksforGeeks):
+
+```
+   z                            z                            x
+  / \                          / \                          /  \ 
+T1   y   Right Rotate (y)    T1   x      Left Rotate(z)   z      y
+    / \  - - - - - - - - ->     /  \   - - - - - - - ->  / \    / \
+   x   T4                      T2   y                  T1  T2  T3  T4
+  / \                              /  \
+T2   T3                           T3   T4
+```
+
+#### Complexity
+
+| Query | Update | Space |
+| :---: | :---: | :---: |
+| $$O(log N)$$ | $$O(log N)$$ | $$O(N)$$ |
+
+#### Code
+
+```cpp
+struct AVLNode {
+    int value;
+    struct AVLNode* l;
+    struct AVLNode* r;
+    int height; // height of this subtree
+};
+
+
+```
+
 ## Priority Queue
 
 A data structure which allows adding elements and popping the smallest / largest / some other as defined by a comparator function. If implemented as a binary heap, a common implementation, has $$O(log N)$$ update and pop.
