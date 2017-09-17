@@ -542,6 +542,8 @@ It is evident from the above diagram how rotation works. The node in brackets is
 
 #### Code
 
+(Partially sourced from http://www.geeksforgeeks.org/avl-tree-set-1-insertion/).
+
 ```cpp
 struct AVLNode {
     int value;
@@ -551,7 +553,28 @@ struct AVLNode {
 };
 
 AVLNode* newNode(int value) {
-    AVLNode* node = 
+    AVLNode* node = (AVLNode*)malloc(sizeof(AVLNode));
+    node->value = value;
+    node->l = node->r = NULL;
+    node->height = 1;
+    return node;
+}
+
+AVLNode* rightRotate(AVLNode* y) {
+    AVLNode* x = y->l;
+    AVLNode* T = x->r;
+    
+    // rotate
+    x->r = y;
+    y->l = T;
+    
+    // update the heights
+    y->height = max(height(y->left), height(y->right)) + 1;
+    x->height = max(height(x->left), height(x->right)) + 1;
+    
+    // return the new root
+    return x;
+}
 ```
 
 ## Priority Queue
