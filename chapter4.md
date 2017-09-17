@@ -689,11 +689,28 @@ AVLNode* deleteNode(AVLNode* node, int value) {
         }
     }
     
-    // If this subtree only had one child,
+    // If this subtree only had one node,
     // we're done.
-    if (root == NULL) return root;
+    if (node == NULL) return node;
     
+    node->height = max(height(node->l),
+                       height(node->r)) + 1;
     
+    // check for unbalance
+    // and fix it.
+    int balance = getBalance(node);
+    
+    if (balance > 1 && getBalance(root->l) < 0)
+        root->l =  leftRotate(root->l);
+    
+    if (balance < -1 && getBalance(root->r) > 0)
+        root->r = rightRotate(root->r);
+    
+    if (balance > 1) return rightRotate(root);
+    if (balance < -1) return leftRotate(root);
+    
+    return node;
+}
 ```
 
 ## Priority Queue
