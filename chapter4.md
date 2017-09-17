@@ -700,14 +700,14 @@ AVLNode* deleteNode(AVLNode* node, int value) {
     // and fix it.
     int balance = getBalance(node);
     
-    if (balance > 1 && getBalance(root->l) < 0)
-        root->l =  leftRotate(root->l);
+    if (balance > 1 && getBalance(node->l) < 0)
+        node->l =  leftRotate(node->l);
     
-    if (balance < -1 && getBalance(root->r) > 0)
-        root->r = rightRotate(root->r);
+    if (balance < -1 && getBalance(node->r) > 0)
+        node->r = rightRotate(node->r);
     
-    if (balance > 1) return rightRotate(root);
-    if (balance < -1) return leftRotate(root);
+    if (balance > 1) return rightRotate(node);
+    if (balance < -1) return leftRotate(node);
     
     return node;
 }
