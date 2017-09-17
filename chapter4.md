@@ -579,8 +579,8 @@ AVLNode* rightRotate(AVLNode* y) {
     y->l = T;
     
     // update the heights
-    y->height = max(height(y->left), height(y->right)) + 1;
-    x->height = max(height(x->left), height(x->right)) + 1;
+    y->height = max(height(y->l), height(y->r)) + 1;
+    x->height = max(height(x->l), height(x->r)) + 1;
     
     // return the new root
     return x;
