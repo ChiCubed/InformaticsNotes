@@ -532,6 +532,8 @@ T1   y   Right Rotate (y)    T1   x      Left Rotate(z)   z      y
 T2   T3                           T3   T4
 ```
 
+It is evident from the above diagram how rotation works. The node in brackets is the root node of the subtree which is being rotated.
+
 #### Complexity
 
 | Query | Update | Space |
@@ -548,7 +550,8 @@ struct AVLNode {
     int height; // height of this subtree
 };
 
-
+AVLNode* newNode(int value) {
+    AVLNode* node = 
 ```
 
 ## Priority Queue
