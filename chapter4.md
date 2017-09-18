@@ -510,7 +510,7 @@ Logarithms aren't practically constant time; precalculating them should increase
 
 ## Self-Balancing Binary Search Tree
 
-A Self-Balancing Binary Search Tree (SBBST) is a binary tree which can be used for search operations.
+A Self-Balancing Binary Search Tree (SBBST) is a binary tree which can be used for search operations, and often ensures $$O(log N)$$ complexity. A search may be performed by performing a simple binary search over the nodes.
 
 There are two significant implementations of SBBSTs, AVL trees and Red-Black trees. Generally an AVL tree is preferable when there are more queries than updates, and vice versa for a Red-Black tree.
 
@@ -733,7 +733,7 @@ Essentially, maintaining these invariants ensures that the tree has height less 
 
 #### Code
 
-See http://www.geeksforgeeks.org/c-program-red-black-tree-insertion/.
+See http://www.geeksforgeeks.org/c-program-red-black-tree-insertion/ and http://www.geeksforgeeks.org/red-black-tree-set-3-delete-2/.
 
 ```cpp
 struct RBNode {
@@ -744,6 +744,7 @@ struct RBNode {
     RBNode(int value) {
         this->value = value;
         l = r = parent = NULL;
+        isBlack = false;
     }
 }* root; // Root is here a global.
 
@@ -783,15 +784,15 @@ RBNode* rotateRight(RBNode* node) {
     return node;
 }
 
-RBNode* insert(RBNode* node, int value) {
+RBNode* BSTInsert(RBNode* node, RBNode* add) {
     // First perform the regular BST insert
-    if (node == NULL) return new Node(value);
+    if (node == NULL) return add;
     
-    if (value < node->value) {
-        node->l = insert(node->l, value);
+    if (add->value < node->value) {
+        node->l = BSTInsert(node->l, value);
         node->l->parent = node;
-    } else if (value > node->value) {
-        node->r = insert(node->r, value);
+    } else if (add->value > node->value) {
+        node->r = BSTInsert(node->r, value);
         node->r->parent = node;
     } else {
         // We disallow multiple keys here,
@@ -804,6 +805,79 @@ RBNode* insert(RBNode* node, int value) {
     }
     
     return node;
+}
+
+void insert(int value) {
+    RBNode* newNode = new Node(value);
+    
+    root = BSTInsert(root, newNode);
+    
+    // Now we fix any rule violations caused.
+    Node* parent = NULL;
+    Node* grand_parent = NULL;
+    
+    while ((newNode != root) && !newNode->isBlack &&
+           !newNode->parent->isBlack) {
+        parent = newNode->parent;
+        grand_parent = parent->parent;
+        
+        if (parent == grand_parent->l) {
+            Node* uncle = grand_parent->r;
+            
+            if ((uncle != NULL) && !uncle->isBlack) {
+                grand_parent->isBlack = false;
+                parent->isBlack = true;
+                uncle->isBlack = true;
+                newNode = grand_parent;
+            } else {
+                if (newNode == parent->r) {
+                    parent = rotateLeft(parent);
+                    newNode = parent;
+                    parent = newNode->parent;
+                }
+                
+                grand_parent = rotateRight(grand_parent);
+                swap(parent->isBlack, grand_parent->isBlack);
+                newNode = parent;
+            }
+        } else {
+            Node* uncle = grand_parent->l;
+            
+            if ((uncle != NULL) && !uncle->isBlack) {
+                grand_parent->isBlack = false;
+                parent->isBlack = true;
+                uncle->isBlack = true;
+                newNode = grand_parent;
+            } else {
+                if (newNode == parent->l) {
+                    parent = rotateRight(parent);
+                    newNode = parent;
+                    parent = newNode -> parent;
+                }
+                
+                grand_parent = rotateLeft(grand_parent);
+                swap(parent->isBlack, grand_parent->isBlack);
+                newNode = parent;
+            }
+        }
+    }
+    
+    root->isBlack = true;
+}
+
+RBNode* BSTSearch(RBNode* node, int value) {
+    if (!node) return NULL;
+    while (node->value != value) {
+        if (node->value > value)
+            node = node->l;
+        else node = node->r;
+        if (!node) return NULL;
+    }
+    return node;
+}
+
+void delete(int value) {
+    RBNode* toDelete = BSTSearch(root, value);
 ```
 
 ## Priority Queue
