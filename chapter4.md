@@ -918,7 +918,38 @@ RBNode* getPredecessor(RBNode* node) {
     
     return prv;
 }
-            
+
+void fixDelete(RBNode* node) {
+    // Restores properties of a red-black
+    // tree after the deletion of a node.
+    // The argument is the child of the
+    // removed node.
+    
+    RBNode* w;
+    
+    while (node->isBlack && (root != node)) {
+        if (node == node->parent->l) {
+            w = node->parent->r;
+            if (!w->isBlack) {
+                w->isBlack = true;
+                node = node->parent;
+            } else {
+                if (w->r->isBlack) {
+                    w->l->isBlack = true;
+                    w->isBlack = false;
+                    w = rotateRight(w);
+                    w = node->parent->r;
+                }
+                
+                w->isBlack = node->parent->isBlack;
+                w->parent->isBlack = true;
+                w->right->isBlack = true;
+                node->parent = rotateLeft(node->parent);
+                node = root; // break
+            }
+        } else {
+            w = node->parent->l;
+            if (!w->isBlack) {
 
 void delete(int value) {
     RBNode* toDelete = BSTSearch(root, value);
