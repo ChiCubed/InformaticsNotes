@@ -551,23 +551,20 @@ I have used the term 'value' since it makes more sense, in my opinion, than 'key
 ```cpp
 struct AVLNode {
     int value;
-    struct AVLNode* l;
-    struct AVLNode* r;
+    AVLNode *l, *r;
     int height; // height of this subtree
+    
+    AVLNode(int value) {
+        this->value = value;
+        l = r = NULL;
+        height = 1;
+    }
 };
 
 // Gets height of node.
 // Checks for null.
 int height(AVLNode* x) {
     return (x == NULL) ? 0 : x->height;
-}
-
-AVLNode* newNode(int value) {
-    AVLNode* node = (AVLNode*)malloc(sizeof(AVLNode));
-    node->value = value;
-    node->l = node->r = NULL;
-    node->height = 1;
-    return node;
 }
 
 AVLNode* rightRotate(AVLNode* y) {
@@ -612,7 +609,7 @@ int getBalance(AVLNode* x) {
 // Insert 'value' into the subtree
 // with root node.
 AVLNode* insert(AVLNode* node, int value) {
-    if (node == NULL) return newNode(value);
+    if (node == NULL) return new Node(value);
     
     if (value < node->value)
         node->l = insert(node->l, value);
@@ -711,6 +708,102 @@ AVLNode* deleteNode(AVLNode* node, int value) {
     
     return node;
 }
+```
+
+### Red-Black Tree
+
+#### Summary
+
+(http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/)
+
+A red-black tree is an SBBST where:
+
+1. Every node has an assigned colour, red or black
+2. The root is always a black node
+3. There are no two adjacent red nodes i.e. a red node cannot have a red parent or red child
+4. Every path from the root to a leaf node contains the same number of black nodes (including the leaf).
+
+Essentially, maintaining these invariants ensures that the tree has height less than or equal to $$2 log(n+1)$$.
+
+#### Complexity
+
+| Query | Update | Space |
+| :---: | :---: | :---: |
+| $$O(log N)$$ | $$O(log N)$$ | $$O(N)$$ |
+
+#### Code
+
+See http://www.geeksforgeeks.org/c-program-red-black-tree-insertion/.
+
+```cpp
+struct RBNode {
+    int value;
+    bool isBlack;
+    RBNode *l, *r, *parent;
+    
+    RBNode(int value) {
+        this->value = value;
+        l = r = parent = NULL;
+    }
+}* root; // Root is here a global.
+
+RBNode* rotateLeft(RBNode* node) {
+    Node* r = node->r;
+    
+    node->r = r->l;
+    if (node->r != NULL) node->r->parent = node;
+    
+    r->parent = node->parent;
+    if (node->parent == NULL) root = r;
+    else if (node == node->parent->l)
+        node->parent->l = r;
+    else node->parent->r = r;
+    
+    r->l = node;
+    node->parent = r;
+    
+    return node;
+}
+
+RBNode* rotateRight(RBNode* node) {
+    Node* l = node->l;
+    
+    node->l = l->r;
+    if (node->l != NULL) node->l->parent = node;
+    
+    l->parent = node->parent;
+    if (node->parent == NULL) root = l;
+    else if (node == node->parent->l)
+        node->parent->l = l;
+    else node->parent->r = l;
+    
+    l->r = node;
+    node->parent = l;
+    
+    return node;
+}
+
+RBNode* insert(RBNode* node, int value) {
+    // First perform the regular BST insert
+    if (node == NULL) return new Node(value);
+    
+    if (value < node->value) {
+        node->l = insert(node->l, value);
+        node->l->parent = node;
+    } else if (value > node->value) {
+        node->r = insert(node->r, value);
+        node->r->parent = node;
+    } else {
+        // We disallow multiple keys here,
+        // but we could store a count
+        // with each node or assume that
+        // equal elements being inserted
+        // should be on the right,
+        // i.e. change the conditional
+        // above to >=.
+    }
+    
+    return node;
 ```
 
 ## Priority Queue
