@@ -878,6 +878,8 @@ RBNode* BSTSearch(RBNode* node, int value) {
 
 void delete(int value) {
     RBNode* toDelete = BSTSearch(root, value);
+    
+    RBNode* 
 ```
 
 ## Priority Queue
