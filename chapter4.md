@@ -797,11 +797,12 @@ RBNode* BSTInsert(RBNode* node, RBNode* add) {
     } else {
         // We disallow multiple keys here,
         // but we could store a count
-        // with each node or assume that
-        // equal elements being inserted
-        // should be on the right,
-        // i.e. change the conditional
-        // above to >=.
+        // with each node.
+        // This implementation will work
+        // with the assumption that equal
+        // nodes go on the left, i.e.
+        // the first condition above is
+        // changed to <=.
     }
     
     return node;
@@ -876,10 +877,79 @@ RBNode* BSTSearch(RBNode* node, int value) {
     return node;
 }
 
+RBNode* getSuccessor(RBNode* node) {
+    // Gets the successor of the node.
+    RBNode* nxt = node->r;
+    
+    if (nxt != NULL) {
+        while (nxt->l != NULL) {
+            nxt = nxt->l;
+        }
+    } else {
+        nxt = node->parent;
+        while (node == nxt->r) {
+            node = nxt;
+            nxt = nxt->parent;
+        }
+        if (nxt == root) return NULL;
+    }
+    
+    return nxt;
+}
+
+RBNode* getPredecessor(RBNode* node) {
+    RBNode* prv = node->l;
+    
+    if (prv != NULL) {
+        while (prv->r != NULL) {
+            prv = prv->r;
+        }
+    } else {
+        prv = node->parent;
+        // The reason for the difference
+        // with getSuccessor is to allow
+        // handling of equal elements.
+        while (node == prv->l) {
+            if (prv == root) return NULL;
+            node = prv;
+            prv = prv->parent;
+        }
+    }
+    
+    return prv;
+}
+            
+
 void delete(int value) {
     RBNode* toDelete = BSTSearch(root, value);
     
-    RBNode* 
+    RBNode* y = ((toDelete->l == NULL) ||
+                 (toDelete->r == NULL)) ? toDelete :
+                 getSuccessor(toDelete);
+    RBNode* x = y->l ? y->l : y->r;
+    x->parent = y->parent;
+    if (root == x->parent) root->l = x;
+    else if (y == y->parent->l) y->parent->l = x;
+    else y->parent->r = x;
+    
+    if (y != toDelete) {
+        if (y->isBlack) fixDelete(x);
+        
+        y->l = toDelete->l;
+        y->r = toDelete->r;
+        y->parent = toDelete->parent;
+        y->isBlack = toDelete->isBlack;
+        toDelete->l->parent = y;
+        toDelete->r->parent = y;
+        if (toDelete == toDelete->parent->l)
+            toDelete->parent->l = y;
+        else toDelete->parent->r = y;
+        delete toDelete;
+    } else {
+        if (y->isBlack) fixDelete(x);
+        delete y;
+    }
+}
 ```
 
 ## Priority Queue
