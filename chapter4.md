@@ -514,6 +514,8 @@ A Self-Balancing Binary Search Tree (SBBST) is a binary tree which can be used f
 
 There are two significant implementations of SBBSTs, AVL trees and Red-Black trees. Generally an AVL tree is preferable when there are more queries than updates, and vice versa for a Red-Black tree.
 
+Treaps will also be discussed. Treaps use randomisation to allow expected time complexity to remain $$O(log N)$$.
+
 ### AVL Tree
 
 #### Summary
@@ -950,6 +952,31 @@ void fixDelete(RBNode* node) {
         } else {
             w = node->parent->l;
             if (!w->isBlack) {
+                w->isBlack = true;
+                node->parent->isBlack = false;
+                node->parent = rotateRight(node->parent);
+                w = node->parent->l;
+            }
+            if (w->r->isBlack && w->l->isBlack) {
+                w->isBlack = false;
+                node = node->parent;
+            } else {
+                if (w->l->isBlack) {
+                    w->r->isBlack = true;
+                    w->isBlack = false;
+                    w = rotateLeft(w);
+                    w = node->parent->l;
+                }
+                w->isBlack = node->parent->isBlack;
+                node->parent->isBlack = true;
+                w->l->isBlack = true;
+                node->parent = rotateRight(node->parent);
+                node = root; // break
+            }
+        }
+    }
+    node->isBlack = true;
+}
 
 void delete(int value) {
     RBNode* toDelete = BSTSearch(root, value);
@@ -981,6 +1008,49 @@ void delete(int value) {
         delete y;
     }
 }
+```
+
+### Treap
+
+#### Summary
+
+A treap is essentially a BST where the values (technically keys) of each node is ordered by the BST property (max on left side <= current node <= min on right side), and the 'priorities' of each node is ordered by the max-heap property (max on left side, max on right side <= current node).
+
+Each node is assigned a random priority when they are inserted. The tree is rotated when it is updated to ensure the max-heap property is satisified for the priorities.
+
+#### Complexity
+
+| Query | Update | Space |
+| :---: | :---: | :---: |
+| $$O(log N)$$ | $$O(log N)$$ | $$O(N)$$ |
+
+#### Code
+
+```cpp
+#include <cstdlib> // random
+
+using namespace std;
+
+// It may be advisable
+// to srand(some number)
+// in the main function.
+
+struct TNode{
+    int value;
+    int priority;
+    TNode *l, *r;
+    
+    TNode(int value) {
+        this->value = value;
+        priority = rand();
+        l = r = NULL;
+    }
+} *root; // Global root.
+
+// Query is just a regular binary search.
+
+TNode* insert(TNode* node, int value) {
+    if (!node) return new TNode(value);
 ```
 
 ## Priority Queue
