@@ -899,28 +899,6 @@ RBNode* getSuccessor(RBNode* node) {
     return nxt;
 }
 
-RBNode* getPredecessor(RBNode* node) {
-    RBNode* prv = node->l;
-    
-    if (prv != NULL) {
-        while (prv->r != NULL) {
-            prv = prv->r;
-        }
-    } else {
-        prv = node->parent;
-        // The reason for the difference
-        // with getSuccessor is to allow
-        // handling of equal elements.
-        while (node == prv->l) {
-            if (prv == root) return NULL;
-            node = prv;
-            prv = prv->parent;
-        }
-    }
-    
-    return prv;
-}
-
 void fixDelete(RBNode* node) {
     // Restores properties of a red-black
     // tree after the deletion of a node.
@@ -978,7 +956,7 @@ void fixDelete(RBNode* node) {
     node->isBlack = true;
 }
 
-void delete(int value) {
+void remove(int value) {
     RBNode* toDelete = BSTSearch(root, value);
     
     RBNode* y = ((toDelete->l == NULL) ||
@@ -1049,8 +1027,74 @@ struct TNode{
 
 // Query is just a regular binary search.
 
+TNode* rotateRight(TNode* y) {
+    TNode *x = y->l, *T = x->r;
+    
+    // rotate
+    x->r = y; y->l = T;
+    
+    return x;
+}
+
+TNode* rotateLeft(TNode* x) {
+    TNode *y = x->r, *T = y->l;
+    
+    // rotate
+    y->l = x; x->r = T;
+    
+    return y;
+}
+
 TNode* insert(TNode* node, int value) {
-    if (!node) return new TNode(value);
+    if (node == NULL) return new TNode(value);
+    
+    if (node->value >= value) {
+        // We'll handle equal elements
+        // by putting them on the left.
+        node->l = insert(node->l, value);
+        
+        // Fix max-heap property
+        if (node->l->priority > node->priority)
+            node = rotateRight(node);
+    } else {
+        node->r = insert(node->r, value);
+        
+        if (node->r->priority > node->priority)
+            node = rotateLeft(node);
+    }
+    
+    return node;
+}
+
+TNode* remove(TNode* node, int value) {
+    if (node == NULL) return node;
+    
+    // First handle the case that
+    // we're not on the node to be deleted.
+    if (value < node->value)
+        node->l = remove(node->l, value);
+    else if (value > node->value)
+        node->r = remove(node->r, value);
+    else if ((node->l == NULL) || (node->r == NULL)) {
+        // This is the one to delete.
+        // Handle the case that the
+        // root only has one child.
+        TNode* tmp = node->l ? node->l : node->r;
+        delete node;
+        node = tmp;
+    } else if (node->l->priority < node->r->priority) {
+        // We move the node to the left,
+        // and _then_ delete it.
+        node = rotateLeft(node);
+        node->l = remove(node->l, value);
+    } else {
+        // Move the node to the right then delete.
+        node = rotateRight(node);
+        node->r = remove(node->r, value);
+    }
+    
+    return node;
+}            
 ```
 
 ## Priority Queue
