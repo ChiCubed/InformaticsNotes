@@ -751,7 +751,7 @@ struct RBNode {
 }* root; // Root is here a global.
 
 RBNode* rotateLeft(RBNode* node) {
-    Node* r = node->r;
+    RBNode* r = node->r;
     
     node->r = r->l;
     if (node->r != NULL) node->r->parent = node;
@@ -769,7 +769,7 @@ RBNode* rotateLeft(RBNode* node) {
 }
 
 RBNode* rotateRight(RBNode* node) {
-    Node* l = node->l;
+    RBNode* l = node->l;
     
     node->l = l->r;
     if (node->l != NULL) node->l->parent = node;
@@ -811,13 +811,13 @@ RBNode* BSTInsert(RBNode* node, RBNode* add) {
 }
 
 void insert(int value) {
-    RBNode* newNode = new Node(value);
+    RBNode* newNode = new RBNode(value);
     
     root = BSTInsert(root, newNode);
     
     // Now we fix any rule violations caused.
-    Node* parent = NULL;
-    Node* grand_parent = NULL;
+    RBNode* parent = NULL;
+    RBNode* grand_parent = NULL;
     
     while ((newNode != root) && !newNode->isBlack &&
            !newNode->parent->isBlack) {
@@ -1028,19 +1028,19 @@ struct TNode{
 // Query is just a regular binary search.
 
 TNode* rotateRight(TNode* y) {
-    TNode *x = y->l, *T = x->r;
+    TNode *x = y->l;
     
     // rotate
-    x->r = y; y->l = T;
+    y->l = x->r; x->r = y;
     
     return x;
 }
 
 TNode* rotateLeft(TNode* x) {
-    TNode *y = x->r, *T = y->l;
+    TNode *y = x->r;
     
     // rotate
-    y->l = x; x->r = T;
+    x->r = y->l; y->l = x;
     
     return y;
 }
@@ -1095,6 +1095,134 @@ TNode* remove(TNode* node, int value) {
     
     return node;
 }            
+```
+
+### Splay Tree
+
+#### Summary
+
+A splay tree moves frequently accessed nodes to the root, an operation called 'splaying'. This ensures amortized $$O(log N)$$ complexity (starting from an empty tree).
+
+#### Complexity
+
+| Query | Update | Space |
+| :---: | :---: | :---: |
+| $$O(log N)$$ | $$O(log N)$$ | $$O(N)$$ |
+
+#### Code
+
+See http://www.geeksforgeeks.org/splay-tree-set-2-insert-delete/.
+
+```cpp
+struct SNode {
+    int value;
+    SNode *l, *r;
+    
+    SNode(int value) {
+        this->value = value;
+        l = r = NULL;
+    }
+} *root;
+
+SNode* rotateRight(SNode* y) {
+    SNode *x = y->l;
+    
+    // rotate
+    y->l = x->r; x->r = y;
+    
+    return x;
+}
+
+SNode* rotateLeft(SNode* x) {
+    SNode *y = x->r;
+    
+    // rotate
+    x->r = y->l; y->l = x;
+    
+    return y;
+}
+
+// Splaying functions as a search.
+// You can splay the tree and then
+// check the root to search for an element.
+
+SNode* splay(SNode* node, int value) {
+    if (!node || node->value == value) return node;
+    
+    if (node->value > value) {
+        if (!node->l) return node;
+        
+        if (node->l->value > value) {
+            node->l->l = splay(node->l->l, key);
+ 
+            node = rotateRight(node);
+        } else if (node->l->value < value) {
+            node->l->r = splay(node->l->r, value);
+ 
+            if (node->l->r)
+                node->l = rotateLeft(node->l);
+        }
+ 
+        return node->l : rotateRight(node) : node;
+    } else {
+        if (node->r == NULL) return node;
+ 
+        if (node->r->value > value) {
+            node->r->l = splay(node->r->l, value);
+ 
+            if (node->r->l)
+                node->r = rotateRight(node->r);
+        } else if (node->r->value < value) {
+            node->r->r = splay(node->r->r, value);
+            node = rotateLeft(node);
+        }
+ 
+        return node->r ? rotateLeft(node) : node;
+    }
+}
+
+SNode* insert(int value) {
+    if (!root) return new SNode(value);
+    
+    root = splay(root, value);
+    
+    if (root->value == value) return root;
+    
+    SNode* newNode = new SNode(value);
+    
+    if (root->value > value) {
+        newNode->r = root;
+        newNode->l = root->l;
+        root->l = NULL;
+    } else {
+        newNode->l = root;
+        newNode->r = root->r;
+        root->r = NULL;
+    }
+    
+    return newNode;
+}
+
+SNode* remove(int value) {
+    if (!root) return root;
+    
+    root = splay(root, value);
+    
+    if (root->value != value) return root;
+    
+    SNode* prev = root;
+    
+    if (!root->l) root = root->r;
+    else {
+        root = splay(root->l, value);
+        
+        root->r = prev->r;
+    }
+    
+    delete prev;
+    
+    return root;
+}
 ```
 
 ## Priority Queue
