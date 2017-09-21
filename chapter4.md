@@ -4,7 +4,7 @@
 
 ### Summary
 
-A range tree allows querying the minimum / sum / product / other operations (see Requirements) of the range $$[L,R]$$ in an array in $$O(log N)$$ time. It is typically the best option for range queries, and its fast updates normally make it the best option for querying a range. There are a few exceptions; for example, when there are no updates and the operation you are using has a unique inverse, prefix tables are a better (and much faster) option; sparse tables can also be used in some cases.
+A range tree allows querying the minimum / sum / product / other operations \(see Requirements\) of the range $$[L,R]$$ in an array in $$O(log N)$$ time. It is typically the best option for range queries, and its fast updates normally make it the best option for querying a range. There are a few exceptions; for example, when there are no updates and the operation you are using has a unique inverse, prefix tables are a better \(and much faster\) option; sparse tables can also be used in some cases.
 
 A range tree essentially allows reduction of a query to a lowest common ancestor problem.
 
@@ -45,14 +45,14 @@ int preprocess(int l, int r, int pos) {
   // The children of the current node
   // (represented by pos)
   // are at indices 2*pos+1 and 2*pos+2.
-  
+
   // Note we have used a single
   // equals sign. The default return
   // value of a=b is the result,
   // i.e. a=b returns b.
   // This is just for conciseness.
   if (l==r) return tree[pos]=arr[l];
-  
+
   // In this example we are using
   // the min operation. We could
   // equally well have used sum or
@@ -69,13 +69,13 @@ int query(int l, int r, int pos, int s, int e) {
   // If we're within the query range:
   // just return the minimum here
   if (s <= l && r <= e) return tree[pos];
-  
+
   // If we're completely outside the query range:
   // return the identity of the operation.
   // Since the operation is min, the identity
   // in this case is INF.
   if (e < l || r < s) return INF;
-  
+
   // We partially overlap the query range.
   int m=mid(l,r);
   return min(query(l,  m,(pos<<1)+1,s,e),
@@ -88,14 +88,14 @@ int update(int l, int r, int pos, int i, int val) {
   // if the index to be updated is outside the range:
   // do nothing
   if (i < l || r < i) return tree[pos];
-  
+
   // We're on a node at the bottom of the tree:
   // we update its value
   // Remove arr[l] from this expression if
   // you don't want to update the original
   // array.
   if (l==r) return tree[pos]=arr[l]=val;
-  
+
   // We contain the index to update.
   int m=mid(l,r);
   return tree[pos]=min(update(l,  m,(pos<<1)+1,i,val),
@@ -158,7 +158,7 @@ Identities are not necessary if you implement a range tree differently, that is 
 
 ### Summary
 
-A binary indexed tree (or Fenwick tree) is used to calculate the result of the application of some associative operator (e.g. addition) across a range in an array, similar to a range tree. (It is designed to make the prefix sum easy to calculate, so it may be described as a blend between a range tree and a prefix sum data structure.) It only requires less than half the space of a range tree, however, and is easier/quicker to implement.
+A binary indexed tree \(or Fenwick tree\) is used to calculate the result of the application of some associative operator \(e.g. addition\) across a range in an array, similar to a range tree. \(It is designed to make the prefix sum easy to calculate, so it may be described as a blend between a range tree and a prefix sum data structure.\) It only requires less than half the space of a range tree, however, and is easier/quicker to implement.
 
 A binary indexed tree is typically faster than a range tree.
 
@@ -204,7 +204,7 @@ void update(int n, int i, int val);
 // preprocess(ARRAY_LENGTH);
 void preprocess(int n) {
   // Assumes the array tree is already zeroed.
-  
+
   for (int i = 0; i < n; ++i) {
     update(n, i, arr[i]);
   }
@@ -216,17 +216,17 @@ void preprocess(int n) {
 // query(r) - query(l-1).
 int query(int i) {
   int s = 0;
-  
+
   // Since BIT[0] is a dummy...
   int ind = i+1;
-  
+
   // go through the ancestors
   // of the index in the array
   while (ind>0) {
     s += tree[ind];
     ind -= lsb(ind);
   }
-  
+
   return s;
 }
 
@@ -240,7 +240,7 @@ int query(int i) {
 void update(int n, int i, int val) {
   // For the same reason as in the query function
   int ind = i+1;
-  
+
   while (ind <= n) {
     tree[ind] += val;
     ind += lsb(ind);
@@ -282,7 +282,7 @@ void update(int n, int i, int val) {
 
 ### Requirements
 
-Technically, a binary indexed tree works on any associative binary operation e.g. addition. However, the implementation given here is unable to handle the case where the operation does not have an inverse (for example, when one wants to find the minimum of a range.) In particular, it cannot find the minimum in an arbitrary range without using some roundabout tricks.
+Technically, a binary indexed tree works on any associative binary operation e.g. addition. However, the implementation given here is unable to handle the case where the operation does not have an inverse \(for example, when one wants to find the minimum of a range.\) In particular, it cannot find the minimum in an arbitrary range without using some roundabout tricks.
 
 Generally a range tree is better for querying the minimum in a range, and a binary indexed tree is better for almost anything else.
 
@@ -317,7 +317,7 @@ int pre[MAX_ARRAY_LENGTH];
 // n is the array size
 void preprocess(int n) {
   pre[0] = arr[0];
-  
+
   for (int i=0; i<n; ++i) {
     // In this example we are using addition.
     // We can use any operation with an inverse.
@@ -336,11 +336,11 @@ int query(int l, int r) {
 
 void update(int n, int i, int val) {
   // i is the index, val is the new value
-  
+
   // We can technically optimise this but
   // if there are going to be updates
   // prefix sum is the wrong data structure.
-  
+
   arr[i]=val;
   preprocess(n);
 }
@@ -421,7 +421,7 @@ void preprocess(int n) {
   for (int i=0; i<n; ++i) {
     sparse[0][i] = arr[i];
   }
-  
+
   for (int l=0; l<LOG2_MAX_ARR_LEN; ++l) {
     if (l) {
       // note the    <= rather than <
@@ -435,7 +435,7 @@ void preprocess(int n) {
                            sparse[l-1][i + (1<<(l-1))]);
       }
     }
-    
+
     // Preprocess logarithms
     for (int j=(1<<l); j<(1<<(l+1)) && j<array_size; ++j) {
       logs[j]=l;
@@ -502,7 +502,7 @@ void update(int i, int val, int n) {
 
 ### Requirements
 
-A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associative, commutative and idempotent (see the section on [Set Theory](/chapter3/settheory.md#properties-of-binary-operators) for explanation). Examples include the $$min$$ function. No inverse is required.
+A sparse table only works on a set $$S$$ and operator $$*$$ if $$*$$ is associative, commutative and idempotent \(see the section on [Set Theory](/chapter3/settheory.md#properties-of-binary-operators) for explanation\). Examples include the $$min$$ function. No inverse is required.
 
 ### Tips
 
@@ -510,7 +510,7 @@ Logarithms aren't practically constant time; precalculating them should increase
 
 ## Self-Balancing Binary Search Tree
 
-A Self-Balancing Binary Search Tree (SBBST) is a binary tree which can be used for search operations, and often ensures $$O(log N)$$ complexity. A search may be performed by performing a simple binary search over the nodes.
+A Self-Balancing Binary Search Tree \(SBBST\) is a binary tree which can be used for search operations, and often ensures $$O(log N)$$ complexity. A search may be performed by performing a simple binary search over the nodes.
 
 There are two significant implementations of SBBSTs, AVL trees and Red-Black trees. Generally an AVL tree is preferable when there are more queries than updates, and vice versa for a Red-Black tree.
 
@@ -520,9 +520,9 @@ Treaps will also be discussed. Treaps use randomisation to allow expected time c
 
 #### Summary
 
-An AVL tree is a binary tree where, for each node, the difference between the height of the left subtree and the height of the right subtree is at most one. (In addition, it is a binary search tree, which means that every node has a value greater than or equal to the maximum of all the values in the left subtree, and less than or equal to the minimum of all the values in the right subtree.)
+An AVL tree is a binary tree where, for each node, the difference between the height of the left subtree and the height of the right subtree is at most one. \(In addition, it is a binary search tree, which means that every node has a value greater than or equal to the maximum of all the values in the left subtree, and less than or equal to the minimum of all the values in the right subtree.\)
 
-The code makes reference to the notions of 'rotation' of a subtree. This involves 'moving the root', as indicated in the below ASCII art diagram (sourced from GeeksforGeeks):
+The code makes reference to the notions of 'rotation' of a subtree. This involves 'moving the root', as indicated in the below ASCII art diagram \(sourced from GeeksforGeeks\):
 
 ```
    z                            z                            x
@@ -546,7 +546,7 @@ The 'balance factor' of a node indicates how balanced it is, and is equal to the
 
 #### Code
 
-(Partially sourced from http://www.geeksforgeeks.org/avl-tree-set-1-insertion/).
+\(Partially sourced from [http://www.geeksforgeeks.org/avl-tree-set-1-insertion/](http://www.geeksforgeeks.org/avl-tree-set-1-insertion/)\).
 
 I have used the term 'value' since it makes more sense, in my opinion, than 'key'; however, note that the technical term is 'key'.
 
@@ -555,7 +555,7 @@ struct AVLNode {
     int value;
     AVLNode *l, *r;
     int height; // height of this subtree
-    
+
     AVLNode(int value) {
         this->value = value;
         l = r = NULL;
@@ -572,15 +572,15 @@ int height(AVLNode* x) {
 AVLNode* rightRotate(AVLNode* y) {
     AVLNode* x = y->l;
     AVLNode* T = x->r;
-    
+
     // rotate
     x->r = y;
     y->l = T;
-    
+
     // update the heights
     y->height = max(height(y->l), height(y->r)) + 1;
     x->height = max(height(x->l), height(x->r)) + 1;
-    
+
     // return the new root
     return x;
 }
@@ -588,15 +588,15 @@ AVLNode* rightRotate(AVLNode* y) {
 AVLNode* leftRotate(AVLNode* x) {
     AVLNode* y = x->r;
     AVLNode* T = y->l;
-    
+
     // rotate
     y->l = x;
     x->r = T;
-    
+
     // update the heights
     x->height = max(height(x->l), height(x->r)) + 1;
     y->height = max(height(y->l), height(y->r)) + 1;
-    
+
     // return the new root
     return y;
 }
@@ -612,7 +612,7 @@ int getBalance(AVLNode* x) {
 // with root node.
 AVLNode* insert(AVLNode* node, int value) {
     if (node == NULL) return new Node(value);
-    
+
     if (value < node->value)
         node->l = insert(node->l, value);
     else if (value > node->value)
@@ -625,24 +625,24 @@ AVLNode* insert(AVLNode* node, int value) {
         // store a count of how many times
         // the key appears for each node.
         return node;
-    
+
     // Update height
     node->height = max(height(node->l),
                        height(node->r)) + 1;
-    
+
     // Get balance factor
     int balance = getBalance(node);
-    
+
     if (balance > 1 && value > node->l->value)
         node->l = leftRotate(node->l);
     if (balance < -1 && value < node->r->value)
         node->r = rightRotate(node->r);
-    
+
     if (balance > 1 && value != node->l->value)
         return rightRotate(node);
     if (balance < -1 && value != node->r->value)
         return leftRotate(node);
-    
+
     // Remains unchanged.
     return node;
 }
@@ -650,9 +650,9 @@ AVLNode* insert(AVLNode* node, int value) {
 // Calculate minimum value in a tree
 AVLNode* minValueNode(AVLNode* x) {
     AVLNode* curr = x;
-    
+
     while (curr->l != NULL) curr = curr->l;
-    
+
     return curr;
 }
 
@@ -660,7 +660,7 @@ AVLNode* minValueNode(AVLNode* x) {
 // with value value and root node.
 AVLNode* deleteNode(AVLNode* node, int value) {
     if (node == NULL) return node;
-    
+
     if (value < node->value)
         node->l = deleteNode(node->l, value);
     else if (value > node->value)
@@ -668,7 +668,7 @@ AVLNode* deleteNode(AVLNode* node, int value) {
     else {
         // This has the same value,
         // so it's the node to be deleted.
-        
+
         // Check if this node only has one child.
         if (node->l == NULL || node->r == NULL) {
             AVLNode* tmp = node->l ? node->l : node->r;
@@ -681,33 +681,33 @@ AVLNode* deleteNode(AVLNode* node, int value) {
             free(tmp);
         } else {
             AVLNode* tmp = minValueNode(node->r);
-            
+
             node->value = tmp->value;
-            
+
             node->r = deleteNode(node->r, tmp->value);
         }
     }
-    
+
     // If this subtree only had one node,
     // we're done.
     if (node == NULL) return node;
-    
+
     node->height = max(height(node->l),
                        height(node->r)) + 1;
-    
+
     // check for unbalance
     // and fix it.
     int balance = getBalance(node);
-    
+
     if (balance > 1 && getBalance(node->l) < 0)
         node->l =  leftRotate(node->l);
-    
+
     if (balance < -1 && getBalance(node->r) > 0)
         node->r = rightRotate(node->r);
-    
+
     if (balance > 1) return rightRotate(node);
     if (balance < -1) return leftRotate(node);
-    
+
     return node;
 }
 ```
@@ -716,14 +716,14 @@ AVLNode* deleteNode(AVLNode* node, int value) {
 
 #### Summary
 
-(http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/)
+\([http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/](http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/)\)
 
 A red-black tree is an SBBST where:
 
 1. Every node has an assigned colour, red or black
 2. The root is always a black node
 3. There are no two adjacent red nodes i.e. a red node cannot have a red parent or red child
-4. Every path from the root to a leaf node contains the same number of black nodes (including the leaf).
+4. Every path from the root to a leaf node contains the same number of black nodes \(including the leaf\).
 
 Essentially, maintaining these invariants ensures that the tree has height less than or equal to $$2 log(n+1)$$.
 
@@ -735,61 +735,61 @@ Essentially, maintaining these invariants ensures that the tree has height less 
 
 #### Code
 
-See http://www.geeksforgeeks.org/c-program-red-black-tree-insertion/ and http://www.geeksforgeeks.org/red-black-tree-set-3-delete-2/.
+See [http://www.geeksforgeeks.org/c-program-red-black-tree-insertion/](http://www.geeksforgeeks.org/c-program-red-black-tree-insertion/) and [http://www.geeksforgeeks.org/red-black-tree-set-3-delete-2/](http://www.geeksforgeeks.org/red-black-tree-set-3-delete-2/).
 
 ```cpp
 struct RBNode {
     int value;
     bool isBlack;
     RBNode *l, *r, *parent;
-    
+
     RBNode(int value) {
         this->value = value;
         l = r = parent = NULL;
         isBlack = false;
     }
-}* root; // Root is here a global.
+}* root = NULL; // Root is here a global.
 
 RBNode* rotateLeft(RBNode* node) {
     RBNode* r = node->r;
-    
+
     node->r = r->l;
     if (node->r != NULL) node->r->parent = node;
-    
+
     r->parent = node->parent;
     if (node->parent == NULL) root = r;
     else if (node == node->parent->l)
         node->parent->l = r;
     else node->parent->r = r;
-    
+
     r->l = node;
     node->parent = r;
-    
+
     return node;
 }
 
 RBNode* rotateRight(RBNode* node) {
     RBNode* l = node->l;
-    
+
     node->l = l->r;
     if (node->l != NULL) node->l->parent = node;
-    
+
     l->parent = node->parent;
     if (node->parent == NULL) root = l;
     else if (node == node->parent->l)
         node->parent->l = l;
     else node->parent->r = l;
-    
+
     l->r = node;
     node->parent = l;
-    
+
     return node;
 }
 
 RBNode* BSTInsert(RBNode* node, RBNode* add) {
     // First perform the regular BST insert
     if (node == NULL) return add;
-    
+
     if (add->value < node->value) {
         node->l = BSTInsert(node->l, value);
         node->l->parent = node;
@@ -806,27 +806,27 @@ RBNode* BSTInsert(RBNode* node, RBNode* add) {
         // the first condition above is
         // changed to <=.
     }
-    
+
     return node;
 }
 
 void insert(int value) {
     RBNode* newNode = new RBNode(value);
-    
+
     root = BSTInsert(root, newNode);
-    
+
     // Now we fix any rule violations caused.
     RBNode* parent = NULL;
     RBNode* grand_parent = NULL;
-    
+
     while ((newNode != root) && !newNode->isBlack &&
            !newNode->parent->isBlack) {
         parent = newNode->parent;
         grand_parent = parent->parent;
-        
+
         if (parent == grand_parent->l) {
             Node* uncle = grand_parent->r;
-            
+
             if ((uncle != NULL) && !uncle->isBlack) {
                 grand_parent->isBlack = false;
                 parent->isBlack = true;
@@ -838,14 +838,14 @@ void insert(int value) {
                     newNode = parent;
                     parent = newNode->parent;
                 }
-                
+
                 grand_parent = rotateRight(grand_parent);
                 swap(parent->isBlack, grand_parent->isBlack);
                 newNode = parent;
             }
         } else {
             Node* uncle = grand_parent->l;
-            
+
             if ((uncle != NULL) && !uncle->isBlack) {
                 grand_parent->isBlack = false;
                 parent->isBlack = true;
@@ -857,14 +857,14 @@ void insert(int value) {
                     newNode = parent;
                     parent = newNode -> parent;
                 }
-                
+
                 grand_parent = rotateLeft(grand_parent);
                 swap(parent->isBlack, grand_parent->isBlack);
                 newNode = parent;
             }
         }
     }
-    
+
     root->isBlack = true;
 }
 
@@ -882,7 +882,7 @@ RBNode* BSTSearch(RBNode* node, int value) {
 RBNode* getSuccessor(RBNode* node) {
     // Gets the successor of the node.
     RBNode* nxt = node->r;
-    
+
     if (nxt != NULL) {
         while (nxt->l != NULL) {
             nxt = nxt->l;
@@ -895,7 +895,7 @@ RBNode* getSuccessor(RBNode* node) {
         }
         if (nxt == root) return NULL;
     }
-    
+
     return nxt;
 }
 
@@ -904,9 +904,9 @@ void fixDelete(RBNode* node) {
     // tree after the deletion of a node.
     // The argument is the child of the
     // removed node.
-    
+
     RBNode* w;
-    
+
     while (node->isBlack && (root != node)) {
         if (node == node->parent->l) {
             w = node->parent->r;
@@ -920,7 +920,7 @@ void fixDelete(RBNode* node) {
                     w = rotateRight(w);
                     w = node->parent->r;
                 }
-                
+
                 w->isBlack = node->parent->isBlack;
                 w->parent->isBlack = true;
                 w->right->isBlack = true;
@@ -958,7 +958,7 @@ void fixDelete(RBNode* node) {
 
 void remove(int value) {
     RBNode* toDelete = BSTSearch(root, value);
-    
+
     RBNode* y = ((toDelete->l == NULL) ||
                  (toDelete->r == NULL)) ? toDelete :
                  getSuccessor(toDelete);
@@ -967,10 +967,10 @@ void remove(int value) {
     if (root == x->parent) root->l = x;
     else if (y == y->parent->l) y->parent->l = x;
     else y->parent->r = x;
-    
+
     if (y != toDelete) {
         if (y->isBlack) fixDelete(x);
-        
+
         y->l = toDelete->l;
         y->r = toDelete->r;
         y->parent = toDelete->parent;
@@ -992,7 +992,7 @@ void remove(int value) {
 
 #### Summary
 
-A treap is essentially a BST where the values (technically keys) of each node is ordered by the BST property (max on left side <= current node <= min on right side), and the 'priorities' of each node is ordered by the max-heap property (max on left side, max on right side <= current node).
+A treap is essentially a BST where the values \(technically keys\) of each node is ordered by the BST property \(max on left side &lt;= current node &lt;= min on right side\), and the 'priorities' of each node is ordered by the max-heap property \(max on left side, max on right side &lt;= current node\).
 
 Each node is assigned a random priority when they are inserted. The tree is rotated when it is updated to ensure the max-heap property is satisified for the priorities.
 
@@ -1017,58 +1017,58 @@ struct TNode{
     int value;
     int priority;
     TNode *l, *r;
-    
+
     TNode(int value) {
         this->value = value;
         priority = rand();
         l = r = NULL;
     }
-} *root; // Global root.
+} *root = NULL; // Global root.
 
 // Query is just a regular binary search.
 
 TNode* rotateRight(TNode* y) {
     TNode *x = y->l;
-    
+
     // rotate
     y->l = x->r; x->r = y;
-    
+
     return x;
 }
 
 TNode* rotateLeft(TNode* x) {
     TNode *y = x->r;
-    
+
     // rotate
     x->r = y->l; y->l = x;
-    
+
     return y;
 }
 
 TNode* insert(TNode* node, int value) {
     if (node == NULL) return new TNode(value);
-    
+
     if (node->value >= value) {
         // We'll handle equal elements
         // by putting them on the left.
         node->l = insert(node->l, value);
-        
+
         // Fix max-heap property
         if (node->l->priority > node->priority)
             node = rotateRight(node);
     } else {
         node->r = insert(node->r, value);
-        
+
         if (node->r->priority > node->priority)
             node = rotateLeft(node);
     }
-    
+
     return node;
 }
 
 TNode* remove(TNode* node, int value) {
     if (node == NULL) return node;
-    
+
     // First handle the case that
     // we're not on the node to be deleted.
     if (value < node->value)
@@ -1092,16 +1092,16 @@ TNode* remove(TNode* node, int value) {
         node = rotateRight(node);
         node->r = remove(node->r, value);
     }
-    
+
     return node;
-}            
+}
 ```
 
 ### Splay Tree
 
 #### Summary
 
-A splay tree moves frequently accessed nodes to the root, an operation called 'splaying'. This ensures amortized $$O(log N)$$ complexity (starting from an empty tree).
+A splay tree moves frequently accessed nodes to the root, an operation called 'splaying'. This ensures amortized $$O(log N)$$ complexity \(starting from an empty tree\).
 
 #### Complexity
 
@@ -1111,34 +1111,34 @@ A splay tree moves frequently accessed nodes to the root, an operation called 's
 
 #### Code
 
-See http://www.geeksforgeeks.org/splay-tree-set-2-insert-delete/.
+See [http://www.geeksforgeeks.org/splay-tree-set-2-insert-delete/](http://www.geeksforgeeks.org/splay-tree-set-2-insert-delete/).
 
 ```cpp
 struct SNode {
     int value;
     SNode *l, *r;
-    
+
     SNode(int value) {
         this->value = value;
         l = r = NULL;
     }
-} *root;
+} *root = NULL;
 
 SNode* rotateRight(SNode* y) {
     SNode *x = y->l;
-    
+
     // rotate
     y->l = x->r; x->r = y;
-    
+
     return x;
 }
 
 SNode* rotateLeft(SNode* x) {
     SNode *y = x->r;
-    
+
     // rotate
     x->r = y->l; y->l = x;
-    
+
     return y;
 }
 
@@ -1148,48 +1148,48 @@ SNode* rotateLeft(SNode* x) {
 
 SNode* splay(SNode* node, int value) {
     if (!node || node->value == value) return node;
-    
+
     if (node->value > value) {
         if (!node->l) return node;
-        
+
         if (node->l->value > value) {
             node->l->l = splay(node->l->l, key);
- 
+
             node = rotateRight(node);
         } else if (node->l->value < value) {
             node->l->r = splay(node->l->r, value);
- 
+
             if (node->l->r)
                 node->l = rotateLeft(node->l);
         }
- 
+
         return node->l : rotateRight(node) : node;
     } else {
         if (node->r == NULL) return node;
- 
+
         if (node->r->value > value) {
             node->r->l = splay(node->r->l, value);
- 
+
             if (node->r->l)
                 node->r = rotateRight(node->r);
         } else if (node->r->value < value) {
             node->r->r = splay(node->r->r, value);
             node = rotateLeft(node);
         }
- 
+
         return node->r ? rotateLeft(node) : node;
     }
 }
 
 SNode* insert(int value) {
     if (!root) return new SNode(value);
-    
+
     root = splay(root, value);
-    
+
     if (root->value == value) return root;
-    
+
     SNode* newNode = new SNode(value);
-    
+
     if (root->value > value) {
         newNode->r = root;
         newNode->l = root->l;
@@ -1199,28 +1199,28 @@ SNode* insert(int value) {
         newNode->r = root->r;
         root->r = NULL;
     }
-    
+
     return newNode;
 }
 
 SNode* remove(int value) {
     if (!root) return root;
-    
+
     root = splay(root, value);
-    
+
     if (root->value != value) return root;
-    
+
     SNode* prev = root;
-    
+
     if (!root->l) root = root->r;
     else {
         root = splay(root->l, value);
-        
+
         root->r = prev->r;
     }
-    
+
     delete prev;
-    
+
     return root;
 }
 ```
@@ -1233,7 +1233,7 @@ You can provide comparator functions as per the entry on [http://cppreference.co
 
 A Priority Queue is defined in the C++ STL; there is no need to create one manually.
 
-(So no, you won't be getting a golfed version.)
+\(So no, you won't be getting a golfed version.\)
 
 ```cpp
 #include <queue> // or <bits/stdc++.h>
@@ -1250,7 +1250,6 @@ q.pop();
 
 cout << q.top() << endl; // 6
 q.pop();
-
 ```
 
 ## Binary Heap
@@ -1281,9 +1280,9 @@ pop_heap(vec.begin(), vec.end());
 
 ### Summary
 
-(Also known as a Disjoint Set data structure.) An efficient data structure for storing the connected components of a graph. Could also be considered an algorithm.
+\(Also known as a Disjoint Set data structure.\) An efficient data structure for storing the connected components of a graph. Could also be considered an algorithm.
 
-Has two operations: find and union (hence the name). Each node can be considered to be in a 'group'. 'Find' checks which group a node is in. 'Union' merges two groups, given a node in each of the groups.
+Has two operations: find and union \(hence the name\). Each node can be considered to be in a 'group'. 'Find' checks which group a node is in. 'Union' merges two groups, given a node in each of the groups.
 
 ### Complexity
 
@@ -1291,7 +1290,7 @@ Has two operations: find and union (hence the name). Each node can be considered
 | :---: | :---: | :---: |
 | $$O(1)$$ | $$O(1)$$ | $$O(N)$$ |
 
-(Assuming both path compression and union by rank are implemented.)
+\(Assuming both path compression and union by rank are implemented.\)  
 Technically the functions Find and Union are inverse Ackermann complexity; however, for all practical values, this is less than 5.
 
 ### Code
@@ -1327,11 +1326,11 @@ int find (int x) {
 // because it is a specifier in C++
 void join (int x, int y) {
   x = find(x); y = find(y);
-  
+
   // This is union by rank
   if (nrank[x] > nrank[y]) parent[y] = x;
   else                     parent[x] = y;
-  
+
   if (nrank[x] == nrank[y]) nrank[y]++;
 }
 ```
@@ -1368,3 +1367,4 @@ void join (int x, int y) {
 ### Requirements
 
 Nothing really.
+
