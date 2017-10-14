@@ -93,6 +93,16 @@ ld distToLine(vec2 p, line l) {
     return vec2(p,inter).norm();
 }
 
+// Sign of a double
+// https://stackoverflow.com/a/4609795/3943306
+inline int sign(ld val) {
+    // It may be necessary to ensure
+    // that the value is approximately
+    // equal to 0, because of precision.
+    // i.e. fabs(val) < EPSILON
+    return (0.0 < val) - (val < 0.0);
+}
+
 // Determine which 'side'
 // of a line a point lies on.
 // This is 0 if the point
@@ -103,7 +113,7 @@ ld distToLine(vec2 p, line l) {
 // below the line,
 // and positive if the point is
 // above the line.
-ld side(vec2 p, line l) {
+inline ld side(vec2 p, line l) {
     return cross(vec2(l.p1,l.p2),vec2(l.p1,p));
 }
 
@@ -117,11 +127,42 @@ ld side(vec2 p, line l) {
 // collinear this function
 // will necessarily
 // return true.
-bool differentSide(vec2 p1, vec2 p2, line l) {
+inline bool differentSide(vec2 p1, vec2 p2, line l) {
     return side(p1,l)*side(p2,l) <= 0.0;
 }
 
+inline bool onSegment(vec2 p, line l) {
+    return (p.x <= max(l.p1.x, l.p2.x) && p.x >= min(l.p1.x, l.p2.x) &&
+            p.y <= max(l.p1.y, l.p2.y) && p.y >= min(l.p1.y, l.p2.y));
+}
 
+// returns a true/false
+// value, whether or not
+// the lines intersect.
+// http://www.cdn.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+// if you are guaranteed
+// that no lines are
+// collinear and
+// intersecting, i.e.
+// no two lines intersect
+// at more than one point
+// (or are collinear
+//  and intersect at
+//  an endpoint)
+// then the special tests
+// are unnecessary.
+bool linesIntersect(line l1, line l2) {
+    ld a = sign(side(l1.p1, line(l1.p2, l2.p1))),
+       b = sign(side(l1.p1, line(l1.p2, l2.p2))),
+       c = sign(side(l2.p1, line(l2.p2, l1.p1))),
+       d = sign(side(l2.p1, line(l2.p2, l1.p2)));
+    
+    return ((a != b   && c != d)               ||
+            (a == 0.0 && onSegment(l2.p1, l1)) ||
+            (b == 0.0 && onSegment(l2.p2, l1)) ||
+            (c == 0.0 && onSegment(l1.p1, l2)) ||
+            (d == 0.0 && onSegment(l1.p2, l2)));
+}
 ```
 
 
