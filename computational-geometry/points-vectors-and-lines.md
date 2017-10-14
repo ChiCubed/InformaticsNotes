@@ -171,15 +171,15 @@ vec2 intersection(line l1, line l2) {
     vec2 l1v = vec2(l1.p1, l1.p2);
     vec2 l2v = vec2(l2.p1, l2.p2);
     vec2 lsv = vec2(l1.p1, l2.p1);
-    
+
     ld denom = cross(l2v, l1v);
-    
+
     // if denom is zero,
     // the lines are parallel
-          
+
     ld ua = cross(l2v, lsv) / denom,
        ub = cross(l1v, lsv) / denom;
-    
+
     // We can ensure that the
     // intersection is on the
     // line segments by checking that
@@ -188,8 +188,11 @@ vec2 intersection(line l1, line l2) {
     // This could theoretically be faster
     // than using the linesIntersect
     // function.
-    
-    return l1.p1 + ua * l1v;
+    // Remove this conditional for
+    // infinite line intersection.
+    if (ua >= 0.0 && ua <= 1.0 &&
+        ub >= 0.0 && ub <= 1.0)
+        return l1.p1 + ua * l1v;
 }
 ```
 
