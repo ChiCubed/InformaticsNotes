@@ -156,12 +156,40 @@ bool linesIntersect(line l1, line l2) {
        b = sign(side(l1.p1, line(l1.p2, l2.p2))),
        c = sign(side(l2.p1, line(l2.p2, l1.p1))),
        d = sign(side(l2.p1, line(l2.p2, l1.p2)));
-    
+
     return ((a != b   && c != d)               ||
             (a == 0.0 && onSegment(l2.p1, l1)) ||
             (b == 0.0 && onSegment(l2.p2, l1)) ||
             (c == 0.0 && onSegment(l1.p1, l2)) ||
             (d == 0.0 && onSegment(l1.p2, l2)));
+}
+
+// returns the intersection
+// point of two line segments
+// http://paulbourke.net/geometry/pointlineplane/
+vec2 intersection(line l1, line l2) {
+    vec2 l1v = vec2(l1.p1, l1.p2);
+    vec2 l2v = vec2(l2.p1, l2.p2);
+    vec2 lsv = vec2(l1.p1, l2.p1);
+    
+    ld denom = cross(l2v, l1v);
+    
+    // if denom is zero,
+    // the lines are parallel
+          
+    ld ua = cross(l2v, lsv) / denom,
+       ub = cross(l1v, lsv) / denom;
+    
+    // We can ensure that the
+    // intersection is on the
+    // line segments by checking that
+    // both ua and ub are in range
+    // [0,1].
+    // This could theoretically be faster
+    // than using the linesIntersect
+    // function.
+    
+    return l1.p1 + ua * l1v;
 }
 ```
 
