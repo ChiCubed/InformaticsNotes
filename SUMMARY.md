@@ -23,4 +23,5 @@
 ## Computational Geometry
 
 * [Points, Vectors and Lines](computational-geometry/points-vectors-and-lines.md)
+* [Algorithms](computational-geometry/algorithms.md)
 
