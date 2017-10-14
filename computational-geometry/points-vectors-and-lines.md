@@ -13,10 +13,10 @@ typedef long double ld;
 
 struct vec2 {
     ld x,y;
-    
+
     // Default constructor
     vec2(ld x, ld y): x(x), y(y) {}
-    
+
     // The reason for this constructor
     // is to represent a vector between
     // two points. For instance, the
@@ -26,12 +26,12 @@ struct vec2 {
     // allows that to be represented as
     // vec2(A, B).
     vec2(const vec2& a, const vec2& b): x(b.x-a.x), y(b.y-a.y) {}
-    
+
     vec2 operator+= (const vec2& o) { x+=o.x; y+=o.y; return *this; }
     vec2 operator-= (const vec2& o) { x-=o.x; y-=o.y; return *this; }
     vec2 operator*= (const ld v)    { x*=v;   y*=v;   return *this; }
     vec2 operator/= (const ld v)    { x/=v;   y/=v;   return *this; }
-    
+
     ld norm()    { return sqrt(x*x + y*y); }
     ld normsqr() { return      x*x + y*y;  }
 };
@@ -61,9 +61,9 @@ typedef long double ld;
 
 struct line {
     vec2 p1,p2;
-    
+
     line(vec2 p1, vec2 p2): p1(p1), p2(p2) {}
-    
+
     // These functions do not check
     // that the gradient is not equal
     // to infinity (p1.x = p2.x).
@@ -76,6 +76,8 @@ struct line {
 
 ```cpp
 // http://paulbourke.net/geometry/pointlineplane/
+// Note the solution is quite similar
+// in higher dimensions.
 ld distToLine(vec2 p, line l) {
     // This can be adjusted easily
     // to return the intersection point.
@@ -86,8 +88,40 @@ ld distToLine(vec2 p, line l) {
     // on the line segment, all that
     // you need to do is test that
     // u is in the range [0,1].
-    
-    vec2 interPos = l.p1 + u*vec2(l.p1,l.p2);
+
+    vec2 inter = l.p1 + u*vec2(l.p1,l.p2);
+    return vec2(p,inter).norm();
+}
+
+// Determine which 'side'
+// of a line a point lies on.
+// This is 0 if the point
+// lies on an extension of the
+// line segment i.e. all three
+// points are collinear,
+// negative if the point is
+// below the line,
+// and positive if the point is
+// above the line.
+ld side(vec2 p, line l) {
+    return cross(vec2(l.p1,l.p2),vec2(l.p1,p));
+}
+
+// Checks that two points
+// are on different sides
+// of a line. A point
+// collinear to a line is
+// considered to be
+// on neither side, i.e.
+// if one of the points is
+// collinear this function
+// will necessarily
+// return true.
+bool differentSide(vec2 p1, vec2 p2, line l) {
+    return side(p1,l)*side(p2,l) <= 0.0;
+}
+
+
 ```
 
 
