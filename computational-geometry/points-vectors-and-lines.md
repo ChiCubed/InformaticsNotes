@@ -194,6 +194,20 @@ vec2 intersection(line l1, line l2) {
         ub >= 0.0 && ub <= 1.0)
         return l1.p1 + ua * l1v;
 }
+
+// check box intersection.
+// boxes are defined by two vectors:
+// c and s. c is the center and
+// s is the width and height.
+// boxes are thus represented
+// as lines.
+// https://gamedev.stackexchange.com/a/587/50587
+inline bool boxIntersection(line a, line b) {
+    // Change < to <= if edge touching
+    // is allowed.
+    return (fabs(a.p1.x-b.p1.x)*2 < (a.p2.x+b.p2.x) &&
+            fabs(a.p1.y-b.p1.y)*2 < (a.p1.y+b.p1.y));
+}
 ```
 
 
