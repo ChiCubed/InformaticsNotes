@@ -482,7 +482,7 @@ The naïve method of computing the LCA of two nodes involves determining every a
 
 ### Reduction to RMQ
 
-The Lowest Common Ancestor problem can be reduced to Range Minimum Query using the following method \(sourced from [https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/\#Another%20easy%20solution%20in%20O\(N%20logN,%20O\(logN\)](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/#Another%20easy%20solution%20in%20O%28N%20logN,%20O%28logN%29)\).
+The Lowest Common Ancestor problem can be reduced to Range Minimum Query using the following method \(sourced from [https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/\#Another%20easy%20solution%20in%20O\(N%20logN,%20O\(logN\)](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/#Another easy solution in O%28N logN, O%28logN%29)\).
 
 Construct three arrays, `E`, `L` and `H`. `E` contains the nodes visited in an 'Euler Tour' of the tree, in order, and `E[i]` contains the index of the `i`th node visited in the tour. To construct this array, we start from the root node, and perform a DFS. Every vertex is added every time we visit it: that is, it is added to the array `E` when we descend from its parent, and when we return from it back to its parent. The array `E` will always have size $$2V - 1$$.
 
@@ -615,6 +615,130 @@ void calculateTopoSort(int n) {
     DFS(i);
   }
   reverse(topoSort.begin(), topoSort.end());
+}
+```
+
+## Cycle Compression
+
+This involves compressing cycles in an undirected graph into single nodes, so that the resulting graph is a tree \(or a forest, if the original graph was disconnected\).
+
+The definition of 'cycle' here is a maximal subgraph of an undirected graph that does not contain any bridge edges. A bridge edge is an edge that, if it is removed, increases the number of connected components of a graph by one. Thus, the compressed graph's edges all correspond to bridge edges in the original graph.
+
+Information may be stored for each node in the compressed graph: for instance, how many nodes in the original graph are represented by the compressed node \(which is what is given in this case\) or which nodes are corresponded to. The code given here implements the first of these.
+
+This algorithm is $$O(V + E)$$.
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Disjoint set
+const int MAX_NODES = 100000;
+
+int parent[MAX_NODES+1];
+int  nrank[MAX_NODES+1];
+
+void create(int n) {
+  for(int i=0;i<=n;++i)parent[i]=i;
+}
+
+int find(int x) {
+  return parent[x]=parent[x]^x?find(parent[x]):x;
+}
+
+void join(int x, int y) {
+  x=find(x);y=find(y);
+  nrank[x]>nrank[y]?parent[y]=x:parent[x]=y;
+  nrank[y]+=nrank[x]==nrank[y];
+}
+
+// color is 0 for unvisited nodes,
+// 1 for nodes currently being visited,
+// 2 for nodes which have already been fully visited.
+int color[MAX_NODES];
+
+// parent of a node in the DFS.
+// This should be initialised to
+// UNINITIALISED.
+const int UNINITIALISED = -1;
+int dfs_parent[MAX_NODES];
+
+// whether or not this node has
+// been merged. if this is true,
+// we don't have to worry about
+bool merged[MAX_NODES];
+
+// represents the number of nodes
+// in the original graph that this
+// node represents. if this is 0, the
+// node doesn't actually exist.
+int numNodes[MAX_NODES];
+
+// Adjacency list for the graph
+vector<int> graph[MAX_NODES];
+
+void DFS(int c) {
+  if (color[c] == 1) {
+    // There is a cycle.
+    // We keep going up through
+    // our parents until we hit
+    // one that is either merged,
+    // or this one. We merge
+    // with each of these.
+    merged[c] = true;
+    
+    int nxt = dfs_parent[c];
+    while (!merged[nxt] && nxt != c) {
+      join(nxt, c);
+      merged[nxt] = true;
+      nxt = dfs_parent[c];
+    }
+    join(nxt, c); // just in case
+    merged[nxt] = true;
+    
+    return;
+  }
+  
+  color[c] = 1;
+  
+  for (int nxt : graph[c]) {
+    if (dfs_parent[nxt] == UNINITIALISED) {
+      dfs_parent[nxt] = c;
+    }
+    
+    DFS(nxt);
+  }
+  
+  // We've finished visiting.
+  color[c] = 2;
+}
+
+// call create(n) before DFS,
+// and initialise dfs_parent to UNINITIALISED.
+
+// ... call DFS ...
+
+for (int i = 0; i < n; ++i) {
+  // modify this node's outgoing edges
+  // to point to the representative nodes
+  for (int j = 0; j < graph[i].size(); ++j) {
+    graph[i][j] = find(graph[i][j]);
+  }
+  
+  int newPos = find(i);
+  numNodes[newPos]++;
+  if (newPos ^ i) {
+    // move this node's edges
+    // to the new, 'representative'
+    // node
+    for (int nxt : graph[i]) {
+      if (nxt != newPos) {
+        graph[newPos].push_back(nxt);
+      }
+    }
+    graph[i].clear();
+  }
 }
 ```
 
