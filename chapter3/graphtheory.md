@@ -1,18 +1,23 @@
 # Graph Theory
+
 ## Representing a graph
+
 ### Adjacency matrix
-Stores the distance between any two vertices, i.e.:
+
+Stores the distance between any two vertices, i.e.:  
 `graph[i][j]` is the distance between vertices `i` and `j`. If there is no edge between two vertices a value representing inifinity can be used, and there is obviously $$0$$ distance from a vertex to itself.
 
 $$O(V^2)$$ space.
 
 ### Adjacency list
-Stores the distance from every vertex to every vertex it has an edge to, i.e.
+
+Stores the distance from every vertex to every vertex it has an edge to, i.e.  
 `graph[i][j]` represents the `j`th outgoing edge from vertex `i`.
 
 $$O(EV)$$ space. Typically much less; normally one would use a list of vectors to represent the outgoing edges, to account for sparse and dense graphs alike.
 
 ### Conversion
+
 ```cpp
 #include <bits/stdc++.h>
 
@@ -51,14 +56,14 @@ adjlist_t matrixToList(adjmat_t matrix) {
       }
     }
   }
-  
+
   return list;
 }
 
 // nodes represents the number of nodes in the graph
 adjmat_t listToMatrix(adjlist_t list, int nodes) {
   adjmat_t matrix;
-  
+
   // build the adjacency matrix
   for (int i=0; i<nodes; ++i) {
     matrix.push_back({});
@@ -66,22 +71,22 @@ adjmat_t listToMatrix(adjlist_t list, int nodes) {
       matrix[i].push_back(INF);
     }
   }
-  
+
   for (int i=0; i<nodes; ++i) {
     matrix[i][i]=0;
     for (auto j : list[i]) {
       // sanity check
       if (j.second >= nodes) continue;
-      
+
       matrix[i][j.second] = j.first;
     }
   }
-  
+
   return matrix;
 }
 ```
 
-### Conversion (golfed)
+### Conversion \(golfed\)
 
 ```cpp
 #include <bits/stdc++.h>
@@ -114,7 +119,7 @@ adjmat_t listToMatrix(adjlist_t l, int n) {
     m.pb({});
     for(int j=0;j<n;++j)m[i].pb(INF);
   }
-  
+
   for(int i=0;i<n;++i){
     m[i][i]=0;
     for(pi j:l[i]){
@@ -122,26 +127,30 @@ adjmat_t listToMatrix(adjlist_t l, int n) {
       m[i][j.second]=j.first;
     }
   }
-  
+
   return m;
 }
 ```
 
-
 ## Tree
+
 An undirected graph in which any two vertices are connected by exactly one path.
 
-A graph $$G$$ with $$n$$ vertices is a tree if: (Technically these are equivalent statements)
+A graph $$G$$ with $$n$$ vertices is a tree if: \(Technically these are equivalent statements\)
 
-- $$G$$ is connected (i.e. no vertices have no edges) and $$G$$ is not connected if any edge is removed
-- $$G$$ has no cycles, and a cycle is formed if any edge is added
-- $$G$$ is connected and has $$n-1$$ edges
-- $$G$$ has no cycles and has $$n-1$$ edges
+* $$G$$ is connected \(i.e. no vertices have no edges\) and $$G$$ is not connected if any edge is removed
+* $$G$$ has no cycles, and a cycle is formed if any edge is added
+* $$G$$ is connected and has $$n-1$$ edges
+* $$G$$ has no cycles and has $$n-1$$ edges
 
 ## Minimum Spanning Tree
-The minimum spanning tree of a graph is defined to be the tree with the smallest weight that connects every node in the graph. (It may not be unique.)
 
-- Every MST has $$n-1$$ edges, where there are $$n$$ edges in the graph
-- If every edge has a different weight the MST is unique
-- The longest edge in any cycle cannot belong to an MST
-- If the shortest edge in a graph is unique, that edge is in every MST of the graph
+The minimum spanning tree of a graph is defined to be the tree with the smallest weight that connects every node in the graph. \(It may not be unique.\)
+
+* Every MST has $$n-1$$ edges, where there are $$n$$ edges in the graph
+* If every edge has a different weight the MST is unique
+* The longest edge in any cycle cannot belong to an MST
+* If the shortest edge in a graph is unique, that edge is in every MST of the graph
+
+
+

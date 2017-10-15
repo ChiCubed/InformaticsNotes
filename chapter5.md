@@ -474,7 +474,25 @@ If we need to query ranges and update a range with operations such as 'set every
 
 This solution works with any pair of distributive semigroups. Since multiplication distributes over addition, the above solution works. Another example is that addition distributes over $$min$$, so the solution would work if we stored an amount to be added on each node and our queries were of the minimum element in a range.
 
-## Knapsack
+## Lowest Common Ancestor
+
+The Lowest Common Ancestor of two nodes in a tree is the lowest node on a tree which is an ancestor of both of them.
+
+The naïve method of computing the LCA of two nodes involves determining every ancestor of each of the node and selecting the lowest one which is common to both of them.
+
+### Reduction to RMQ
+
+The Lowest Common Ancestor problem can be reduced to Range Minimum Query using the following method \(sourced from [https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/\#Another%20easy%20solution%20in%20O\(N%20logN,%20O\(logN\)](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/#Another%20easy%20solution%20in%20O%28N%20logN,%20O%28logN%29)\).
+
+Construct three arrays, `E`, `L` and `H`. `E` contains the nodes visited in an 'Euler Tour' of the tree, in order, and `E[i]` contains the index of the `i`th node visited in the tour. To construct this array, we start from the root node, and perform a DFS. Every vertex is added every time we visit it: that is, it is added to the array `E` when we descend from its parent, and when we return from it back to its parent. The array `E` will always have size $$2V - 1$$.
+
+`L` contains the levels of the nodes visited in the Euler tour. The level, or height, is defined as the shortest distance to the root, so the root node will have height 0 \(or 1, depending on how you wish to define it\); the root's children will have height 1; and so on.
+
+`H` is an array containing the index of any occurrence of each node in the array `E`. The actual occurrence is irrelevant so usually the first is used. In other words, `H[i]` contains the index of the first occurrence of node `i` in the array `E`.
+
+To perform a query for nodes `u` and `v`, we first assume that `H[u]` is less than `H[v]`. If this is not true, it is trivial to swap `u` and `v`. Now, we find the index of the smallest level of nodes between `u` and `v`. In other words, we find the index of the minimum value in range \[`u`, `v`\] in the array `L`, using RMQ. Call this index `i`. The solution is then equal to `E[i]`.
+
+# Knapsack
 
 ### Summary
 
@@ -599,3 +617,6 @@ void calculateTopoSort(int n) {
   reverse(topoSort.begin(), topoSort.end());
 }
 ```
+
+
+
