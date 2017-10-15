@@ -687,7 +687,7 @@ void DFS(int c) {
     // or this one. We merge
     // with each of these.
     merged[c] = true;
-    
+
     int nxt = dfs_parent[c];
     while (!merged[nxt] && nxt != c) {
       join(nxt, c);
@@ -696,20 +696,20 @@ void DFS(int c) {
     }
     join(nxt, c); // just in case
     merged[nxt] = true;
-    
+
     return;
   }
-  
+
   color[c] = 1;
-  
+
   for (int nxt : graph[c]) {
     if (dfs_parent[nxt] == UNINITIALISED) {
       dfs_parent[nxt] = c;
     }
-    
+
     DFS(nxt);
   }
-  
+
   // We've finished visiting.
   color[c] = 2;
 }
@@ -725,7 +725,7 @@ for (int i = 0; i < n; ++i) {
   for (int j = 0; j < graph[i].size(); ++j) {
     graph[i][j] = find(graph[i][j]);
   }
-  
+
   int newPos = find(i);
   numNodes[newPos]++;
   if (newPos ^ i) {
