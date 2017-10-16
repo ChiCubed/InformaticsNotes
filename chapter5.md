@@ -786,21 +786,22 @@ This search function has the same function as Ternary Search, and operates on th
 
 ```cpp
 // (sqrt(5) + 1) / 2
+// Note that 1 / golden ratio = golden ratio - 1.
 // long double goldenRatio = 1.618033988749894848;
 float goldenRatio = 1.61803399f;
 
 float goldenSectionSearch(float a, float b, float epsilon) {
     float c = b - (b - a) / goldenRatio;
     float d = a + (b - a) / goldenRatio;
-    
+
     while (fabs(c-d) > epsilon) {
         if (func(c) < func(d)) b = d;
         else a = c;
-        
+
         c = b - (b - a) / goldenRatio;
         d = a + (b - a) / goldenRatio;
     }
-    
+
     return (b + a) / 2.0f;
 }
 ```
