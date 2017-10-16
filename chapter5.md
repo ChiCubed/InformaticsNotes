@@ -746,6 +746,8 @@ for (int i = 0; i < n; ++i) {
 
 Ternary Search is a searching method, similar to Binary Search, that operates on a function that strictly increases, and then strictly decreases. The code shown below is most useful in the case that one wants to maximise / minimise the value of a continuous function.
 
+\(Obviously `float` should be changed to `double` or `long double`  as necessary.\)
+
 ```cpp
 float ternarySearch(float a, float b, float epsilon) {
     while (b-a > epsilon) {
@@ -776,6 +778,16 @@ float ternarySearch(float a, float b, float epsilon) {
     }
     return a;
 }
+```
+
+## Golden-Section Search
+
+This search function has the same function as Ternary Search, and operates on the same type of function, but requires fewer evaluations of the function in question.
+
+```cpp
+// (sqrt(5) + 1) / 2
+// long double goldenRatio = 1.618033988749894848
+float goldenRatio = 1.61803399f;
 ```
 
 
