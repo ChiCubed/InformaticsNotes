@@ -62,7 +62,7 @@ int comp(const vec2& a, const vec2& b) {
     return s;
 }
 
-vector<vec2> stack;
+vector<vec2> S;
 
 // http://www.geeksforgeeks.org/convex-hull-set-2-graham-scan/
 void convexHull(vector<vec2>& points) {
@@ -104,18 +104,18 @@ void convexHull(vector<vec2>& points) {
         return;
     }
 
-    stack.push_back(points[0]);
-    stack.push_back(points[1]);
-    stack.push_back(points[2]);
+    S.push_back(points[0]);
+    S.push_back(points[1]);
+    S.push_back(points[2]);
 
     for (int i = 3; i < m; ++i) {
-        while (sign(side(secondFromTop(stack),
-                         line(stack.back(), points[i]))) >= 0)
-            stack.pop_back();
-        stack.push_back(points[i]);
+        while (sign(side(secondFromTop(S),
+                         line(S.back(), points[i]))) >= 0)
+            S.pop_back();
+        S.push_back(points[i]);
     }
 
-    // stack is now populated
+    // S is now populated
     // with the convex hull.
 }
 ```
