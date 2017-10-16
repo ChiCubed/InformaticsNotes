@@ -756,7 +756,7 @@ float ternarySearch(float a, float b, float epsilon) {
         else
             b = m2;
     }
-    
+
     return b;
 }
 ```
