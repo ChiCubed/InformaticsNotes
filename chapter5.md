@@ -782,12 +782,27 @@ float ternarySearch(float a, float b, float epsilon) {
 
 ## Golden-Section Search
 
-This search function has the same function as Ternary Search, and operates on the same type of function, but requires fewer evaluations of the function in question.
+This search function has the same function as Ternary Search, and operates on the same type of function, but requires fewer evaluations of the function in question. This requires the function to cache its results.
 
 ```cpp
 // (sqrt(5) + 1) / 2
-// long double goldenRatio = 1.618033988749894848
+// long double goldenRatio = 1.618033988749894848;
 float goldenRatio = 1.61803399f;
+
+float goldenSectionSearch(float a, float b, float epsilon) {
+    float c = b - (b - a) / goldenRatio;
+    float d = a + (b - a) / goldenRatio;
+    
+    while (fabs(c-d) > epsilon) {
+        if (func(c) < func(d)) b = d;
+        else a = c;
+        
+        c = b - (b - a) / goldenRatio;
+        d = a + (b - a) / goldenRatio;
+    }
+    
+    return (b + a) / 2.0f;
+}
 ```
 
 
