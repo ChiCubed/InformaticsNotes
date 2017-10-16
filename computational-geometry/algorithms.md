@@ -52,12 +52,11 @@ inline ld side(vec2 p, line l) {
 
 // Function to compare two points, used
 // by the sorting function.
-int comp(const vec2& a, const vec2& b) {
-    int s = sign(side(rootPoint, line(a, b)));
+bool cmp(const vec2& a, const vec2& b) {
+    int s = sign(side(rootPoint, a, b));
     if (s == 0) {
-        return vec2(rootPoint, b).normsqr() >=
-               vec2(rootPoint, a).normsqr()
-             ? -1 : 1;
+        return normsqr(vec2(rootPoint.x-b.x, rootPoint.y-b.y)) <
+               normsqr(vec2(rootPoint.x-a.x, rootPoint.y-a.y));
     }
     return s;
 }
