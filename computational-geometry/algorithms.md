@@ -90,7 +90,7 @@ void convexHull(vector<vec2>& points) {
     // We'll now remove all
     // the points that are at the same
     // angle but further than other points.
-    int m = 1;
+    m = 1;
     for (int i = 1; i < points.size(); ++i) {
         while (i < points.size()-1 &&
                sign(side(rootPoint, line(points[i], points[i+1]))) == 0)
