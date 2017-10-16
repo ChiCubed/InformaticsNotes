@@ -742,5 +742,41 @@ for (int i = 0; i < n; ++i) {
 }
 ```
 
+## Ternary Search
+
+Ternary Search is a searching method, similar to Binary Search, that operates on a function that strictly increases, and then strictly decreases. The code shown below is most useful in the case that one wants to maximise / minimise the value of a continuous function.
+
+```cpp
+float ternarySearch(float a, float b, float epsilon) {
+    while (b-a > epsilon) {
+        float m1 = (2*a + b) / 3.0f;
+        float m2 = (a + 2*b) / 3.0f;
+        if func(m1) < func(m2)
+            a = m1;
+        else
+            b = m2;
+    }
+    
+    return b;
+}
+```
+
+Because of the type of function that ternary search operates on, we can note that the derivative is either non-strictly increasing or decreasing. Thus, if it is cheaper to calculate derivatives, or if you are using integral data, the below snippet is more useful.
+
+```cpp
+float ternarySearch(float a, float b, float epsilon) {
+    while (a < b) {
+        int mid = (a + b) / 2.0f;
+        // Alternatively, if func's derivative
+        // is negative at mid
+        if (func(mid) > func(mid+1))
+            b = mid;
+        else
+            a = mid+1;
+    }
+    return a;
+}
+```
+
 
 
