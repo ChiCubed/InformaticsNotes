@@ -95,7 +95,7 @@ void convexHull(vector<vec2>& points) {
     int m = 1;
     for (int i = 1; i < points.size(); ++i) {
         while (i < points.size()-1 &&
-               sign(side(rootPoint, points[i], points[i+1])) == 0)
+               sign(side(rootPoint, line(points[i], points[i+1]))) == 0)
            ++i;
 
         points[m++] = points[i];
@@ -112,7 +112,7 @@ void convexHull(vector<vec2>& points) {
 
     for (int i = 3; i < m; ++i) {
         while (sign(side(secondFromTop(stack),
-                         stack.back(), points[i])) >= 0)
+                         line(stack.back(), points[i]))) >= 0)
             stack.pop_back();
         stack.push_back(points[i]);
     }
