@@ -25,9 +25,17 @@ struct vec2 {
     ld x,y;
     vec2(ld x, ld y): x(x), y(y) {}
     vec2(const vec2& a, const vec2& b): x(b.x-a.x), y(b.y-a.y) {}
-    
+
     ld normsqr() { return x*x + y*y; }
 } rootPoint; // rootPoint is a point needed as a reference for sorting
+
+typedef long double ld;
+
+struct line {
+    vec2 p1,p2;
+
+    line(vec2 p1, vec2 p2): p1(p1), p2(p2) {}
+};
 
 inline ld cross(const vec2& l, const vec2& o) { return l.x*o.y - o.x*l.y; }
 
@@ -72,15 +80,15 @@ void convexHull(vector<vec2>& points) {
             m = i;
         }
     }
-    
+
     // We now ensure the lowest point is
     // at the start, so it doesn't get sorted.
     swap(points[0], points[m]);
-    
+
     // Sorting
     rootPoint = points[0];
     sort(points.begin()+1, points.end(), comp);
-    
+
     // We'll now remove all
     // the points that are at the same
     // angle but further than other points.
@@ -89,26 +97,26 @@ void convexHull(vector<vec2>& points) {
         while (i < points.size()-1 &&
                sign(side(rootPoint, points[i], points[i+1])) == 0)
            ++i;
-       
+
         points[m++] = points[i];
     }
-    
+
     if (m < 3) {
         // Not enough points for convex hull
         return;
     }
-    
+
     stack.push_back(points[0]);
     stack.push_back(points[1]);
     stack.push_back(points[2]);
-    
+
     for (int i = 3; i < m; ++i) {
         while (sign(side(secondFromTop(stack),
                          stack.back(), points[i])) >= 0)
             stack.pop_back();
         stack.push_back(points[i]);
     }
-    
+
     // stack is now populated
     // with the convex hull.
 }
