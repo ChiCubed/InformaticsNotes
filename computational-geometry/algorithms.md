@@ -29,8 +29,6 @@ struct vec2 {
     ld normsqr() { return x*x + y*y; }
 } rootPoint; // rootPoint is a point needed as a reference for sorting
 
-typedef long double ld;
-
 struct line {
     vec2 p1,p2;
 
