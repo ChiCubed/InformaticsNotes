@@ -31,6 +31,12 @@ struct vec2 {
 
 inline ld cross(const vec2& l, const vec2& o) { return l.x*o.y - o.x*l.y; }
 
+struct line {
+    vec2 p1,p2;
+
+    line(vec2 p1, vec2 p2): p1(p1), p2(p2) {}
+};
+
 inline vec2 secondFromTop(const vector<vec2>& v) {
     // assumes that the vector has size >= 2.
     return *(v.rbegin()+1);
