@@ -751,7 +751,9 @@ int flowPassed[MAX_NODES][MAX_NODES];
 // This must contain a reverse edge
 // for every directed edge.
 // The capacity is only set for the
-// forwards edge though.
+// forwards edge though, i.e.
+// the reverse edge has zero
+// capacity.
 vector<int> graph[MAX_NODES];
 int parentsList[MAX_NODES];
 int currentPathCapacity[MAX_NODES];
@@ -761,13 +763,13 @@ int bfs(int startNode, int endNode) {
         parentsList[i] = UNINIT;
         currentPathCapacity[i] = 0;
     }
-    
+
     queue<int> q;
     q.push(startNode);
-    
+
     parentsList[startNode] = -2;
     currentPathCapacity[startNode] = INF;
-    
+
     while (q.size()) {
         int curr= q.front(); q.pop();
         for (int to : graph[curr]) {
@@ -775,46 +777,62 @@ int bfs(int startNode, int endNode) {
                 if (capacities[curr][to] -
                     flowPassed[curr][to] > 0) {
                     parentsList[to] = curr;
-                    
+
                     currentPathCapacity[to] = min(
                         currentPathCapacity[curr],
                         capacities[curr][to] -
                         flowPassed[curr][to]
                     );
-                    
+
                     if (to == endNode)
                         return currentPathCapacity[to];
-                    
+
                     q.push(to);
                 }
             }
         }
     }
-    
+
     return 0;
 }
 
 int edmondsKarp(int startNode, int endNode) {
     int maxFlow = 0;
-    
+
     while (1) {
         int flow = bfs(startNode, endNode);
-        
+
         if (!flow) break;
-        
+
         maxFlow += flow;
         int curr = endNode;
-        
+
         while (curr != startNode) {
             int prev = parentsList[curr];
             flowPassed[prev][curr] += flow;
             flowPassed[curr][prev] -= flow;
-            
+
             curr = prev;
         }
     }
-    
+
     return maxFlow;
+}
+
+void addEdge(int u, int v, int C) {
+    // An example of how to add an edge.
+    graph[u].push_back(v);
+    graph[v].push_back(u);
+    
+    // If there can be multiple
+    // edges between two nodes,
+    // you will have to make sure that
+    // the capacity is not overwritten.
+    // If capacities is initialised to zero,
+    // this could be achieved by replacing
+    // = with +=.
+    capacities[u][v] = C;
+    capacities[v][u] = 0;
 }
 ```
 
