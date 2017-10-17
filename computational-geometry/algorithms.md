@@ -55,8 +55,8 @@ inline ld side(vec2 p, line l) {
 bool cmp(const vec2& a, const vec2& b) {
     int s = sign(side(rootPoint, a, b));
     if (s == 0) {
-        return normsqr(vec2(rootPoint.x-b.x, rootPoint.y-b.y)) <
-               normsqr(vec2(rootPoint.x-a.x, rootPoint.y-a.y));
+        return normsqr(vec2(b, rootPoint)) <
+               normsqr(vec2(a, rootPoint));
     }
     return s<0;
 }
