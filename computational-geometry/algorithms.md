@@ -53,7 +53,7 @@ inline ld side(vec2 p, line l) {
 // Function to compare two points, used
 // by the sorting function.
 bool cmp(const vec2& a, const vec2& b) {
-    int s = sign(side(rootPoint, a, b));
+    int s = sign(side(rootPoint, line(a, b)));
     if (s == 0) {
         return normsqr(vec2(b, rootPoint)) <
                normsqr(vec2(a, rootPoint));
