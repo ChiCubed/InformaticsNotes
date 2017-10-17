@@ -618,13 +618,11 @@ void calculateTopoSort(int n) {
 }
 ```
 
-## Cycle Compression
+## Bridge Finding
 
-This involves compressing cycles in an undirected graph into single nodes, so that the resulting graph is a tree \(or a forest, if the original graph was disconnected\).
+This algorithm finds bridges in an undirected graph. A bridge is an edge that, when removed, increases the number of connected components in a graph by one; in other words, it is not part of any cycle.
 
-The definition of 'cycle' here is a maximal subgraph of an undirected graph that does not contain any bridge edges. A bridge edge is an edge that, if it is removed, increases the number of connected components of a graph by one. Thus, the compressed graph's edges all correspond to bridge edges in the original graph.
-
-Information may be stored for each node in the compressed graph: for instance, how many nodes in the original graph are represented by the compressed node \(which is what is given in this case\) or which nodes are corresponded to. The code given here implements the first of these.
+We can compress cycles in a graph by finding all the bridges, removing them, and then compressing every connected component in the remaining graph into a single node.
 
 This algorithm is $$O(V + E)$$.
 
@@ -633,112 +631,33 @@ This algorithm is $$O(V + E)$$.
 
 using namespace std;
 
-// Disjoint set
-const int MAX_NODES = 100000;
-
-int parent[MAX_NODES+1];
-int  nrank[MAX_NODES+1];
-
-void create(int n) {
-  for(int i=0;i<=n;++i)parent[i]=i;
-}
-
-int find(int x) {
-  return parent[x]=parent[x]^x?find(parent[x]):x;
-}
-
-void join(int x, int y) {
-  x=find(x);y=find(y);
-  nrank[x]>nrank[y]?parent[y]=x:parent[x]=y;
-  nrank[y]+=nrank[x]==nrank[y];
-}
-
-// color is 0 for unvisited nodes,
-// 1 for nodes currently being visited,
-// 2 for nodes which have already been fully visited.
-int color[MAX_NODES];
-
-// parent of a node in the DFS.
-// This should be initialised to
-// UNINITIALISED.
-const int UNINITIALISED = -1;
-int dfs_parent[MAX_NODES];
-
-// whether or not this node has
-// been merged. if this is true,
-// we don't have to worry about
-bool merged[MAX_NODES];
-
-// represents the number of nodes
-// in the original graph that this
-// node represents. if this is 0, the
-// node doesn't actually exist.
-int numNodes[MAX_NODES];
-
-// Adjacency list for the graph
+// https://e-maxx-eng.appspot.com/graph/bridge-searching.html
 vector<int> graph[MAX_NODES];
+bool used[MAX_NODES];
+int count, tin[MAX_NODES], fup[MAX_NODES];
 
-void DFS(int c) {
-  if (color[c] == 1) {
-    // There is a cycle.
-    // We keep going up through
-    // our parents until we hit
-    // one that is either merged,
-    // or this one. We merge
-    // with each of these.
-    merged[c] = true;
-
-    int nxt = dfs_parent[c];
-    while (!merged[nxt] && nxt != c) {
-      join(nxt, c);
-      merged[nxt] = true;
-      nxt = dfs_parent[c];
+void dfs(int v, int p = -1) {
+    used[v]++;
+    tin[v] = fup[v] = count++;
+    for (int to : graph[v]) {
+        if (to == p) continue;
+        if (used[to]) {
+            fup[v] = min(fup[v], tin[to]);
+        } else {
+            dfs(to, v);
+            fup[v] = min(fup[v], fup[to]);
+            if (fup[to] > tin[v]) {
+                // edge v - to
+                // is a bridge
+            }
+        }
     }
-    join(nxt, c); // just in case
-    merged[nxt] = true;
-
-    return;
-  }
-
-  color[c] = 1;
-
-  for (int nxt : graph[c]) {
-    if (dfs_parent[nxt] == UNINITIALISED) {
-      dfs_parent[nxt] = c;
-    }
-
-    DFS(nxt);
-  }
-
-  // We've finished visiting.
-  color[c] = 2;
 }
 
-// call create(n) before DFS,
-// and initialise dfs_parent to UNINITIALISED.
-
-// ... call DFS ...
-
-for (int i = 0; i < n; ++i) {
-  // modify this node's outgoing edges
-  // to point to the representative nodes
-  for (int j = 0; j < graph[i].size(); ++j) {
-    graph[i][j] = find(graph[i][j]);
-  }
-
-  int newPos = find(i);
-  numNodes[newPos]++;
-  if (newPos ^ i) {
-    // move this node's edges
-    // to the new, 'representative'
-    // node
-    for (int nxt : graph[i]) {
-      if (nxt != newPos) {
-        graph[newPos].push_back(nxt);
-      }
-    }
-    graph[i].clear();
-  }
+void find_bridges() {
+    count = 0
+    for (int i = 0; i < n; ++i) used[i] = false;
+    for (int i = 0; i < n; ++i) if (!used[i]) dfs(i);
 }
 ```
 
