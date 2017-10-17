@@ -725,5 +725,98 @@ float goldenSectionSearch(float a, float b, float epsilon) {
 }
 ```
 
+## Max Flow
+
+Maximum flow involves determining the maximum flow between two nodes in a weighted directed graph. To visualise this, we can imagine the flow of water from the 'source' \(start node\) to the 'sink' \(end node\), through each of the edges in the graph. The weight of each edge is the maximum amount of water that can pass through that edge, though of course not every edge must be full to its capacity.
+
+The max-flow min-cut theorem states that, in a flow network, the max flow is equal to the total weight of the minimum number of edges that must be removed to disconnect the source from the sink.
+
+### Edmonds-Karp
+
+$$O(VE^2)$$.
+
+Sourced from [http://backtrack-it.blogspot.com.au/2013/03/max-flow-algorithm-with-sample-c-code.html](http://backtrack-it.blogspot.com.au/2013/03/max-flow-algorithm-with-sample-c-code.html)
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int INF = 2147483646;
+// node with no parent
+const int UNINIT = -1;
+
+int capacities[MAX_NODES][MAX_NODES];
+int flowPassed[MAX_NODES][MAX_NODES];
+// This must contain a reverse edge
+// for every directed edge.
+// The capacity is only set for the
+// forwards edge though.
+vector<int> graph[MAX_NODES];
+int parentsList[MAX_NODES];
+int currentPathCapacity[MAX_NODES];
+
+int bfs(int startNode, int endNode) {
+    for(int i = 0; i < n; ++i) {
+        parentsList[i] = UNINIT;
+        currentPathCapacity[i] = 0;
+    }
+    
+    queue<int> q;
+    q.push(startNode);
+    
+    parentsList[startNode] = -2;
+    currentPathCapacity[startNode] = INF;
+    
+    while (q.size()) {
+        int curr= q.front(); q.pop();
+        for (int to : graph[curr]) {
+            if (parentsList[to] == UNINIT) {
+                if (capacities[curr][to] -
+                    flowPassed[curr][to] > 0) {
+                    parentsList[to] = curr;
+                    
+                    currentPathCapacity[to] = min(
+                        currentPathCapacity[curr],
+                        capacities[curr][to] -
+                        flowPassed[curr][to]
+                    );
+                    
+                    if (to == endNode)
+                        return currentPathCapacity[to];
+                    
+                    q.push(to);
+                }
+            }
+        }
+    }
+    
+    return 0;
+}
+
+int edmondsKarp(int startNode, int endNode) {
+    int maxFlow = 0;
+    
+    while (1) {
+        int flow = bfs(startNode, endNode);
+        
+        if (!flow) break;
+        
+        maxFlow += flow;
+        int curr = endNode;
+        
+        while (curr != startNode) {
+            int prev = parentsList[curr];
+            flowPassed[prev][curr] += flow;
+            flowPassed[curr][prev] -= flow;
+            
+            curr = prev;
+        }
+    }
+    
+    return maxFlow;
+}
+```
+
 
 
