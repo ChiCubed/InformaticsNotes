@@ -819,20 +819,15 @@ int edmondsKarp(int startNode, int endNode) {
     return maxFlow;
 }
 
+// initialise capacities to 0
+
 void addEdge(int u, int v, int C) {
     // An example of how to add an edge.
     graph[u].push_back(v);
     graph[v].push_back(u);
-    
-    // If there can be multiple
-    // edges between two nodes,
-    // you will have to make sure that
-    // the capacity is not overwritten.
-    // If capacities is initialised to zero,
-    // this could be achieved by replacing
-    // = with +=.
-    capacities[u][v] = C;
-    capacities[v][u] = 0;
+
+    capacities[u][v] += C;
+    capacities[v][u] += 0;
 }
 ```
 
