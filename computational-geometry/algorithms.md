@@ -58,7 +58,7 @@ bool cmp(const vec2& a, const vec2& b) {
         return normsqr(vec2(rootPoint.x-b.x, rootPoint.y-b.y)) <
                normsqr(vec2(rootPoint.x-a.x, rootPoint.y-a.y));
     }
-    return s;
+    return s<0;
 }
 
 vector<vec2> S;
