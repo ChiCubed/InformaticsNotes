@@ -443,6 +443,7 @@ function addline takes integers m, c as input:
   C[length] = c
   length++
 
+- Change <= to >= to find the upper envelope instead.
 function minValue takes integer x as input:
   - Given ascending values of x
   pointer = min(pointer, length-1)
