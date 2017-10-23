@@ -50,6 +50,8 @@ inline ld dot(const vec2& l, const vec2& o) { return l.x*o.y + o.x*l.y; }
 // among other things, line
 // segment intersections.
 inline ld cross(const vec2& l, const vec2& o) { return l.x*o.y - o.x*l.y; }
+
+inline vec2 normalize (vec2 a) { l/=norm(l); return l; }
 ```
 
 ## Lines
@@ -91,6 +93,11 @@ ld distToLine(vec2 p, line l) {
 
     vec2 inter = l.p1 + u*vec2(l.p1,l.p2);
     return vec2(p,inter).norm();
+}
+
+// Signed distance to line
+ld signedDistToLine(vec2 p, line l) {
+    return cross(normalize(vec2(l.p1,l.p2)),vec2(l.p1,p));
 }
 
 // Sign of a double
