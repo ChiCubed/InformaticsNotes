@@ -285,6 +285,44 @@ Same as Dijkstra.
 
 The code above assumes the graph is in [adjacency matrix](/chapter3/graphtheory.md#adjacency-matrix) format.
 
+### Bellman-Ford
+
+#### Summary
+
+The Bellman-Ford algorithm is similar to Dijkstra, and has a slightly worse runtime, but is able to detect negative cycles.
+
+#### Complexity
+
+$$O(VE)$$.
+
+#### Pseudocode
+
+```
+initialise dist to infinity
+dist[start] = 0
+
+for i in range(num vertices - 1):
+    for each edge with start u, end v, weight w:
+        dist[v] = min(dist[v], dist[u] + w)
+```
+
+If one wishes to determine the shortest path with at most $$K$$ edges:
+
+```
+initialise prev, new to infinity
+prev[start] = 0
+new[start] = 0
+
+for i in range(k):
+    copy new into prev
+    for each edge with start u, end v, weight w:
+        new[v] = min(new[v], prev[u] + w)
+```
+
+#### Requirements
+
+This code can handle negative weight cycles. A graph contains a negative weight cycle if, for any edge, the distance to the start  plus the edge's weight is less than the distance to the end.
+
 ## Minimum spanning tree
 
 See the [section](/chapter3/graphtheory.md#minimum-spanning-tree) on Graph Theory.
@@ -454,6 +492,18 @@ function minValue takes integer x as input:
 
   return M[pointer]*x + C[pointer]
 ```
+
+## Removing DP Dimensions
+
+This isn't an algorithm per se, but rather a DP optimisation.
+
+A useful way of looking at how this can be applied is to consider the IOI 2016 task Aliens.
+
+Eventually the problem reduces to a Convex Hull Trick. The problem has two DP dimensions: the DP state is $$dp[i][j]$$.
+
+Let the function $$f(x)=dp[i][x]$$. \(Of course if the DP had more dimensions this would be different.\) The input gives us a required value of $$x$$ in this case, i.e. $$x = k$$. \(In this case, $$k$$ is the maximum number of contiguous subsequences of an array of segments which we are allowed to take.\) For this trick to work, $$f(x)$$ must be convex or concave, i.e. $$f(x+1) - f(x) <= f(x) - f(x-1)$$, or the other way round. In other words, the amount that $$f(x)$$ increases or decreases by is constantly decreasing. We can kick out the other dimension as follows. Let $$g(x) = -Cx$$, where $$C$$ is some variable, indicating the "cost" of taking $$x$$ subsequences. Now let $$h(x) = f(x) + g(x)$$. Since $$f(x)$$ is convex \(or concave\), $$h(x)$$ has a minimum \(or maximum\). If $$h(x)$$ is minimal \(or maximal\) at a point, it means that for the given value of $$C$$ the optimal value of the second dimension \(in the case of Aliens\) is $$x$$. We can now binary search the value of $$C$$ such that the value of $$x$$ is that which is given in the input. Within the binary search we can simply calculate the maximum \(or minimum\) of $$h(x)$$ and its corresponding $$x$$; in the case of Aliens this is done with Convex Hull Trick.
+
+\(In some tasks, multiple dimensions can be removed if the reduced function is convex or concave.\)
 
 ## Range minimum query
 
