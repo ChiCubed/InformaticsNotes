@@ -118,6 +118,3 @@ void convexHull(vector<vec2>& points) {
     // with the convex hull.
 }
 ```
-
-
-

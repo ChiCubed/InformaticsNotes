@@ -184,8 +184,8 @@ vec2 intersection(line l1, line l2) {
     // if denom is zero,
     // the lines are parallel
 
-    ld ua = cross(l2v, lsv) / denom,
-       ub = cross(l1v, lsv) / denom;
+    ld ua = cross(l1v, lsv) / denom,
+       ub = cross(l2v, lsv) / denom;
 
     // We can ensure that the
     // intersection is on the
