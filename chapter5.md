@@ -631,6 +631,61 @@ for i in range 0 to n:
         )
 ```
 
+## SCC Finding
+
+An SCC, or Strongly Connected Component, is a component of a directed graph where every node can reach every other node. In other words, it can be considered to be analogous to a cycle in an undirected graph.
+
+Tarjan's algorithm for finding SCCs finds the maximal SCCs of a graph. \(An SCC is maximal if it is not contained in any other SCC.\)
+
+Sourced from [https://gist.github.com/APwhitehat/e2ae94b811defc7407bc320f98fd268b](https://gist.github.com/APwhitehat/e2ae94b811defc7407bc320f98fd268b).
+
+```cpp
+vector<int> graph[MAX_NODES];
+vector<vector<int>> scc;
+bool onstack[MAX_NODES]; // init to 0
+int count; // init to whatever
+int disc[MAX_NODES]; // init to -1
+int low[MAX_NODES];
+stack<int> st;
+
+void dfs(int u) {
+    disc[u] = low[u] = count++;
+    st.push(u);
+    onstack[u] = true;
+    
+    for (auto v : graph[u]) {
+        if (disc[v] == -1) {
+            dfs(v);
+            low[u] = min(low[u], low[v]);
+        } else if (onstack[v]) {
+            low[u] = min(low[u], disc[v]);
+        }
+    }
+    if (disc[u] == low[u]) {
+        vector<int> curr;
+        while (1) {
+            int v = st.top(); st.pop();
+            onstack[v] = false;
+            curr.push_back(v);
+            if (u == v) break;
+        }
+        // curr contains a single
+        // SCC.
+        scc.push_back(curr);
+    }
+}
+
+void tarjan(int n) {
+    for (int i = 0; i < n; ++i) {
+        disc[i] = -1;
+        low[i] = onstack[i] = 0;
+    }
+    
+    for (int i = 0; i < n; ++i)
+        if (disc[i] == -1) dfs(i);
+}
+```
+
 ## Topological Sort
 
 A topological sort of a graph is an ordering of vertices in a directed \(acyclic\) graph such that, for every edge, the source vertex is guaranteed to be before the destination vertex in the topological sort. \(There may be multiple topological sorts of a graph.\)
@@ -646,7 +701,7 @@ Here's an algorithm to find a topological sorting of a graph. It requires the gr
 
 using namespace std;
 
-bool seen[MAX_NODES];
+bool seen[MAX_NODES]; // init to 0
 vector<int> graph[MAX_NODES];
 
 vector<int> topoSort;
