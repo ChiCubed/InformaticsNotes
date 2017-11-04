@@ -652,7 +652,7 @@ void dfs(int u) {
     disc[u] = low[u] = count++;
     st.push(u);
     onstack[u] = true;
-    
+
     for (auto v : graph[u]) {
         if (disc[v] == -1) {
             dfs(v);
@@ -680,7 +680,7 @@ void tarjan(int n) {
         disc[i] = -1;
         low[i] = onstack[i] = 0;
     }
-    
+
     for (int i = 0; i < n; ++i)
         if (disc[i] == -1) dfs(i);
 }
@@ -841,7 +841,7 @@ The max-flow min-cut theorem states that, in a flow network, the max flow is equ
 
 $$O(VE^2)$$.
 
-Sourced from [http://backtrack-it.blogspot.com.au/2013/03/max-flow-algorithm-with-sample-c-code.html](http://backtrack-it.blogspot.com.au/2013/03/max-flow-algorithm-with-sample-c-code.html)
+Sourced from [http://backtrack-it.blogspot.com.au/2013/03/max-flow-algorithm-with-sample-c-code.html](http://backtrack-it.blogspot.com.au/2013/03/max-flow-algorithm-with-sample-c-code.html).
 
 ```cpp
 #include <bits/stdc++.h>
@@ -934,6 +934,99 @@ void addEdge(int u, int v, int C) {
 
     capacities[u][v] += C;
     capacities[v][u] += 0;
+}
+```
+
+## Centroid Decomposition
+
+### Centroid
+
+The 'centroid' of a tree is a node which, when removed, splits the tree into a forest such that any tree in the resulting forest has at most half the vertices contained in the original tree. The centroid always exists but is not necessarily unique \(this is clear from a trivial case with two nodes.\)
+
+### Centroid Decomposition
+
+The 'centroid decomposition' of a tree constitutes creating a tree out of the centroids of a tree, and recursively decomposing each subtree. We then 'attach' the centroids of these subtrees to the original centroid.
+
+Source: [http://www.geeksforgeeks.org/centroid-decomposition-of-tree/](http://www.geeksforgeeks.org/centroid-decomposition-of-tree/).
+
+```cpp
+#include <bits/std++.h>
+using namespace std;
+
+vector<int> graph[MAX_NODES], centroidGraph[MAX_NODES];
+bool centroidMarked[MAX_NODES], visited[MAX_NODES];
+
+// cnt is equal to the number of nodes.
+// this is necessary for the recursive aspect
+// of the centroid decomposition.
+int cnt, subtreeSize[MAX_NODES];
+
+void dfs(int src) {
+    visited[src] = 1; cnt++;
+    subtreeSize[src] = 1;
+    
+    for (int nxt : graph[src]) {
+        if (!visited[nxt] && !centroidMarked[nxt]) {
+            dfs(nxt);
+            subtreeSize[src] += subtreeSize[nxt];
+        }
+    }
+}
+
+int getCentroidHelper(int src) {
+    // assume by default
+    bool isCentroid = 1;
+    
+    visited[src] = 1;
+    
+    int largestChild = -1;
+    
+    for (int nxt : graph[src]) {
+        if (!visited[nxt] && !centroidMarked[nxt]) {
+            if (subtreeSize[nxt] > cnt / 2) {
+                isCentroid = 0;
+            }
+            
+            if (largestChild == -1 ||
+                subtreeSize[nxt] > subtreeSize[largestChild]) {
+                largestChild = nxt;
+            }
+        }
+    }
+    
+    if (isCentroid && cnt - subtreeSize[src] <= cnt / 2) {
+        return src;
+    }
+    
+    return getCentroidHelper(largestChild);
+}
+
+int getCentroid(int src) {
+    fill(visited, visited + MAX_NODES, 0);
+    fill(subtreeSize, subtreeSize + MAX_NODES, 0);
+    
+    cnt = 0;
+    dfs(src);
+    
+    fill(visited, visited + MAX_NODES, 0);
+    
+    int centroid = getCentroidHelper(src);
+    
+    centroidMarked[centroid] = true;
+    return centroid;
+}
+
+int decomposeTree(int root) {
+    int cendTree = getCentroid(root);
+    
+    for (int n : graph[cendTree]) if (!centroidMarked[n]) {
+        int cendSubtree = decomposeTree(n);
+        
+        centroidGraph[cendTree].push_back(cendSubtree);
+        centroidGraph[cendSubtree].push_back(cendTree);
+    }
+    
+    return cendTree;
 }
 ```
 
