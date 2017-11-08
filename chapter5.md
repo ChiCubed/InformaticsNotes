@@ -637,6 +637,8 @@ An SCC, or Strongly Connected Component, is a component of a directed graph wher
 
 Tarjan's algorithm for finding SCCs finds the maximal SCCs of a graph. \(An SCC is maximal if it is not contained in any other SCC.\)
 
+A useful property of this algorithm is that it visits the SCCs in reverse topological order of their positions in the DAG formed by the SCCs.
+
 Sourced from [https://gist.github.com/APwhitehat/e2ae94b811defc7407bc320f98fd268b](https://gist.github.com/APwhitehat/e2ae94b811defc7407bc320f98fd268b).
 
 ```cpp
@@ -964,7 +966,7 @@ int cnt, subtreeSize[MAX_NODES];
 void dfs(int src) {
     visited[src] = 1; cnt++;
     subtreeSize[src] = 1;
-    
+
     for (int nxt : graph[src]) {
         if (!visited[nxt] && !centroidMarked[nxt]) {
             dfs(nxt);
@@ -976,56 +978,56 @@ void dfs(int src) {
 int getCentroidHelper(int src) {
     // assume by default
     bool isCentroid = 1;
-    
+
     visited[src] = 1;
-    
+
     int largestChild = -1;
-    
+
     for (int nxt : graph[src]) {
         if (!visited[nxt] && !centroidMarked[nxt]) {
             if (subtreeSize[nxt] > cnt / 2) {
                 isCentroid = 0;
             }
-            
+
             if (largestChild == -1 ||
                 subtreeSize[nxt] > subtreeSize[largestChild]) {
                 largestChild = nxt;
             }
         }
     }
-    
+
     if (isCentroid && cnt - subtreeSize[src] <= cnt / 2) {
         return src;
     }
-    
+
     return getCentroidHelper(largestChild);
 }
 
 int getCentroid(int src) {
     fill(visited, visited + MAX_NODES, 0);
     fill(subtreeSize, subtreeSize + MAX_NODES, 0);
-    
+
     cnt = 0;
     dfs(src);
-    
+
     fill(visited, visited + MAX_NODES, 0);
-    
+
     int centroid = getCentroidHelper(src);
-    
+
     centroidMarked[centroid] = true;
     return centroid;
 }
 
 int decomposeTree(int root) {
     int cendTree = getCentroid(root);
-    
+
     for (int n : graph[cendTree]) if (!centroidMarked[n]) {
         int cendSubtree = decomposeTree(n);
-        
+
         centroidGraph[cendTree].push_back(cendSubtree);
         centroidGraph[cendSubtree].push_back(cendTree);
     }
-    
+
     return cendTree;
 }
 ```
