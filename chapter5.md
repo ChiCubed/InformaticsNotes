@@ -459,7 +459,7 @@ In the example given above, we first note that $$y=4$$ will never be the lowest.
 
 It is significant to note that each line that we add must only be compared with the two lines before it.
 
-The below code assumes all the lines are added initially; there are variants which allow for logarithmic arbitrary line insertion.
+The below code assumes all the lines are added initially; there are variants which allow for logarithmic arbitrary line insertion. It also only works for decreasing gradient and finding the lower envelope, or increasing gradient and finding the upper envelope; in addition the query x-values must be increasing. However, this solution is $$O(Q+M)$$ i.e. there is no log factor. To allow for arbitrary line insertion and query points, a 'fully dynamic' variant is required.
 
 ```
 long M[MAX_LINES]
